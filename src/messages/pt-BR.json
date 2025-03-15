@@ -1,0 +1,83 @@
+{
+  "welcome": {
+    "title": "Bem-vindo ao meu Portfólio",
+    "subtitle": "Explore meu trabalho e projetos"
+  },
+  "nav": {
+    "home": "Início",
+    "projects": "Projetos",
+    "about": "Sobre Mim",
+    "contact": "Contato"
+  },
+  "language": {
+    "en": "English",
+    "pt-BR": "Português",
+    "zh": "中文",
+    "current": "pt-BR"
+  },
+  "main": {
+    "header": "Olá e bem-vindo ao meu portfólio!",
+    "description1": "Sou um engenheiro de software brasileiro com paixão por construir produtos que ajudam as pessoas a viverem melhor.",
+    "description2": "...e eu AMO música, jogos e programação.",
+    "bounceHint": "Clique em qualquer sprite para vê-lo quicar com velocidade aleatória!",
+    "clickCounter": "Cliques nos Sprites: {count}",
+    "back": "Voltar",
+    "menu": {
+      "title": "Menu Principal",
+      "start": "Iniciar",
+      "hideMenu": "Esconder Menu",
+      "showMenu": "Mostrar Menu"
+    },
+    "about": {
+      "title": "Sobre Mim",
+      "subtitle": "SELECIONE O MODO",
+      "resume": {
+        "title": "MEU CURRÍCULO",
+        "desc": "Atributos do personagem e experiências profissionais"
+      },
+      "skills": {
+        "title": "MINHAS HABILIDADES",
+        "desc": "Habilidades especiais e níveis de poder"
+      },
+      "socials": {
+        "title": "MINHAS REDES",
+        "desc": "Conecte-se com outros jogadores"
+      },
+      "footer": "PRESSIONE OPÇÃO PARA CONTINUAR · INSIRA MOEDA PARA DESBLOQUEAR TODOS OS MODOS"
+    },
+    "projects": {
+      "title": "Meus Projetos",
+      "viewAll": "Ver Todos os Projetos"
+    },
+    "skills": {
+      "title": "Minhas Habilidades",
+      "selectTech": "SELECIONE SUA TECNOLOGIA",
+      "back": "Voltar",
+      "descriptions": {
+        "typescript": "TypeScript é um superconjunto de JavaScript com tipagem estática que adiciona tipos, classes e interfaces opcionais.",
+        "javascript": "JavaScript é uma linguagem de programação que permite implementar recursos complexos em páginas da web.",
+        "html": "HTML é a linguagem de marcação padrão para criar páginas da web.",
+        "css": "CSS é uma linguagem de folha de estilo usada para descrever a apresentação de um documento escrito em HTML.",
+        "react": "React é uma biblioteca JavaScript para construir interfaces de usuário. Trabalhei extensivamente com React para criar aplicações web interativas.",
+        "react-native": "React Native é um framework para construir aplicativos móveis nativos usando React.",
+        "next": "Next.js é um framework React que permite renderização do lado do servidor e geração de sites estáticos.",
+        "angular": "Angular é uma plataforma para construir aplicações web para desktop e dispositivos móveis.",
+        "vue": "Vue.js é um framework progressivo para construir interfaces de usuário.",
+        "express": "Express.js é um framework de aplicação web para Node.js.",
+        "fastify": "Fastify é um framework web para Node.js.",
+        "node": "Node.js é um ambiente de execução JavaScript construído sobre o motor V8 do Chrome.",
+        "nest": "Nest.js é um framework para construir aplicações de servidor Node.js eficientes e escaláveis.",
+        "git": "Git é um sistema de controle de versão distribuído para rastrear mudanças no código-fonte.",
+        "docker": "Docker é uma plataforma para desenvolver, enviar e executar aplicações em contêineres.",
+        "php": "PHP é uma linguagem de script de propósito geral popular para desenvolvimento web.",
+        "java": "Java é uma linguagem de programação orientada a objetos, baseada em classes, projetada para portabilidade.",
+        "csharp": "C# é uma linguagem de programação orientada a objetos moderna da Microsoft.",
+        "python": "Python é uma linguagem de programação interpretada, de alto nível e de propósito geral.",
+        "default": "Esta é uma das tecnologias com as quais trabalho. Clique para ver mais detalhes."
+      }
+    },
+    "language": {
+      "current": "pt-BR"
+    }
+  }
+} 

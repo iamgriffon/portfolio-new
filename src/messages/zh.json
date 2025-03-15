@@ -1,0 +1,83 @@
+{
+  "welcome": {
+    "title": "欢迎来到我的作品集",
+    "subtitle": "探索我的工作和项目"
+  },
+  "nav": {
+    "home": "首页",
+    "projects": "项目",
+    "about": "关于我",
+    "contact": "联系"
+  },
+  "language": {
+    "en": "English",
+    "pt-BR": "Português",
+    "zh": "中文",
+    "current": "zh"
+  },
+  "main": {
+    "header": "你好，欢迎来到我的作品集！",
+    "description1": "我是一名巴西软件工程师，热衷于构建帮助人们生活得更好的产品。",
+    "description2": "...我喜欢音乐、游戏和编程。",
+    "bounceHint": "点击任何精灵，让它以随机速度弹跳！",
+    "clickCounter": "精灵点击次数: {count}",
+    "back": "返回",
+    "menu": {
+      "title": "主菜单",
+      "start": "开始",
+      "hideMenu": "隐藏菜单",
+      "showMenu": "显示菜单"
+    },
+    "about": {
+      "title": "关于我",
+      "subtitle": "选择你的模式",
+      "resume": {
+        "title": "我的简历",
+        "desc": "角色属性和背景故事"
+      },
+      "skills": {
+        "title": "我的技能",
+        "desc": "特殊能力和能力级别"
+      },
+      "socials": {
+        "title": "我的社交",
+        "desc": "与其他玩家连接"
+      },
+      "footer": "按选项继续 · 投入硬币解锁所有模式"
+    },
+    "projects": {
+      "title": "我的项目",
+      "viewAll": "查看所有项目"
+    },
+    "language": {
+      "current": "zh"
+    },
+    "skills": {
+      "title": "我的技能",
+      "selectTech": "选择技术",
+      "back": "返回",
+      "descriptions": {
+        "typescript": "TypeScript 是 JavaScript 的类型化超集，它添加了可选类型、类和接口。",
+        "javascript": "JavaScript 是一种编程语言，它允许你在网页上实现复杂的功能。",
+        "html": "HTML 是创建网页的标准标记语言。",
+        "css": "CSS 是一种样式表语言，用于描述用 HTML 编写的文档的表现形式。",
+        "react": "React 是一个用于构建用户界面的 JavaScript 库。我在创建交互式 Web 应用程序方面有丰富的 React 经验。",
+        "react-native": "React Native 是一个使用 React 构建原生移动应用程序的框架。",
+        "next": "Next.js 是一个 React 框架，支持服务器端渲染和生成静态网站。",
+        "angular": "Angular 是一个用于构建移动和桌面 Web 应用程序的平台。",
+        "vue": "Vue.js 是一个用于构建用户界面的渐进式框架。",
+        "express": "Express.js 是一个 Node.js 的 Web 应用程序框架。",
+        "fastify": "Fastify 是一个 Node.js 的 Web 框架。",
+        "node": "Node.js 是一个基于 Chrome V8 JavaScript 引擎构建的 JavaScript 运行时环境。",
+        "nest": "Nest.js 是一个用于构建高效、可扩展的 Node.js 服务器端应用程序的框架。",
+        "git": "Git 是一个分布式版本控制系统，用于跟踪源代码中的更改。",
+        "docker": "Docker 是一个用于开发、发布和运行容器化应用程序的平台。",
+        "php": "PHP 是一种流行的通用脚本语言，用于 Web 开发。",
+        "java": "Java 是一种基于类的面向对象编程语言，专为可移植性而设计。",
+        "csharp": "C# 是微软推出的现代面向对象编程语言。",
+        "python": "Python 是一种解释型、高级、通用编程语言。",
+        "default": "这是我使用的技术之一。点击查看更多详情。"
+      }
+    }
+  }
+} 

@@ -91,11 +91,6 @@ export default function ResumeClient({
             subtitle={job.company}
             startDate={job.start_date}
             endDate={job.end_date}
-            description={
-              job.description[
-                t("language.current") as keyof typeof job.description
-              ]
-            }
             image_url={job.image_url}
             details={[
               {
@@ -134,9 +129,6 @@ export default function ResumeClient({
             subtitle={edu.institution}
             startDate={edu.start_date}
             endDate={edu.end_date}
-            description={edu.description[
-              t("language.current") as keyof typeof edu.description
-            ]}
             image_url={edu.image_url}
             details={[
               {

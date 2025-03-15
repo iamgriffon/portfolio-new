@@ -5,7 +5,6 @@ import { locales, getMessages } from "@/app/i18n";
 import LanguageSwitcher from "@/components/ui/language-switcher";
 import Link from "next/link";
 import Image from "next/image";
-import { initializeApp } from "@/db/init";
 
 // Import DB initializer dynamically with SSR disabled to avoid issues
 
@@ -19,8 +18,6 @@ export default async function LocaleLayout({
   const { locale } = await params;
   if (!locales.includes(locale)) notFound();
   const messages = await getMessages(locale);
-
-  initializeApp();
 
   return (
     <NextIntlClientProvider locale={locale} messages={messages}>      

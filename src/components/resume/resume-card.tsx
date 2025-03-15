@@ -6,7 +6,6 @@ interface ResumeCardProps {
   subtitle: string;
   startDate: string;
   endDate: string | null;
-  description: string;
   details: Array<{ label: string; content: string | null }>;
   url: string | null;
   isExpanded: boolean;
@@ -21,7 +20,6 @@ export function ResumeCard({
   subtitle,
   startDate,
   endDate,
-  description,
   details,
   url,
   isExpanded,
@@ -57,8 +55,7 @@ export function ResumeCard({
       <div className="p-5">
         <div className="flex justify-between items-center">
           <div>
-              <h3 className="text-xl font-bold text-white">{title}</h3>
-              <h3 className="text-xl font-bold text-white py-2">{description}</h3>
+            <h3 className="text-xl font-bold text-white mb-4">{title}</h3>
             <p className="flex items-center gap-4">
               <span className="text-green-400">{subtitle}</span>
               {image_url && (

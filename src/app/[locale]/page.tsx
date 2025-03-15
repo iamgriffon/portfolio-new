@@ -8,33 +8,20 @@ import { useRouter, useParams } from "next/navigation";
 import { useBackgroundState } from "@/components/background/pixel-art-background-provider";
 import { sprites } from "@/components/background/pixel-art-background-sprites";
 import PixelArtBackground from "@/components/background/pixel-art-background";
-import { FaPlay, FaEye, FaEyeSlash } from "react-icons/fa";
-
-// Add a MenuStar type
-interface MenuStar {
-  id: number;
-  size: number;
-  top: string;
-  left: string;
-  opacity: number;
-  animationDuration: string;
-}
-
-const SPARKLE_COUNT = 10;
-
-interface Sparkle {
-  id: number;
-  size: number;
-  left: string;
-  top: string;
-  animation: string;
-}
+import { FaPlay, FaEyeSlash } from "react-icons/fa";
+import {
+  MenuItem,
+  SectionTitle,
+  ProgressBar,
+  SkipIntroButton,
+  ToggleMenuButton
+} from "@/components/ui";
 
 export default function Home() {
   const t = useTranslations("main");
   const menuOptions = [
     { title: t("menu.start"), icon: <FaPlay />, action: "start" },
-    { title: t("menu.hideMenu"), icon: <FaEyeSlash />, action: "hide" }
+    { title: t("menu.hideMenu"), icon: <FaEyeSlash />, action: "hide" },
   ];
   const [showMenu, setShowMenu] = useState(true);
   const { hasAnimated, setHasAnimated } = useAnimationState();
@@ -44,12 +31,13 @@ export default function Home() {
   const params = useParams();
   const hasResetRef = useRef(false);
   const spritePaths = sprites.map((sprite) => sprite.path);
+  const [skippedIntro, setSkippedIntro] = useState(false);
+  const timeoutRef = useRef<NodeJS.Timeout>(setTimeout(() => {}, 0));
 
   useEffect(() => {
     if (hasVisitedProjects) {
       setHasAnimated(true);
     } else {
-      // Normal animation timing for first visit
       const timer = setTimeout(() => {
         setHasAnimated(true);
       }, 8000);
@@ -81,8 +69,17 @@ export default function Home() {
     };
   }, [hasVisitedProjects, setItems]);
 
+  useEffect(() => {
+    if (!hasAnimated && !skippedIntro) {
+      timeoutRef.current = setTimeout(() => {
+        setHasAnimated(true);
+      }, 5000);
+    }
+    return () => clearTimeout(timeoutRef.current);
+  }, [hasAnimated, skippedIntro]);
+
   const getAnimationProps = (delay: number) => {
-    if (hasAnimated) {
+    if (hasAnimated || skippedIntro) {
       return {
         initial: { opacity: 1 },
         animate: { opacity: 1 },
@@ -98,7 +95,7 @@ export default function Home() {
   };
 
   const getMenuAnimationProps = () => {
-    if (hasAnimated) {
+    if (hasAnimated || skippedIntro) {
       return {
         initial: { opacity: 1, y: 0 },
         animate: { opacity: 1, y: 0 },
@@ -122,6 +119,12 @@ export default function Home() {
     }
   };
 
+  const handleSkipIntro = () => {
+    clearTimeout(timeoutRef.current);
+    setHasAnimated(true);
+    setSkippedIntro(true);
+  };
+
   return (
     <div className="flex flex-col w-screen h-screen text-white p-6 z-10">
       <PixelArtBackground
@@ -138,13 +141,21 @@ export default function Home() {
             className="z-10"
           >
             <motion.img
+              key={`logo-${hasAnimated || skippedIntro ? 'skipped' : 'animated'}`}
               src="https://github.com/iamgriffon.png"
               alt="logo"
               className="w-24 h-24 z-10 rounded-full"
               {...getAnimationProps(0)}
             />
           </a>
+          {!hasAnimated && !skippedIntro && (
+            <SkipIntroButton
+              onSkip={handleSkipIntro}
+              skipText={t("skipIntro")}
+            />
+          )}
           <motion.h1
+            key={`header-${hasAnimated || skippedIntro ? 'skipped' : 'animated'}`}
             className="text-4xl m-4 font-bold"
             {...getAnimationProps(0)}
           >
@@ -152,103 +163,57 @@ export default function Home() {
           </motion.h1>
           <p className="flex flex-col text-center gap-2 z-10 shadow-sm">
             <motion.span
+              key={`desc1-${hasAnimated || skippedIntro ? 'skipped' : 'animated'}`}
               className="text-base font-bold font-mono"
               {...getAnimationProps(2)}
             >
               {t("description1")}
             </motion.span>
             <motion.span
+              key={`desc2-${hasAnimated || skippedIntro ? 'skipped' : 'animated'}`}
               className="text-base z-10 font-bold font-mono"
               {...getAnimationProps(4)}
             >
               {t("description2")}
             </motion.span>
           </p>
-          {showMenu ? (
-            <motion.div
-              className="mt-8 flex flex-col items-center"
-              {...getMenuAnimationProps()}
-              ref={menuRef}
-            >
-              <div className="max-w-md w-full z-10">
-                <section className="text-center mb-8">
-                  <h2 
-                    className="text-3xl font-bold mb-4 text-green-400 tracking-wider animate-bounce duration-500"
-                    style={{ textShadow: "0 0 10px rgba(74, 222, 128, 0.5), 0 0 20px rgba(74, 222, 128, 0.3)" }}
-                  >
-                    {t("menu.title")}
-                  </h2>
-                  <div className="h-2 w-32 bg-green-500 mx-auto rounded-full"></div>
-                </section>
-                
-                <section className="space-y-4">
-                  {menuOptions.map((option, index) => (
-                    <motion.div
-                      key={index}
-                      className="group bg-slate-800/80 border-2 border-white rounded-lg overflow-hidden duration-[1500ms]"
-                      initial={{ x: -50, opacity: 0 }}
-                      animate={{ x: 0, opacity: 1 }}
-                      transition={{ duration: 0.5, delay: 0.2 * index }}
-                      whileHover={{
-                        scale: 1.03, 
-                        boxShadow: "0 0 20px rgba(255, 255, 255, 0.5)",
-                        borderColor: "#4ade80",
-                      }}
-                    >
-                      <button 
-                        onClick={() => handleMenuOptionClick(option.action)}
-                        className="w-full text-left block cursor-pointer"
+          {hasAnimated ? (
+            showMenu ? (
+              <motion.div
+                key={`menu-${hasAnimated || skippedIntro ? 'skipped' : 'animated'}`}
+                className="mt-8 flex flex-col items-center"
+                {...getMenuAnimationProps()}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.5 }}
+                ref={menuRef}
+              >
+                <div className="max-w-md w-full min-w-96 z-10">
+                  <SectionTitle title={t("menu.title")} />
+                  <section className="space-y-4">
+                    {menuOptions.map((option, index) => (
+                      <MenuItem
+                        key={index}
                         title={option.title}
-                      >
-                        <div className="px-6 py-5 flex items-center">
-                          <div
-                            className="group-hover:bg-white/10 group-hover:border-green-400 transition-all duration-500 delay-200 w-10 h-10 flex-shrink-0 border-2 border-white/50 rounded-full flex items-center justify-center mr-4 font-bold"
-                          >
-                            {option.icon}
-                          </div>
-                          <div className="flex-grow">
-                            <h3
-                              className="group-hover:text-green-400 transition-all duration-500 delay-200 text-2xl font-bold tracking-wide text-white"
-                              style={{ textShadow: "0 0 8px rgba(34, 211, 238, 0.6)" }}
-                            >
-                              {option.title}
-                            </h3>
-                          </div>
-                          <div className="text-green-400 text-2xl">➔</div>
-                        </div>
-                      </button>
-                    </motion.div>
-                  ))}
-                </section>
-                
-                <footer className="text-center mt-10 text-sm font-mono text-gray-400">
-                  PRESS ENTER TO SELECT · ESC TO CANCEL
-                </footer>
-              </div>
-            </motion.div>
-          ) : (
-            <motion.button
-              className="group mt-8 bg-slate-800/80 border-2 border-white rounded-lg px-6 py-3 overflow-hidden z-10"
-              {...getMenuAnimationProps()}
-              onClick={() => setShowMenu(true)}
-              whileHover={{
-                scale: 1.05, 
-                boxShadow: "0 0 20px rgba(255, 255, 255, 0.5)",
-                borderColor: "#4ade80"
-              }}
-              title={t("menu.showMenu")}
-            >
-              <div className="flex items-center">
-                <div
-                  className="group-hover:bg-white/10 group-hover:border-green-400 transition-all duration-500 delay-200 w-8 h-8 flex-shrink-0 border-2 border-white/50 rounded-full flex items-center justify-center mr-3 font-bold"
-                >
-                  <FaEye />
+                        icon={option.icon}
+                        onClick={() => handleMenuOptionClick(option.action)}
+                        index={index}
+                        interactive={true}
+                      />
+                    ))}
+                  </section>
                 </div>
-                <span className="group-hover:text-green-400 transition-all duration-300 font-mono">
-                  {t("menu.showMenu")}
-                </span>
-              </div>
-            </motion.button>
+              </motion.div>
+            ) : (
+              <ToggleMenuButton
+                onClick={() => setShowMenu(true)}
+                buttonText={t("menu.showMenu")}
+              />
+            )
+          ) : (
+            <ProgressBar
+              complete={skippedIntro}
+              duration={5}
+            />
           )}
         </div>
       </PixelArtBackground>

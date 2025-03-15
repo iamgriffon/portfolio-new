@@ -22,6 +22,7 @@
     "bounceHint": "Clique em qualquer sprite para vê-lo quicar com velocidade aleatória!",
     "clickCounter": "Cliques nos Sprites: {count}",
     "back": "Voltar",
+    "skipIntro": "Pular Intro",
     "menu": {
       "title": "Menu Principal",
       "start": "Iniciar",
@@ -43,7 +44,7 @@
         "title": "MINHAS REDES",
         "desc": "Conecte-se com outros jogadores"
       },
-      "footer": "PRESSIONE OPÇÃO PARA CONTINUAR · INSIRA MOEDA PARA DESBLOQUEAR TODOS OS MODOS"
+      "footer": "CLIQUE EM UMA OPÇÃO PARA CONTINUAR · INSIRA MOEDA PARA DESBLOQUEAR TODOS OS MODOS"
     },
     "projects": {
       "title": "Meus Projetos",

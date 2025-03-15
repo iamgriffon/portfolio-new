@@ -22,6 +22,7 @@
     "bounceHint": "点击任何精灵，让它以随机速度弹跳！",
     "clickCounter": "精灵点击次数: {count}",
     "back": "返回",
+    "skipIntro": "跳过介绍",
     "menu": {
       "title": "主菜单",
       "start": "开始",

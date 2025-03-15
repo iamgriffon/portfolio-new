@@ -21,6 +21,7 @@
     "bounceHint": "Click on any sprite to see it bounce with random velocity!",
     "clickCounter": "Sprite Clicks: {count}",
     "back": "Back",
+    "skipIntro": "Skip Intro",
     "menu": {
       "title": "Main Menu",
       "start": "Start",

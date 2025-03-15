@@ -7,6 +7,7 @@ import { useTranslations } from "next-intl";
 import { ranks } from "@/app/[locale]/skills/ranks";
 import { type Tech } from "./tech-card";
 import StackAssessment from "./stack-assessment";
+import { SectionTitle } from "../ui";
 
 interface StackBuilderProps {
   stack: Tech[];
@@ -61,17 +62,9 @@ export default function StackBuilder({
   return (
     <motion.div
       layoutId="stack-builder-container"
-      className="max-w-4xl mx-auto mt-12 mb-20 overflow-visible rounded-xl p-6 border border-gray-800"
+      className="max-w-4xl mx-auto mt-12 mb-20 overflow-visible rounded-xl p-6 border-gray-800"
     >
-      <motion.h2
-        layoutId="stack-builder-title"
-        className="text-2xl sm:text-3xl font-bold text-center mb-6 bg-clip-text text-white shadow-inner animate-bounce duration-500"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.2 }}
-      >
-        {t("skills.buildStack").toLocaleUpperCase()}
-      </motion.h2>
+      <SectionTitle title={t("skills.buildStack")} />
 
       <motion.p
         layoutId="stack-builder-description"
@@ -125,9 +118,7 @@ export default function StackBuilder({
         {!stack.length ? (
           <div className="text-center">
             <div className="text-5xl mb-4 text-gray-500">👇</div>
-            <h3 className="text-xl font-medium mb-2">
-              {t("skills.dropHere")}
-            </h3>
+            <h3 className="text-xl font-medium mb-2">{t("skills.dropHere")}</h3>
             <p className="text-gray-400 text-sm">
               {t("skills.dragDescription")}
             </p>
@@ -190,7 +181,7 @@ export default function StackBuilder({
       </motion.div>
 
       {stack.length > 0 && (
-        <StackAssessment 
+        <StackAssessment
           avgLevel={avgLevel}
           currentSeniority={currentSeniority}
           targetSeniority={targetSeniority}
@@ -198,4 +189,4 @@ export default function StackBuilder({
       )}
     </motion.div>
   );
-} 
+}

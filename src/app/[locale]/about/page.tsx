@@ -1,5 +1,6 @@
 "use client";
 
+import { SectionTitle } from "@/components/ui";
 import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
@@ -41,12 +42,7 @@ export default function About() {
           transition={{ duration: 0.5 }}
         >
           <section className="text-center mb-12">
-            <h2
-              className="text-3xl font-bold mb-4 text-white tracking-wider animate-bounce duration-500"
-            >
-              {t("about.subtitle").toUpperCase()}
-            </h2>
-            <div className="h-2 w-32 bg-green-500 border-2 border-white mx-auto rounded-full" />
+            <SectionTitle title={t("about.subtitle")} />
           </section>
 
           <section className="space-y-8">
@@ -79,7 +75,7 @@ export default function About() {
                 whileHover={{
                   scale: 1.03,
                   boxShadow: "0 0 20px rgba(255, 255, 255, 0.5)",
-                  borderColor: "#4ade80"
+                  borderColor: "#4ade80",
                 }}
               >
                 <Link

@@ -4,13 +4,14 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
-import { 
-  TechGrid, 
-  TechDetail, 
-  StackBuilder, 
+import {
+  TechGrid,
+  TechDetail,
+  StackBuilder,
   SearchBar,
-  type Tech
+  type Tech,
 } from "@/components/skills";
+import { SectionTitle } from "@/components/ui";
 
 interface TechSelectionProps {
   techs: Tech[];
@@ -30,7 +31,7 @@ export default function TechSelection({ techs }: TechSelectionProps) {
   // Load stack from localStorage on mount
   useEffect(() => {
     // Make sure we're running in the browser
-    if (typeof window === 'undefined') {
+    if (typeof window === "undefined") {
       return;
     }
 
@@ -42,7 +43,7 @@ export default function TechSelection({ techs }: TechSelectionProps) {
       const savedStack = localStorage.getItem(STACK_STORAGE_KEY);
       if (savedStack) {
         const savedStackIds = JSON.parse(savedStack) as string[];
-        const restoredStack = techs.filter(tech => 
+        const restoredStack = techs.filter((tech) =>
           savedStackIds.includes(tech.id)
         );
         setStack(restoredStack);
@@ -57,12 +58,12 @@ export default function TechSelection({ techs }: TechSelectionProps) {
   // Save stack to localStorage whenever it changes
   useEffect(() => {
     // Make sure we're running in the browser
-    if (typeof window === 'undefined' || !isReady) {
+    if (typeof window === "undefined" || !isReady) {
       return;
     }
 
     try {
-      const stackIds = stack.map(tech => tech.id);
+      const stackIds = stack.map((tech) => tech.id);
       localStorage.setItem(STACK_STORAGE_KEY, JSON.stringify(stackIds));
     } catch (error) {
       console.error("Failed to save stack to localStorage:", error);
@@ -133,19 +134,9 @@ export default function TechSelection({ techs }: TechSelectionProps) {
         </div>
       </header>
 
-      <motion.h2
-        className="text-3xl sm:text-4xl pt-10 font-bold text-center mb-6 bg-clip-text text-white animate-bounce duration-500"
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.2 }}
-      >
-        {t("skills.selectTech")}
-      </motion.h2>
+      <SectionTitle title={t("skills.selectTech")} />
 
-      <SearchBar 
-        searchQuery={searchQuery}
-        onSearchChange={setSearchQuery}
-      />
+      <SearchBar searchQuery={searchQuery} onSearchChange={setSearchQuery} />
 
       <TechGrid
         techs={techs}

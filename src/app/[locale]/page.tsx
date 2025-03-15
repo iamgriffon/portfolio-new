@@ -192,7 +192,7 @@ export default function Home() {
                 ref={menuRef}
               >
                 <div className="max-w-md w-full min-w-96 z-10">
-                  <SectionTitle title={t("menu.title")} />
+                  <SectionTitle title={t("menu.title")} className="text-white" />
                   <section className="space-y-4">
                     {menuOptions.map((option, index) => (
                       <MenuItem

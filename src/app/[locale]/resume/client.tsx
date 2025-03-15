@@ -1,0 +1,206 @@
+"use client";
+
+import React, { useState } from "react";
+import { motion } from "framer-motion";
+import { useTranslations } from "next-intl";
+import Link from "next/link";
+import { FaBriefcase, FaGraduationCap } from "react-icons/fa";
+import { JobHistoryItem, EducationItem } from "./types";
+import { ResumeCard } from "@/components/ui/resume/resume-card";
+
+interface ResumeClientProps {
+  jobHistory: JobHistoryItem[];
+  education: EducationItem[];
+}
+
+export default function ResumeClient({
+  jobHistory,
+  education,
+}: ResumeClientProps) {
+  const t = useTranslations("main");
+  const [activeTab, setActiveTab] = useState<"jobs" | "education">("jobs");
+  const [expandedCardId, setExpandedCardId] = useState<number | null>(null);
+
+
+  const jobs = jobHistory.map((job) => ({
+    ...job,
+    image_url: job.image_url || null,
+    description: {
+      en: job.en_position,
+      "pt-BR": job.ptbr_position,
+      zh: job.zh_position,
+    },
+  }));
+
+  console.log({jobs});
+
+  const educations = education.map((edu) => ({
+    ...edu,
+    image_url: edu.image_url || null,
+    description: {
+      en: edu.en_description,
+      "pt-BR": edu.ptbr_description,
+      zh: edu.zh_description,
+    },  
+    degree: {
+      en: edu.en_degree,
+      "pt-BR": edu.ptbr_degree,
+      zh: edu.zh_degree,
+    },
+  }));
+
+  const toggleCard = (id: number) => {
+    if (expandedCardId === id) {
+      setExpandedCardId(null);
+      return;
+    }
+
+    setExpandedCardId(id);
+  };
+
+  const renderJobHistory = () => {
+    if (jobHistory.length === 0) {
+      return <p className="text-center text-gray-400">No job history found</p>;
+    }
+
+    return (
+      <div className="space-y-6">
+        {jobs.map((job) => (
+          <ResumeCard
+            key={job.id}
+            id={job.id}
+            title={job.position}
+            subtitle={job.company}
+            startDate={job.start_date}
+            endDate={job.end_date}
+            description={
+              job.description[
+                t("language.current") as keyof typeof job.description
+              ]
+            }
+            image_url={job.image_url}
+            details={[
+              {
+                label: t("about.resume.technologies"),
+                content: job.technologies,
+              },
+              {
+                label: t("about.resume.achievements"),
+                content: job.achievements,
+              },
+            ]}
+            url={job.url}
+            isExpanded={expandedCardId === job.id}
+            onToggle={toggleCard}
+            visitText={t("about.resume.visitWebsite")}
+          />
+        ))}
+      </div>
+    );
+  };
+
+  const renderEducation = () => {
+    if (education.length === 0) {
+      return (
+        <p className="text-center text-gray-400">No education history found</p>
+      );
+    }
+
+    return (
+      <div className="space-y-6">
+        {educations.map((edu) => (
+          <ResumeCard
+            key={edu.id}
+            id={edu.id}
+            title={`${edu.degree[t("language.current") as keyof typeof edu.degree]}`}
+            subtitle={edu.institution}
+            startDate={edu.start_date}
+            endDate={edu.end_date}
+            description={edu.description[
+              t("language.current") as keyof typeof edu.description
+            ]}
+            image_url={edu.image_url}
+            details={[
+              {
+                label: t("about.resume.achievements"),
+                content: edu.achievements,
+              },
+              {
+                label: t("about.resume.technologies"),
+                content: edu.technologies,
+              },
+            ]}
+            url={edu.url}
+            isExpanded={expandedCardId === edu.id}
+            onToggle={toggleCard}
+            visitText={t("about.resume.visitWebsite")}
+          />
+        ))}
+      </div>
+    );
+  };
+
+  return (
+    <div className="min-h-screen text-white">
+      <header className="w-full pt-10">
+        <div className="container mx-auto px-4">
+          <div className="flex justify-between items-center mb-8">
+            <motion.h1
+              className="text-4xl font-bold text-white text-center"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 1 }}
+            >
+              {t("about.resume.title")}
+            </motion.h1>
+
+            <Link
+              href={`/${t("language.current")}/about`}
+              className="px-4 py-2 bg-slate-800 border border-white rounded-md text-white hover:bg-slate-700 transition-colors"
+              title={t("back")}
+            >
+              ← {t("back")}
+            </Link>
+          </div>
+        </div>
+      </header>
+
+      <main className="container mx-auto px-4 py-8">
+        <div className="max-w-4xl mx-auto">
+          <div className="mb-8 bg-slate-800/50 p-4 rounded-lg">
+            <div className="flex border-b border-gray-700">
+              <button
+                className={`flex-1 py-3 px-4 text-center font-mono text-lg transition-colors ${
+                  activeTab === "jobs"
+                    ? "text-green-400 border-b-2 border-green-400"
+                    : "text-gray-400 hover:text-white"
+                }`}
+                onClick={() => setActiveTab("jobs")}
+              >
+                <span className="flex items-center justify-center gap-2">
+                  <FaBriefcase /> {t("about.resume.experience")}
+                </span>
+              </button>
+              <button
+                className={`flex-1 py-3 px-4 text-center font-mono text-lg transition-colors ${
+                  activeTab === "education"
+                    ? "text-green-400 border-b-2 border-green-400"
+                    : "text-gray-400 hover:text-white"
+                }`}
+                onClick={() => setActiveTab("education")}
+              >
+                <span className="flex items-center justify-center gap-2">
+                  <FaGraduationCap /> {t("about.resume.education")}
+                </span>
+              </button>
+            </div>
+
+            <div className="pt-6">
+              {activeTab === "jobs" ? renderJobHistory() : renderEducation()}
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  );
+}

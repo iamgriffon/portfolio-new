@@ -1,0 +1,89 @@
+{
+  "welcome": {
+    "title": "Welcome to my Portfolio",
+    "subtitle": "Explore my work and projects"
+  },
+  "nav": {
+    "home": "Home",
+    "projects": "Projects",
+    "about": "About Me",
+    "contact": "Contact"
+  },
+  "language": {
+    "en": "English",
+    "pt-BR": "Português",
+    "zh": "中文"
+  },
+  "main": {
+    "header": "Hello and welcome to my portfolio!",
+    "description1": "I'm a brazilian software engineer with a passion for building products that help people live better lives.",
+    "description2": "...and I LOVE music, gaming and coding.",
+    "bounceHint": "Click on any sprite to see it bounce with random velocity!",
+    "clickCounter": "Sprite Clicks: {count}",
+    "back": "Back",
+    "skipIntro": "Skip Intro",
+    "menu": {
+      "title": "Main Menu",
+      "start": "Start",
+      "hideMenu": "Hide menu",
+      "showMenu": "Show menu"
+    },
+    "about": {
+      "title": "About Me",
+      "subtitle": "Select your mode",
+      "resume": {
+        "title": "My Resume",
+        "desc": "Character stats and background story",
+        "education": "Education",
+        "experience": "Experience",
+        "technologies": "Technologies",
+        "achievements": "Achievements",
+        "present": "Present",
+        "visitWebsite": "Visit Website"
+      },
+      "skills": {
+        "title": "My Skills",
+        "desc": "Special abilities and power levels"
+      },
+      "socials": {
+        "title": "My Socials",
+        "desc": "Connect with other players"
+      },
+      "footer": "PRESS OPTION TO CONTINUE · INSERT COIN TO UNLOCK ALL MODES"
+    },
+    "projects": {
+      "title": "My Projects",
+      "viewAll": "View All Projects"
+    },
+    "language": {
+      "current": "en"
+    },
+    "skills": {
+      "title": "My Skills",
+      "selectTech": "Select your tech",
+      "back": "Back",
+      "descriptions": {
+        "typescript": "TypeScript is a statically typed superset of JavaScript that adds optional types, classes, and interfaces.",
+        "javascript": "JavaScript is a programming language that allows you to implement complex features on web pages.",
+        "html": "HTML is the standard markup language for creating web pages.",
+        "css": "CSS is a style sheet language used to describe the presentation of a document written in HTML.",
+        "react": "React is a JavaScript library for building user interfaces. I've worked extensively with React for creating interactive web applications.",
+        "react-native": "React Native is a framework for building native mobile applications using React.",
+        "next": "Next.js is a React framework enabling server-side rendering and generating static websites.",
+        "angular": "Angular is a platform for building mobile and desktop web applications.",
+        "vue": "Vue.js is a progressive framework for building user interfaces.",
+        "express": "Express.js is a web application framework for Node.js.",
+        "fastify": "Fastify is a web framework for Node.js.",
+        "node": "Node.js is a JavaScript runtime built on Chrome's V8 JavaScript engine.",
+        "nest": "Nest.js is a framework for building efficient, scalable Node.js server-side applications.",
+        "git": "Git is a distributed version control system for tracking changes in source code.",
+        "docker": "Docker is a platform for developing, shipping, and running applications in containers.",
+        "php": "PHP is a popular general-purpose scripting language for web development.",
+        "java": "Java is a class-based, object-oriented programming language designed for portability.",
+        "csharp": "C# is a modern object-oriented programming language from Microsoft.",
+        "python": "Python is an interpreted, high-level, general-purpose programming language.",
+        "default": "This is one of the technologies I work with. Click to view more details."
+      }
+    }
+  }
+} 

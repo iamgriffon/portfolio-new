@@ -191,13 +191,6 @@ export const BackgroundStateProvider: React.FC<{
 
     setItems(initializedItems);
     setIsInitialized(true);
-    console.log(
-      "Background initialized with",
-      initializedItems.length,
-      "sprites and",
-      generatedStars.length,
-      "stars"
-    );
   }, [isInitialized, windowSize]);
 
   return (

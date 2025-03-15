@@ -1,3 +1,5 @@
+import { ReactNode } from "react";
+
 interface ProgressBarProps {
   duration?: number;
   complete?: boolean;
@@ -7,4 +9,11 @@ interface ProgressBarProps {
   fillColor?: string;
 }
 
-export type { ProgressBarProps };
+interface SectionTitleProps {
+  title: ReactNode;
+  animate?: boolean;
+  className?: string;
+}
+
+
+export type { ProgressBarProps, SectionTitleProps };

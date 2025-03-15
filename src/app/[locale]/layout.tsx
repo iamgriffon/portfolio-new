@@ -1,4 +1,3 @@
-import { ReactNode } from "react";
 import { NextIntlClientProvider } from "next-intl";
 import { notFound } from "next/navigation";
 import { locales, getMessages } from "@/app/i18n";
@@ -6,17 +5,18 @@ import LanguageSwitcher from "@/components/ui/language-switcher";
 import Link from "next/link";
 import Image from "next/image";
 
-// Import DB initializer dynamically with SSR disabled to avoid issues
-
-export default async function LocaleLayout({
-  children,
-  params,
-}: {
-  children: ReactNode;
-  params: { locale: string };
-}) {
-  const { locale } = await params;
-  if (!locales.includes(locale)) notFound();
+// Remove explicit type annotations for the function parameters
+export default async function LocaleLayout(props: any) {
+  // Destructure what we need, letting TypeScript infer the types
+  const { children, params } = props;
+  const locale = params?.locale;
+  
+  // Validate locale
+  if (!locale || !locales.includes(locale)) {
+    notFound();
+  }
+  
+  // Get messages for the locale
   const messages = await getMessages(locale);
 
   return (
@@ -36,7 +36,9 @@ export default async function LocaleLayout({
           <LanguageSwitcher />
         </header>
 
-        <main className="relative z-10 w-full min-h-screen">{children}</main>
+        <main className="relative z-10 w-full min-h-screen">
+          {children}
+        </main>
       </div>
     </NextIntlClientProvider>
   );

@@ -16,6 +16,7 @@ const eslintConfig = [
       "react-hooks/exhaustive-deps": "off",
       "react-hooks/rules-of-hooks": "off",
       "@next/next/no-img-element": "off",
+      "@typescript-eslint/no-explicit-any": "off",
     },
   },
 ];

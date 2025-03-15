@@ -19,7 +19,7 @@ export default function About() {
               animate={{ opacity: 1 }}
               transition={{ duration: 1 }}
             >
-              {t("about.title")}
+              {t("about.title").toUpperCase()}
             </motion.h1>
 
             <Link
@@ -44,9 +44,9 @@ export default function About() {
             <h2
               className="text-3xl font-bold mb-4 text-white tracking-wider animate-bounce duration-500"
             >
-              {t("about.subtitle")}
+              {t("about.subtitle").toUpperCase()}
             </h2>
-            <div className="h-2 w-32 bg-transparent border-2 border-white mx-auto rounded-full"></div>
+            <div className="h-2 w-32 bg-green-500 border-2 border-white mx-auto rounded-full" />
           </section>
 
           <section className="space-y-8">

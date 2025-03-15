@@ -34,7 +34,13 @@
       "subtitle": "选择你的模式",
       "resume": {
         "title": "我的简历",
-        "desc": "角色属性和背景故事"
+        "desc": "角色属性和背景故事",
+        "education": "教育背景",
+        "experience": "工作经验",
+        "technologies": "技术栈",
+        "achievements": "成就",
+        "present": "至今",
+        "visitWebsite": "访问网站"
       },
       "skills": {
         "title": "我的技能",

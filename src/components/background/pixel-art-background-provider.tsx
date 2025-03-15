@@ -1,6 +1,6 @@
 'use client';
 
-import React, { createContext, useContext, useState, useEffect, ReactNode, useRef } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 import { PixelItem, Star, SpritePosition } from './pixel-art-background.types';
 import { sprites } from './pixel-art-background-sprites';
 import { usePathname } from 'next/navigation';
@@ -32,7 +32,7 @@ export const useBackgroundState = () => {
 };
 
 // Create a stable reference that persists across page navigations
-let globalBackgroundState: {
+const globalBackgroundState: {
   items: PixelItem[];
   stars: Star[];
   initialized: boolean;

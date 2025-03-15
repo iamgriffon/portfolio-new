@@ -30,17 +30,23 @@
     },
     "about": {
       "title": "About Me",
-      "subtitle": "SELECT YOUR MODE",
+      "subtitle": "Select your mode",
       "resume": {
-        "title": "MY RESUME",
-        "desc": "Character stats and background story"
+        "title": "My Resume",
+        "desc": "Character stats and background story",
+        "education": "Education",
+        "experience": "Experience",
+        "technologies": "Technologies",
+        "achievements": "Achievements",
+        "present": "Present",
+        "visitWebsite": "Visit Website"
       },
       "skills": {
-        "title": "MY SKILLS",
+        "title": "My Skills",
         "desc": "Special abilities and power levels"
       },
       "socials": {
-        "title": "MY SOCIALS",
+        "title": "My Socials",
         "desc": "Connect with other players"
       },
       "footer": "PRESS OPTION TO CONTINUE · INSERT COIN TO UNLOCK ALL MODES"
@@ -54,7 +60,7 @@
     },
     "skills": {
       "title": "My Skills",
-      "selectTech": "SELECT YOUR TECH",
+      "selectTech": "Select your tech",
       "back": "Back",
       "descriptions": {
         "typescript": "TypeScript is a statically typed superset of JavaScript that adds optional types, classes, and interfaces.",

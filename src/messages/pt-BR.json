@@ -34,7 +34,13 @@
       "subtitle": "SELECIONE O MODO",
       "resume": {
         "title": "MEU CURRÍCULO",
-        "desc": "Atributos do personagem e experiências profissionais"
+        "desc": "Atributos do personagem e experiências profissionais",
+        "education": "EDUCAÇÃO",
+        "experience": "EXPERIÊNCIA PROFISSIONAL",
+        "technologies": "Tecnologias",
+        "achievements": "Conquistas",
+        "present": "Presente",
+        "visitWebsite": "Visitar Website"
       },
       "skills": {
         "title": "MINHAS HABILIDADES",

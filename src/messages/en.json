@@ -42,7 +42,8 @@
         "present": "Present",
         "visitWebsite": "Visit Website",
         "expandAll": "Expand All",
-        "collapseAll": "Collapse All"
+        "collapseAll": "Collapse All",
+        "seeCertificate": "See Certificate"
       },
       "skills": {
         "title": "My Skills",

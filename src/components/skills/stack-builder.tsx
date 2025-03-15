@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import { motion, Reorder } from "framer-motion";
 import { useTranslations } from "next-intl";
@@ -75,7 +75,7 @@ export default function StackBuilder({
 
       <motion.p
         layoutId="stack-builder-description"
-        className="text-center text-gray-200 mb-8 max-w-2xl mx-auto"
+        className="text-center text-lg text-gray-200 mb-8 max-w-2xl mx-auto"
       >
         {t("skills.dragDropDescription")}
       </motion.p>

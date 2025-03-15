@@ -110,7 +110,7 @@ export default function ResumeClient({
             url={job.url}
             isExpanded={expandedCardIds.includes(job.id)}
             onToggle={toggleCard}
-            visitText={t("about.resume.visitWebsite")}
+            visitText={t("about.resume.seeCertificate")}
           />
         ))}
       </div>
@@ -148,10 +148,10 @@ export default function ResumeClient({
                 content: edu.technologies,
               },
             ]}
-            url={edu.url}
+            url={edu.degree_url}
             isExpanded={expandedCardIds.includes(edu.id)}
             onToggle={toggleCard}
-            visitText={t("about.resume.visitWebsite")}
+            visitText={t("about.resume.seeCertificate")}
           />
         ))}
       </div>

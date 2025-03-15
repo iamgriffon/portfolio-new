@@ -31,4 +31,5 @@ export interface EducationItem {
   order_index: number;
   image_url: string | null;
   technologies: string | null;
+  degree_url: string | null;
 }

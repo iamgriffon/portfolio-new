@@ -45,30 +45,25 @@ export default function TechCard({
 
   const handleDragStart = (e: React.DragEvent<HTMLDivElement>) => {
     // Set data transfer to ensure drag works across browsers
-    e.dataTransfer.setData('text/plain', tech.id);
-    e.dataTransfer.effectAllowed = 'move';
-    
+    e.dataTransfer.setData("text/plain", tech.id);
+    e.dataTransfer.effectAllowed = "move";
+
     onDragStart(tech);
   };
 
   return (
     <motion.div
       key={tech.id}
-      className={`
-        relative cursor-pointer rounded-lg overflow-hidden
-        border-4 ${
-          isSelected
-            ? "border-blue-500 shadow-lg shadow-blue-500/30"
-            : isHovered
-            ? "border-white/80 shadow-lg shadow-white/30"
-            : isInStack
-            ? "border-green-500/70 shadow-md shadow-green-500/20"
-            : "border-gray-700"
-        }
-        transition-all duration-300 transform
-        ${isSelected ? "z-10" : "z-0"}
-        w-48
-      `}
+      className={cn(
+        "relative cursor-pointer rounded-lg overflow-hidden border-4 w-48",
+        isSelected
+          ? "border-green-500 shadow-lg shadow-blue-500/30 z-10"
+          : isHovered
+          ? "border-white/80 shadow-lg shadow-white/30"
+          : isInStack
+          ? "border-green-500/70 shadow-md shadow-green-500/20"
+          : "border-gray-700 z-0"
+      )}
       initial={{ opacity: 0, y: 20 }}
       animate={{
         opacity: isReady ? 1 : 0,
@@ -88,7 +83,7 @@ export default function TechCard({
       onMouseLeave={() => setIsHovered(false)}
       onClick={() => onSelect(tech)}
     >
-      <div 
+      <div
         className="relative bg-slate-800/80 backdrop-blur-sm p-4 h-48 flex flex-col items-center justify-center"
         draggable={true}
         onDragStart={handleDragStart}
@@ -138,17 +133,19 @@ export default function TechCard({
             onRemoveFromStack(tech.id);
             return;
           }
-          
+
           onAddToStack(tech);
         }}
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ delay: 0.2, type: "spring" }}
         title={isInStack ? t("skills.removeFromStack") : t("skills.addToStack")}
-        aria-label={isInStack ? t("skills.removeFromStack") : t("skills.addToStack")}
+        aria-label={
+          isInStack ? t("skills.removeFromStack") : t("skills.addToStack")
+        }
       >
         {isInStack ? <FaTimes /> : <FaPlus />}
       </motion.button>
     </motion.div>
   );
-} 
+}

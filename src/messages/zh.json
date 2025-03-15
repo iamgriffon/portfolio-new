@@ -42,7 +42,8 @@
         "present": "至今",
         "visitWebsite": "访问网站",
         "expandAll": "展开全部",
-        "collapseAll": "收起全部"
+        "collapseAll": "收起全部",
+        "seeCertificate": "查看证书"
       },
       "skills": {
         "title": "我的技能",

@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
 import { FaChevronDown, FaExternalLinkAlt } from "react-icons/fa";
-import Image from "next/image";
 interface ResumeCardProps {
   id: number;
   title: string;

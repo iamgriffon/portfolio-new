@@ -16,7 +16,7 @@ import {
   SkipIntroButton,
   ToggleMenuButton
 } from "@/components/ui";
-
+import LanguageSwitcher from "@/components/ui/language-switcher";
 export default function Home() {
   const t = useTranslations("main");
   const menuOptions = [
@@ -126,7 +126,7 @@ export default function Home() {
   };
 
   return (
-    <div className="flex flex-col w-screen h-screen text-white p-6 z-10">
+    <div className="flex flex-col w-screen h-screen text-white z-20">
       <PixelArtBackground
         sprites={spritePaths}
         numberOfSprites={8}
@@ -134,6 +134,10 @@ export default function Home() {
         maxVelocity={3.0}
         withoutBouncing={false}
       >
+        <div className="self-end flex w-full justify-end items-center container mx-auto px-4 mt-10">
+          <LanguageSwitcher />
+        </div>
+        
         <div className="w-full h-full flex flex-col z-10 gap-4 items-center justify-center">
           <a
             href="https://github.com/iamgriffon"

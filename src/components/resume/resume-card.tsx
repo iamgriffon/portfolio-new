@@ -63,7 +63,7 @@ export function ResumeCard({
             <p className="flex items-center gap-4">
               <span className="text-green-400">{subtitle}</span>
               {image_url && (
-                <Image
+                <img
                   src={image_url}
                   alt={title}
                   className="w-10 h-10 rounded-full"

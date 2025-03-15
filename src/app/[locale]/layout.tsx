@@ -24,7 +24,7 @@ export default async function LocaleLayout({
 
   return (
     <NextIntlClientProvider locale={locale} messages={messages}>      
-      <div className="min-h-screen w-full overflow-hidden">
+      <div className="min-h-screen w-full overflow-y-scroll">
         <header className="flex w-full justify-between items-center container mx-auto px-4 mt-10">
           <Link href={`/${locale}`} className="flex items-center gap-2">
             <Image

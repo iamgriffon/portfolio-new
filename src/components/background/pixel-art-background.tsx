@@ -450,7 +450,7 @@ export default function PixelArtBackground({
     <div
       ref={containerRef}
       className={cn(
-        "fixed top-0 left-0 w-screen h-screen overflow-hidden bg-gradient-to-b from-slate-900 to-slate-800",
+        "fixed top-0 left-0 w-screen h-screen overflow-y-scroll bg-gradient-to-b from-slate-900 to-slate-800",
         className
       )}
     >

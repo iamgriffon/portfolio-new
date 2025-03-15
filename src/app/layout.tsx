@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { BackgroundStateProvider } from '@/components/background/pixel-art-background-provider';
-import { AnimationStateProvider } from '@/components/ui/animation-state-provider';
+import { AnimationStateProvider } from '@/components/background/animation-state-provider';
 import BackgroundWrapper from '@/components/background/pixel-art-background-wrapper';
 
 const geistSans = Geist({
@@ -27,7 +27,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
-      <body className="bg-slate-900 min-h-screen">
+      <body className="bg-slate-900 h-full w-full overflow-y-scroll">
         <BackgroundStateProvider>
           <AnimationStateProvider>
             <BackgroundWrapper>

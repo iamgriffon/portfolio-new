@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { useState, useEffect, useRef } from "react";
 import { useTranslations } from "next-intl";
-import { useAnimationState } from "@/components/ui/animation-state-provider";
+import { useAnimationState } from "@/components/background/animation-state-provider";
 import { useRouter, useParams } from "next/navigation";
 import { useBackgroundState } from "@/components/background/pixel-art-background-provider";
 import { sprites } from "@/components/background/pixel-art-background-sprites";

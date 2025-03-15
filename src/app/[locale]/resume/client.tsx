@@ -1,12 +1,12 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
-import { FaBriefcase, FaGraduationCap } from "react-icons/fa";
+import { FaBriefcase, FaGraduationCap, FaChevronDown, FaChevronUp } from "react-icons/fa";
 import { JobHistoryItem, EducationItem } from "./types";
-import { ResumeCard } from "@/components/ui/resume/resume-card";
+import { ResumeCard } from "@/components/resume/resume-card";
 
 interface ResumeClientProps {
   jobHistory: JobHistoryItem[];
@@ -19,8 +19,7 @@ export default function ResumeClient({
 }: ResumeClientProps) {
   const t = useTranslations("main");
   const [activeTab, setActiveTab] = useState<"jobs" | "education">("jobs");
-  const [expandedCardId, setExpandedCardId] = useState<number | null>(null);
-
+  const [expandedCardIds, setExpandedCardIds] = useState<number[]>([]);
 
   const jobs = jobHistory.map((job) => ({
     ...job,
@@ -31,8 +30,6 @@ export default function ResumeClient({
       zh: job.zh_position,
     },
   }));
-
-  console.log({jobs});
 
   const educations = education.map((edu) => ({
     ...edu,
@@ -49,13 +46,34 @@ export default function ResumeClient({
     },
   }));
 
-  const toggleCard = (id: number) => {
-    if (expandedCardId === id) {
-      setExpandedCardId(null);
-      return;
-    }
+  const activeItems = useMemo(() => {
+    return activeTab === "jobs" ? jobs : educations;
+  }, [activeTab, jobs, educations]);
 
-    setExpandedCardId(id);
+  const toggleCard = (id: number) => {
+    setExpandedCardIds(prevIds => {
+      // If the card is already expanded, remove it from the array
+      if (prevIds.includes(id)) {
+        return prevIds.filter(cardId => cardId !== id);
+      }
+      
+      // Otherwise, add it to the array
+      return [...prevIds, id];
+    });
+  };
+
+  const expandAllCards = () => {
+    const allIds = activeItems.map(item => item.id);
+    setExpandedCardIds(allIds);
+  };
+
+  const collapseAllCards = () => {
+    setExpandedCardIds([]);
+  };
+
+  const handleToggleTab = (tab: "jobs" | "education") => {
+    setExpandedCardIds([]);
+    setActiveTab(tab);
   };
 
   const renderJobHistory = () => {
@@ -90,7 +108,7 @@ export default function ResumeClient({
               },
             ]}
             url={job.url}
-            isExpanded={expandedCardId === job.id}
+            isExpanded={expandedCardIds.includes(job.id)}
             onToggle={toggleCard}
             visitText={t("about.resume.visitWebsite")}
           />
@@ -131,7 +149,7 @@ export default function ResumeClient({
               },
             ]}
             url={edu.url}
-            isExpanded={expandedCardId === edu.id}
+            isExpanded={expandedCardIds.includes(edu.id)}
             onToggle={toggleCard}
             visitText={t("about.resume.visitWebsite")}
           />
@@ -151,7 +169,7 @@ export default function ResumeClient({
               animate={{ opacity: 1 }}
               transition={{ duration: 1 }}
             >
-              {t("about.resume.title")}
+              {t("about.resume.title").toUpperCase()}
             </motion.h1>
 
             <Link
@@ -175,7 +193,7 @@ export default function ResumeClient({
                     ? "text-green-400 border-b-2 border-green-400"
                     : "text-gray-400 hover:text-white"
                 }`}
-                onClick={() => setActiveTab("jobs")}
+                onClick={() => handleToggleTab("jobs")}
               >
                 <span className="flex items-center justify-center gap-2">
                   <FaBriefcase /> {t("about.resume.experience")}
@@ -187,11 +205,26 @@ export default function ResumeClient({
                     ? "text-green-400 border-b-2 border-green-400"
                     : "text-gray-400 hover:text-white"
                 }`}
-                onClick={() => setActiveTab("education")}
+                onClick={() => handleToggleTab("education")}
               >
                 <span className="flex items-center justify-center gap-2">
                   <FaGraduationCap /> {t("about.resume.education")}
                 </span>
+              </button>
+            </div>
+
+            <div className="flex justify-end space-x-2 mt-4">
+              <button
+                onClick={expandAllCards}
+                className="flex items-center gap-1 px-3 py-1 text-sm bg-slate-700 hover:bg-slate-600 rounded-md transition-colors"
+              >
+                <FaChevronDown size={12} /> {t("about.resume.expandAll")}
+              </button>
+              <button
+                onClick={collapseAllCards}
+                className="flex items-center gap-1 px-3 py-1 text-sm bg-slate-700 hover:bg-slate-600 rounded-md transition-colors"
+              >
+                <FaChevronUp size={12} /> {t("about.resume.collapseAll")}
               </button>
             </div>
 

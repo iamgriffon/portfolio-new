@@ -14,6 +14,7 @@
     "pt-BR": "Português",
     "zh": "中文"
   },
+  "current": "en",
   "main": {
     "header": "Hello and welcome to my portfolio!",
     "description1": "I'm a brazilian software engineer with a passion for building products that help people live better lives.",
@@ -39,7 +40,9 @@
         "technologies": "Technologies",
         "achievements": "Achievements",
         "present": "Present",
-        "visitWebsite": "Visit Website"
+        "visitWebsite": "Visit Website",
+        "expandAll": "Expand All",
+        "collapseAll": "Collapse All"
       },
       "skills": {
         "title": "My Skills",
@@ -55,13 +58,46 @@
       "title": "My Projects",
       "viewAll": "View All Projects"
     },
-    "language": {
-      "current": "en"
-    },
     "skills": {
       "title": "My Skills",
-      "selectTech": "Select your tech",
-      "back": "Back",
+      "selectTech": "SELECT YOUR TECH",
+      "searchPlaceholder": "Search technologies...",
+      "year": "year",
+      "years": "years",
+      "selected": "Selected",
+      "skillLevel": "Skill Level",
+      "experience": "Experience",
+      "readyToDeploy": "Ready to deploy",
+      "addToStack": "Add to stack",
+      "alreadyInStack": "Already in stack",
+      "removeFromStack": "Remove from stack",
+      "buildStack": "Build your dream stack",
+      "dragDropDescription": "Drag and drop technologies to create your ideal tech stack. Choose your target seniority level and see if I can stack up to your ambition!",
+      "chooseSeniority": "Which seniority level are you looking for?",
+      "dropHere": "Drop Technologies Here",
+      "dragDescription": "Drag technologies from above to build your stack",
+      "yourStack": "Your Tech Stack",
+      "clearAll": "Clear All",
+      "stackAssessment": "Stack Assessment",
+      "averageSkillLevel": "Average Skill Level",
+      "level": "Level",
+      "stackSuitability": "Stack Suitability",
+      "stackMatches": "I'm definitely the right person for you!",
+      "stackMismatch": "You're looking for a {target}, but based on your specifications I'm a {current}",
+      "stackDescription": "Stack Description",
+      "recommendations": "Recommendations",
+      "recommendationLower": "I'm not quite there yet :(",
+      "recommendationHigher": "You're underestimating my capabilities for this position!",
+      "ranks": {
+        "junior": "Junior",
+        "junior_description": "Building foundations with enthusiasm and learning rapidly.",
+        "mid-level": "Mid-level",
+        "mid-level_description": "Solid technical skills with growing independence.",
+        "senior": "Senior",
+        "senior_description": "Expert skills with deep domain knowledge and leadership capabilities.",
+        "principal": "Principal",
+        "principal_description": "World-class expertise with technical vision and innovation."
+      },
       "descriptions": {
         "typescript": "TypeScript is a statically typed superset of JavaScript that adds optional types, classes, and interfaces.",
         "javascript": "JavaScript is a programming language that allows you to implement complex features on web pages.",
@@ -84,6 +120,9 @@
         "python": "Python is an interpreted, high-level, general-purpose programming language.",
         "default": "This is one of the technologies I work with. Click to view more details."
       }
+    },
+    "language": {
+      "current": "en"
     }
   }
 } 

@@ -12,9 +12,9 @@
   "language": {
     "en": "English",
     "pt-BR": "Português",
-    "zh": "中文",
-    "current": "zh"
+    "zh": "中文"
   },
+  "current": "zh",
   "main": {
     "header": "你好，欢迎来到我的作品集！",
     "description1": "我是一名巴西软件工程师，热衷于构建帮助人们生活得更好的产品。",
@@ -40,7 +40,9 @@
         "technologies": "技术栈",
         "achievements": "成就",
         "present": "至今",
-        "visitWebsite": "访问网站"
+        "visitWebsite": "访问网站",
+        "expandAll": "展开全部",
+        "collapseAll": "收起全部"
       },
       "skills": {
         "title": "我的技能",
@@ -56,13 +58,46 @@
       "title": "我的项目",
       "viewAll": "查看所有项目"
     },
-    "language": {
-      "current": "zh"
-    },
     "skills": {
       "title": "我的技能",
-      "selectTech": "选择技术",
-      "back": "返回",
+      "selectTech": "选择你的技术",
+      "searchPlaceholder": "搜索技术...",
+      "year": "年",
+      "years": "年",
+      "selected": "已选择",
+      "skillLevel": "技能水平",
+      "experience": "经验",
+      "readyToDeploy": "准备部署",
+      "addToStack": "添加到技术栈",
+      "removeFromStack": "从技术栈中移除",
+      "alreadyInStack": "已在技术栈中",
+      "buildStack": "构建你的理想技术栈",
+      "dragDropDescription": "拖放技术来创建你的理想技术栈。选择你的目标资历水平，看看我的技术栈是否符合你的期望！",
+      "chooseSeniority": "你在寻找哪种资历水平？",
+      "dropHere": "在此处放置技术",
+      "dragDescription": "从上方拖动技术来构建你的技术栈",
+      "yourStack": "你的技术栈",
+      "clearAll": "清除全部",
+      "stackAssessment": "技术栈评估",
+      "averageSkillLevel": "平均技能水平",
+      "level": "级别",
+      "stackSuitability": "技术栈适用性",
+      "stackMatches": "我绝对是你的最佳人选！",
+      "stackMismatch": "你在寻找{target}级别，但根据你的要求我是{current}级别",
+      "stackDescription": "技术栈描述",
+      "recommendations": "建议",
+      "recommendationLower": "我还没有达到这个水平 :(",
+      "recommendationHigher": "你低估了我对这个职位的能力！",
+      "ranks": {
+        "junior": "初级",
+        "junior_description": "热情学习，快速构建基础。",
+        "mid-level": "中级",
+        "mid-level_description": "扎实的技术能力，逐渐独立。",
+        "senior": "高级",
+        "senior_description": "专业技能，深厚的领域知识和领导能力。",
+        "principal": "资深",
+        "principal_description": "世界级专业知识，具有技术远见和创新能力。"
+      },
       "descriptions": {
         "typescript": "TypeScript 是 JavaScript 的类型化超集，它添加了可选类型、类和接口。",
         "javascript": "JavaScript 是一种编程语言，它允许你在网页上实现复杂的功能。",
@@ -85,6 +120,9 @@
         "python": "Python 是一种解释型、高级、通用编程语言。",
         "default": "这是我使用的技术之一。点击查看更多详情。"
       }
+    },
+    "language": {
+      "current": "zh"
     }
   }
 } 

@@ -12,9 +12,9 @@
   "language": {
     "en": "English",
     "pt-BR": "Português",
-    "zh": "中文",
-    "current": "pt-BR"
+    "zh": "中文"
   },
+  "current": "pt-BR",
   "main": {
     "header": "Olá e bem-vindo ao meu portfólio!",
     "description1": "Sou um engenheiro de software brasileiro com paixão por construir produtos que ajudam as pessoas a viverem melhor.",
@@ -40,7 +40,9 @@
         "technologies": "Tecnologias",
         "achievements": "Conquistas",
         "present": "Presente",
-        "visitWebsite": "Visitar Website"
+        "visitWebsite": "Visitar Website",
+        "expandAll": "Expandir Todos",
+        "collapseAll": "Recolher Todos"
       },
       "skills": {
         "title": "MINHAS HABILIDADES",
@@ -59,7 +61,43 @@
     "skills": {
       "title": "Minhas Habilidades",
       "selectTech": "SELECIONE SUA TECNOLOGIA",
-      "back": "Voltar",
+      "searchPlaceholder": "Pesquisar tecnologias...",
+      "year": "ano",
+      "years": "anos",
+      "selected": "Selecionado",
+      "skillLevel": "Nível de Habilidade",
+      "experience": "Experiência",
+      "readyToDeploy": "Pronto para usar",
+      "addToStack": "Adicionar à stack",
+      "removeFromStack": "Remover da stack",
+      "alreadyInStack": "Já está na stack",
+      "buildStack": "Monte sua stack",
+      "dragDropDescription": "Arraste e solte tecnologias para criar sua stack ideal. Escolha o nível de senioridade desejado e veja se eu correspondo à sua ambição!",
+      "chooseSeniority": "Qual nível de senioridade você está buscando?",
+      "dropHere": "Solte Tecnologias Aqui",
+      "dragDescription": "Arraste tecnologias de cima para montar sua stack",
+      "yourStack": "Sua Stack Tecnológica",
+      "clearAll": "Limpar Tudo",
+      "stackAssessment": "Avaliação da Stack",
+      "averageSkillLevel": "Nível Médio de Habilidade",
+      "level": "Nível",
+      "stackSuitability": "Adequação da Stack",
+      "stackMatches": "Eu definitivamente sou o cara para você!",
+      "stackMismatch": "Você está buscando um {target}, mas para sua especificação eu sou {current}",
+      "stackDescription": "Descrição da Stack",
+      "recommendations": "Recomendações",
+      "recommendationLower": "Ainda não dou conta disso :(",
+      "recommendationHigher": "Você está subestimando minhas capacidades para essa posição!",
+      "ranks": {
+        "junior": "Júnior",
+        "junior_description": "Construindo fundamentos com entusiasmo e aprendendo rapidamente.",
+        "mid-level": "Pleno",
+        "mid-level_description": "Habilidades técnicas sólidas com crescente independência.",
+        "senior": "Sênior",
+        "senior_description": "Habilidades avançadas com profundo conhecimento de domínio e capacidades de liderança.",
+        "principal": "Principal",
+        "principal_description": "Experiência de classe mundial com visão técnica e inovação."
+      },
       "descriptions": {
         "typescript": "TypeScript é um superconjunto de JavaScript com tipagem estática que adiciona tipos, classes e interfaces opcionais.",
         "javascript": "JavaScript é uma linguagem de programação que permite implementar recursos complexos em páginas da web.",
@@ -87,4 +125,4 @@
       "current": "pt-BR"
     }
   }
-} 
+}

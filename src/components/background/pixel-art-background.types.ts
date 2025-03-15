@@ -30,7 +30,7 @@ interface Star {
   twinkleIntensity: number;
 }
 
-export interface Sprite {
+interface Sprite {
   id: number;
   size: number;
   top: string;
@@ -41,7 +41,7 @@ export interface Sprite {
   checkBoundary?: (boundaryRect: DOMRect | null) => void;
 }
 
-export interface SpritePosition {
+interface SpritePosition {
   id: number;
   x: number;
   y: number;
@@ -54,7 +54,7 @@ export interface SpritePosition {
   scale: number;
 }
 
-export interface PixelArtBackgroundProps {
+interface PixelArtBackgroundProps {
   sprites?: string[];
   spriteSize?: number;
   numberOfSprites?: number;
@@ -67,4 +67,30 @@ export interface PixelArtBackgroundProps {
   withoutInteraction?: boolean;
 }
 
-export type { PixelItem, Star };
+interface AnimationStateContextType {
+  hasAnimated: boolean;
+  setHasAnimated: (value: boolean) => void;
+}
+
+interface BackgroundStateContextType {
+  items: PixelItem[];
+  setItems: React.Dispatch<React.SetStateAction<PixelItem[]>>;
+  stars: Star[];
+  isInitialized: boolean;
+  hasVisitedProjects: boolean;
+  setHasVisitedProjects: (value: boolean) => void;
+  spritePositions: SpritePosition[];
+  setSpritePositions: (positions: SpritePosition[]) => void;
+  windowSize: { width: number; height: number };
+  resetSprites: () => void;
+}
+
+export type {
+  PixelItem,
+  Star,
+  Sprite,
+  SpritePosition,
+  PixelArtBackgroundProps,
+  AnimationStateContextType,
+  BackgroundStateContextType,
+};

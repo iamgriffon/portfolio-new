@@ -1,12 +1,6 @@
 "use client";
+import { SectionTitleProps } from "./types";
 
-import { ReactNode } from "react";
-
-interface SectionTitleProps {
-  title: ReactNode;
-  animate?: boolean;
-  className?: string;
-}
 
 /**
  * A reusable section title component with the signature glowing green style.

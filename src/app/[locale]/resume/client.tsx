@@ -52,12 +52,9 @@ export default function ResumeClient({
 
   const toggleCard = (id: number) => {
     setExpandedCardIds(prevIds => {
-      // If the card is already expanded, remove it from the array
       if (prevIds.includes(id)) {
         return prevIds.filter(cardId => cardId !== id);
       }
-      
-      // Otherwise, add it to the array
       return [...prevIds, id];
     });
   };

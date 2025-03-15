@@ -1,11 +1,8 @@
 'use client';
 
 import { createContext, useContext, useState, ReactNode } from 'react';
+import { AnimationStateContextType } from './pixel-art-background.types';
 
-interface AnimationStateContextType {
-  hasAnimated: boolean;
-  setHasAnimated: (value: boolean) => void;
-}
 
 const AnimationStateContext = createContext<AnimationStateContextType>({
   hasAnimated: false,

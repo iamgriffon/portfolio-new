@@ -1,5 +1,3 @@
-// Export all UI components for easier imports
-
 export * from '../home/skip-intro-button';
 export * from './section-title';
 export * from '../home/menu-item';

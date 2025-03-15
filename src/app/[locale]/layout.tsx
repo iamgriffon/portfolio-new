@@ -5,18 +5,15 @@ import LanguageSwitcher from "@/components/ui/language-switcher";
 import Link from "next/link";
 import Image from "next/image";
 
-// Remove explicit type annotations for the function parameters
 export default async function LocaleLayout(props: any) {
-  // Destructure what we need, letting TypeScript infer the types
+
   const { children, params } = props;
   const locale = params?.locale;
   
-  // Validate locale
   if (!locale || !locales.includes(locale)) {
     notFound();
   }
-  
-  // Get messages for the locale
+
   const messages = await getMessages(locale);
 
   return (

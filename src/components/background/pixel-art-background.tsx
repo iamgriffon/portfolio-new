@@ -414,7 +414,6 @@ export default function PixelArtBackground({
 
     animationRef.current = requestAnimationFrame(updatePositions);
 
-    // Cleanup function
     return () => {
       isAnimating.current = false;
       if (animationRef.current) {

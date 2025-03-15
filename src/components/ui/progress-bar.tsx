@@ -1,15 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-
-interface ProgressBarProps {
-  duration?: number;
-  complete?: boolean;
-  width?: string;
-  height?: string;
-  bgColor?: string;
-  fillColor?: string;
-}
+import { ProgressBarProps } from "./types";
 
 /**
  * A reusable animated progress bar component.

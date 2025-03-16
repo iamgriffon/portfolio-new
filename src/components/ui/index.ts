@@ -1,9 +1,7 @@
-// Export all UI components for easier imports
-
-export * from './skip-intro-button';
-export * from './section-title';
-export * from './menu-item';
+export * from '../home/skip-intro-button';
+export * from './common/section-title';
+export * from '../home/menu-item';
 export * from './progress-bar';
-export * from './toggle-menu-button';
-export * from './animation-state-provider';
+export * from '../home/toggle-menu-button';
+export * from '../background/animation-state-provider';
 export * from './button'; 

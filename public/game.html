@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+  <meta name="google-site-verification" content="dRFt1DjMaz4QI-gPjzUmoztVbRdcXL8jltdpfQp6Klo" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+  <meta name="description" content="Play DOOM via JS-DOS">
+  <meta name="keywords" content="DOOM,pc,game,javscript">
+  <title>DOOM via JS-DOS</title>
+  <meta property="og:title" content='DOOM &middot; js-dos' />
+  <meta property="og:description" content="Play in the DOOM in browser." />
+  <meta property="og:type" content="game" />
+  <meta property="og:url" content="https://thedoggybrad.github.io/doom_on_js-dos/" />
+  <meta property="og:image" content="https://thedoggybrad.github.io/doom_on_js-dos/DOOM.png" />
+
+  <!-- FAVICON -->
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/png" href="favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+  <link rel="manifest" href="site.webmanifest">
+
+  <!-- Font Awesome for the fullscreen icon -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+  <!-- JS-DOS scripts -->
+  <script type="text/javascript" src="/js-dos-api.js"></script>
+  <script type="text/javascript" src="/js-dos-v3.js"></script>
+
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background-color: #121212;
+      color: white;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+    
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      padding: 10px;
+      box-sizing: border-box;
+    }
+    
+    #DOOM {
+      width: 100%;
+      max-width: 800px;
+    }
+    
+    #DOOM > .dosbox-container { 
+      width: 100%; 
+      height: 0;
+      padding-bottom: 62.5%; /* 16:10 aspect ratio */
+      position: relative;
+    }
+    
+    #DOOM > .dosbox-container > canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100% !important;
+      height: 100% !important;
+    }
+    
+    #DOOM > .dosbox-container > .dosbox-overlay { 
+      background: url("/DOOM.png");
+      background-size: cover;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+    
+    #DOOM > .dosbox-container > .dosbox-overlay > .dosbox-start {
+      border-radius: 17px;
+      background-color: rgba(90, 90, 90, 0.57);
+      padding: 15px;
+      text-align: center;
+      vertical-align: middle;
+      width: 10em;
+      margin: 20% auto 0;
+      cursor: pointer;
+    }
+    
+    .controls {
+      margin-top: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .fullscreen-btn {
+      color: white;
+      cursor: pointer;
+      padding: 10px;
+      display: flex;
+      align-items: center;
+      background: none;
+      border: none;
+      font-size: 16px;
+    }
+    
+    .fullscreen-btn i {
+      margin-right: 8px;
+    }
+    
+    a {
+      color: white;
+      text-decoration: none;
+    }
+    
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <div id="DOOM" class="dosbox-default"></div>
+      
+      <div class="controls">
+        <button id="fullscreen_DOOM" class="fullscreen-btn">
+          <i class="fa-solid fa-expand"></i> FULLSCREEN
+        </button>
+      </div>
+    </div>
+
+    <script type="text/javascript">
+      // Create Dosbox instance
+      var dosbox_DOOM = new Dosbox({
+        id: "DOOM",
+        onload: function (dosbox) {
+          // Notify the parent window that the game is loading
+          if (window.parent !== window) {
+            window.parent.postMessage({ type: 'doom-loading' }, '*');
+          }
+          
+          // Run DOOM using local file
+          dosbox_DOOM.run("/DOOM-@evilution.zip", "./DOOM/DOOM.EXE");
+        },
+        onrun: function (dosbox, app) {
+          console.log("App '" + app + "' is running");
+          
+          // Notify the parent window that the game is running
+          if (window.parent !== window) {
+            window.parent.postMessage({ type: 'doom-running' }, '*');
+          }
+        }
+      });
+
+      // Add fullscreen button functionality
+      document.getElementById("fullscreen_DOOM").addEventListener("click", function() {
+        // Try to request fullscreen through DosBox
+        dosbox_DOOM.requestFullScreen();
+        
+        // Also notify the parent frame for potential handling
+        if (window.parent !== window) {
+          window.parent.postMessage({ type: 'doom-fullscreen' }, '*');
+        }
+      });
+      
+      // Handle messages from parent window
+      window.addEventListener('message', function(event) {
+        if (event.data && event.data.type === 'resize') {
+          // Handle resize events if needed
+          console.log('Resize event received');
+        }
+      });
+    </script>
+  </body>
+</html>

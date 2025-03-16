@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { useState, useEffect, useRef } from "react";
 import { useTranslations } from "next-intl";
-import { useAnimationState } from "@/components/ui/animation-state-provider";
+import { useAnimationState } from "@/components/background/animation-state-provider";
 import { useRouter, useParams } from "next/navigation";
 import { useBackgroundState } from "@/components/background/pixel-art-background-provider";
 import { sprites } from "@/components/background/pixel-art-background-sprites";
@@ -14,9 +14,7 @@ import {
   SectionTitle,
   ProgressBar,
   SkipIntroButton,
-  ToggleMenuButton
 } from "@/components/ui";
-
 export default function Home() {
   const t = useTranslations("main");
   const menuOptions = [
@@ -126,22 +124,24 @@ export default function Home() {
   };
 
   return (
-    <div className="flex flex-col w-screen h-screen text-white p-6 z-10">
+    <div className="flex flex-col w-screen h-screen text-white z-20 overflow-hidden">
       <PixelArtBackground
         sprites={spritePaths}
         numberOfSprites={8}
         minVelocity={1.0}
-        maxVelocity={3.0}
+        maxVelocity={2.5}
         withoutBouncing={false}
       >
-        <div className="w-full h-full flex flex-col z-10 gap-4 items-center justify-center">
+        <div className="w-full h-full flex flex-col z-10 gap-4 items-center justify-center pointer-events-auto">
           <a
             href="https://github.com/iamgriffon"
             target="_blank"
             className="z-10"
           >
             <motion.img
-              key={`logo-${hasAnimated || skippedIntro ? 'skipped' : 'animated'}`}
+              key={`logo-${
+                hasAnimated || skippedIntro ? "skipped" : "animated"
+              }`}
               src="https://github.com/iamgriffon.png"
               alt="logo"
               className="w-24 h-24 z-10 rounded-full"
@@ -155,7 +155,9 @@ export default function Home() {
             />
           )}
           <motion.h1
-            key={`header-${hasAnimated || skippedIntro ? 'skipped' : 'animated'}`}
+            key={`header-${
+              hasAnimated || skippedIntro ? "skipped" : "animated"
+            }`}
             className="text-4xl m-4 font-bold"
             {...getAnimationProps(0)}
           >
@@ -163,14 +165,18 @@ export default function Home() {
           </motion.h1>
           <p className="flex flex-col text-center gap-2 z-10 shadow-sm">
             <motion.span
-              key={`desc1-${hasAnimated || skippedIntro ? 'skipped' : 'animated'}`}
+              key={`desc1-${
+                hasAnimated || skippedIntro ? "skipped" : "animated"
+              }`}
               className="text-base font-bold font-mono"
               {...getAnimationProps(2)}
             >
               {t("description1")}
             </motion.span>
             <motion.span
-              key={`desc2-${hasAnimated || skippedIntro ? 'skipped' : 'animated'}`}
+              key={`desc2-${
+                hasAnimated || skippedIntro ? "skipped" : "animated"
+              }`}
               className="text-base z-10 font-bold font-mono"
               {...getAnimationProps(4)}
             >
@@ -180,7 +186,9 @@ export default function Home() {
           {hasAnimated ? (
             showMenu ? (
               <motion.div
-                key={`menu-${hasAnimated || skippedIntro ? 'skipped' : 'animated'}`}
+                key={`menu-${
+                  hasAnimated || skippedIntro ? "skipped" : "animated"
+                }`}
                 className="mt-8 flex flex-col items-center"
                 {...getMenuAnimationProps()}
                 animate={{ opacity: 1 }}
@@ -188,7 +196,11 @@ export default function Home() {
                 ref={menuRef}
               >
                 <div className="max-w-md w-full min-w-96 z-10">
-                  <SectionTitle title={t("menu.title")} />
+                  <SectionTitle
+                    title={t("menu.title")}
+                    className="text-white"
+                  />
+
                   <section className="space-y-4">
                     {menuOptions.map((option, index) => (
                       <MenuItem
@@ -204,16 +216,17 @@ export default function Home() {
                 </div>
               </motion.div>
             ) : (
-              <ToggleMenuButton
+              <MenuItem
                 onClick={() => setShowMenu(true)}
-                buttonText={t("menu.showMenu")}
+                title={t("menu.showMenu")}
+                icon={<FaEyeSlash />}
+                index={0}
+                interactive={true}
+                withArrow={false}
               />
             )
           ) : (
-            <ProgressBar
-              complete={skippedIntro}
-              duration={5}
-            />
+            <ProgressBar complete={skippedIntro} duration={5} />
           )}
         </div>
       </PixelArtBackground>

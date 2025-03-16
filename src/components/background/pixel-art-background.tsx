@@ -75,13 +75,10 @@ export default function PixelArtBackground({
 
   // Update container size when window size changes
   useEffect(() => {
-    if (!containerRef.current) return;
-
     const updateSize = () => {
       if (containerRef.current) {
-        const rect = containerRef.current.getBoundingClientRect();
-        const newWidth = rect.width;
-        const newHeight = rect.height;
+        const newWidth = window.innerWidth;
+        const newHeight = window.innerHeight;
         
         // Only update if there's a significant change to avoid unnecessary re-renders
         if (Math.abs(newWidth - containerSize.width) > 5 || Math.abs(newHeight - containerSize.height) > 5) {
@@ -173,6 +170,9 @@ export default function PixelArtBackground({
       const randomVelocityY =
         (Math.random() * (maxVelocity - minVelocity) + minVelocity) *
         (Math.random() > 0.5 ? 1 : -1);
+      
+      // Convert displaySize to proper scale factor (divide by 100)
+      const spriteScale = defaultSprites[index].displaySize / 100;
 
       return {
         id: index,
@@ -183,7 +183,7 @@ export default function PixelArtBackground({
         width: defaultSprites[index].width,
         height: defaultSprites[index].height,
         spritePath: spriteImages[index % spriteImages.length],
-        scale: defaultSprites[index].displaySize,
+        scale: spriteScale,
         name: defaultSprites[index].name,
       };
     });
@@ -334,7 +334,8 @@ export default function PixelArtBackground({
         lastUpdateTime.current = timestamp;
       }
 
-      const deltaTime = Math.min(timestamp - lastUpdateTime.current, 100);
+      // Limit delta time to avoid large jumps during slowdowns or tab switching
+      const deltaTime = Math.min(timestamp - lastUpdateTime.current, 30);
       lastUpdateTime.current = timestamp;
 
       // Skip updating if container width or height is 0
@@ -347,14 +348,16 @@ export default function PixelArtBackground({
 
       currentUpdateSpritePositions((prevPositions: SpritePosition[]) => {
         const newPositions = [...prevPositions];
-
         for (let i = 0; i < newPositions.length; i++) {
           const sprite = newPositions[i];
 
-          sprite.x += (sprite.velocityX * deltaTime) / 16;
-          sprite.y += (sprite.velocityY * deltaTime) / 16;
+          // Use smoother motion calculation with fixed timestep
+          const speedFactor = deltaTime / 16;
+          sprite.x += sprite.velocityX * speedFactor;
+          sprite.y += sprite.velocityY * speedFactor;
 
-          const maxSpeed = currentMaxVelocity * 1.5;
+          // Cap maximum velocity to avoid excessive movement
+          const maxSpeed = currentMaxVelocity * 1.2;
           if (Math.abs(sprite.velocityX) > maxSpeed) {
             sprite.velocityX = maxSpeed * Math.sign(sprite.velocityX);
           }
@@ -363,32 +366,21 @@ export default function PixelArtBackground({
             sprite.velocityY = maxSpeed * Math.sign(sprite.velocityY);
           }
 
+          // Use more gradual velocity changes for softer bounces
           if (sprite.x <= 0) {
-            sprite.x = 0;
-            sprite.velocityX = Math.min(
-              Math.abs(sprite.velocityX) * 0.8 + currentMinVelocity,
-              currentMaxVelocity
-            );
+            sprite.x = 0; // Clamp to boundary
+            sprite.velocityX = Math.abs(sprite.velocityX) * 0.9 + currentMinVelocity * 0.5;
           } else if (sprite.x + sprite.width >= currentContainerWidth) {
-            sprite.x = currentContainerWidth - sprite.width;
-            sprite.velocityX = -Math.min(
-              Math.abs(sprite.velocityX) * 0.8 + currentMinVelocity,
-              currentMaxVelocity
-            );
+            sprite.x = currentContainerWidth - sprite.width; // Clamp to boundary
+            sprite.velocityX = -(Math.abs(sprite.velocityX) * 0.9 + currentMinVelocity * 0.5);
           }
 
           if (sprite.y <= 0) {
-            sprite.y = 0;
-            sprite.velocityY = Math.min(
-              Math.abs(sprite.velocityY) * 0.8 + currentMinVelocity,
-              currentMaxVelocity
-            );
+            sprite.y = 0; // Clamp to boundary
+            sprite.velocityY = Math.abs(sprite.velocityY) * 0.9 + currentMinVelocity * 0.5;
           } else if (sprite.y + sprite.height >= currentContainerHeight) {
-            sprite.y = currentContainerHeight - sprite.height;
-            sprite.velocityY = -Math.min(
-              Math.abs(sprite.velocityY) * 0.8 + currentMinVelocity,
-              currentMaxVelocity
-            );
+            sprite.y = currentContainerHeight - sprite.height; // Clamp to boundary
+            sprite.velocityY = -(Math.abs(sprite.velocityY) * 0.9 + currentMinVelocity * 0.5);
           }
         }
 
@@ -414,7 +406,6 @@ export default function PixelArtBackground({
 
     animationRef.current = requestAnimationFrame(updatePositions);
 
-    // Cleanup function
     return () => {
       isAnimating.current = false;
       if (animationRef.current) {
@@ -453,6 +444,11 @@ export default function PixelArtBackground({
         "fixed top-0 left-0 w-screen h-screen overflow-hidden bg-gradient-to-b from-slate-900 to-slate-800",
         className
       )}
+      style={{
+        perspective: "1000px",
+        transform: "translateZ(0)",
+        backfaceVisibility: "hidden"
+      }}
     >
       <style jsx>{`
         @keyframes twinkle {
@@ -521,8 +517,9 @@ export default function PixelArtBackground({
                 style={{
                   width: `${sprite.width}px`,
                   height: `${sprite.height}px`,
-                  transform: `translate(${sprite.x}px, ${sprite.y}px)`,
+                  transform: `translate3d(${sprite.x}px, ${sprite.y}px, 0)`,
                   filter: "drop-shadow(0 0 8px rgba(255, 255, 255, 0.4))",
+                  pointerEvents: "none"
                 }}
               >
                 <Image
@@ -530,7 +527,11 @@ export default function PixelArtBackground({
                   alt={sprite.name}
                   width={sprite.width}
                   height={sprite.height}
-                  className={`w-full scale-[${sprite.scale}] h-full [image-rendering:pixelated] select-none`}
+                  className="w-full h-full [image-rendering:pixelated] select-none"
+                  style={{
+                    transform: `scale(${typeof sprite.scale === 'number' ? sprite.scale : 1})`,
+                    transformOrigin: "center"
+                  }}
                   draggable={false}
                 />
               </div>

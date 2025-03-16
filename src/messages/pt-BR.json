@@ -1,7 +1,6 @@
 {
   "welcome": {
-    "title": "Bem-vindo ao meu Portfólio",
-    "subtitle": "Explore meu trabalho e projetos"
+    "title": "Bem-vindo ao meu Portfólio"
   },
   "nav": {
     "home": "Início",
@@ -12,15 +11,13 @@
   "language": {
     "en": "English",
     "pt-BR": "Português",
-    "zh": "中文",
-    "current": "pt-BR"
+    "zh": "中文"
   },
+  "current": "pt-BR",
   "main": {
-    "header": "Olá e bem-vindo ao meu portfólio!",
+    "header": "Olá e bem-vindo(a) ao meu portfólio!",
     "description1": "Sou um engenheiro de software brasileiro com paixão por construir produtos que ajudam as pessoas a viverem melhor.",
     "description2": "...e eu AMO música, jogos e programação.",
-    "bounceHint": "Clique em qualquer sprite para vê-lo quicar com velocidade aleatória!",
-    "clickCounter": "Cliques nos Sprites: {count}",
     "back": "Voltar",
     "skipIntro": "Pular Intro",
     "menu": {
@@ -31,26 +28,38 @@
     },
     "about": {
       "title": "Sobre Mim",
-      "subtitle": "SELECIONE O MODO",
+      "subtitle": "Selecione o Modo",
       "resume": {
-        "title": "MEU CURRÍCULO",
-        "desc": "Atributos do personagem e experiências profissionais",
-        "education": "EDUCAÇÃO",
-        "experience": "EXPERIÊNCIA PROFISSIONAL",
-        "technologies": "Tecnologias",
-        "achievements": "Conquistas",
-        "present": "Presente",
-        "visitWebsite": "Visitar Website"
+        "title": "Meu Currículo",
+        "desc": "Atributos do personagem e experiências profissionais"
       },
       "skills": {
-        "title": "MINHAS HABILIDADES",
+        "title": "Minhas Habilidades",
         "desc": "Habilidades especiais e níveis de poder"
       },
       "socials": {
-        "title": "MINHAS REDES",
-        "desc": "Conecte-se com outros jogadores"
+        "title": "Minhas Redes",
+        "desc": "Conecte-se com outros jogadores",
+        "visitProfile": "Visitar Perfil",
+        "copied": "Copiado"
+      },
+      "doom": {
+        "title": "Doom",
+        "desc": "Jogar DOOM!"
       },
       "footer": "CLIQUE EM UMA OPÇÃO PARA CONTINUAR · INSIRA MOEDA PARA DESBLOQUEAR TODOS OS MODOS"
+    },
+    "resume": {
+      "title": "Meu Currículo",
+      "education": "Educação",
+      "experience": "Experiência Profissional",
+      "technologies": "Tecnologias",
+      "achievements": "Conquistas",
+      "present": "Presente",
+      "visitWebsite": "Visitar Website",
+      "expandAll": "Expandir Todos",
+      "collapseAll": "Recolher Todos",
+      "seeCertificate": "Ver Certificado"
     },
     "projects": {
       "title": "Meus Projetos",
@@ -58,8 +67,45 @@
     },
     "skills": {
       "title": "Minhas Habilidades",
-      "selectTech": "SELECIONE SUA TECNOLOGIA",
-      "back": "Voltar",
+      "desc": "Habilidades especiais e níveis de poder",
+      "selectTech": "Selecione sua Tecnologia",
+      "searchPlaceholder": "Pesquisar tecnologias...",
+      "year": "ano",
+      "years": "anos",
+      "selected": "Selecionado",
+      "skillLevel": "Nível de Habilidade",
+      "experience": "Experiência",
+      "readyToDeploy": "Pronto para usar",
+      "addToStack": "Adicionar à stack",
+      "removeFromStack": "Remover da stack",
+      "alreadyInStack": "Já está na stack",
+      "buildStack": "Monte sua stack",
+      "dragDropDescription": "Arraste e solte tecnologias para criar sua stack ideal. Escolha o nível de senioridade desejado e veja se eu correspondo à sua ambição!",
+      "chooseSeniority": "Qual nível de senioridade você está buscando?",
+      "dropHere": "Solte Tecnologias Aqui",
+      "dragDescription": "Arraste tecnologias de cima para montar sua stack",
+      "yourStack": "Sua Stack Tecnológica",
+      "clearAll": "Limpar Tudo",
+      "stackAssessment": "Avaliação da Stack",
+      "averageSkillLevel": "Nível Médio de Habilidade",
+      "level": "Nível",
+      "stackSuitability": "Adequação da Stack",
+      "stackMatches": "Eu definitivamente sou o cara para você!",
+      "stackMismatch": "Você está buscando um {target}, mas para sua especificação eu sou {current}",
+      "stackDescription": "Descrição da Stack",
+      "recommendations": "Recomendações",
+      "recommendationLower": "Ainda não dou conta disso :(",
+      "recommendationHigher": "Você está subestimando minhas capacidades para essa posição!",
+      "ranks": {
+        "junior": "Júnior",
+        "junior_description": "Construindo fundamentos com entusiasmo e aprendendo rapidamente.",
+        "mid-level": "Pleno",
+        "mid-level_description": "Habilidades técnicas sólidas com crescente independência.",
+        "senior": "Sênior",
+        "senior_description": "Habilidades avançadas com profundo conhecimento de domínio e capacidades de liderança.",
+        "principal": "Principal",
+        "principal_description": "Experiência de classe mundial com visão técnica e inovação."
+      },
       "descriptions": {
         "typescript": "TypeScript é um superconjunto de JavaScript com tipagem estática que adiciona tipos, classes e interfaces opcionais.",
         "javascript": "JavaScript é uma linguagem de programação que permite implementar recursos complexos em páginas da web.",
@@ -83,8 +129,46 @@
         "default": "Esta é uma das tecnologias com as quais trabalho. Clique para ver mais detalhes."
       }
     },
+    "socials": {
+      "title": "Minhas Redes",
+      "visitProfile": "Visitar Perfil",
+      "copied": "Copiado!"
+    },
+    "doom": {
+      "title": "DOOM Clássico",
+      "playDoom": "Jogar DOOM",
+      "description": "Experimente o jogo DOOM original diretamente no seu navegador! Controle o marine espacial enquanto combate demônios do inferno.",
+      "loading": "Carregando DOOM...",
+      "errorTitle": "Erro ao Carregar DOOM",
+      "backToHome": "Voltar para Home",
+      "poweredBy": "Powered by js-dos",
+      "browserSupport": "Para a melhor experiência, use Chrome, Firefox ou Edge. Alguns navegadores podem ter limitações com o jogo.",
+      "gameControls": "Controles do Jogo",
+      "controlsDescription": "Use estes controles para navegar e batalhar em DOOM",
+      "movement": "Movimento",
+      "moveForward": "Mover para frente",
+      "moveBackward": "Mover para trás",
+      "strafeLeft": "Esquivar para esquerda",
+      "strafeRight": "Esquivar para direita",
+      "actions": "Ações",
+      "mouseAim": "Mouse - Mirar",
+      "leftClickShoot": "Clique Esquerdo - Atirar",
+      "useAction": "Usar/Abrir portas",
+      "weaponSelect": "Selecionar arma",
+      "fire": "Atirar",
+      "strafe": "Esquivar",
+      "run": "Correr",
+      "gameOptions": "Opções do Jogo",
+      "menu": "Menu do jogo",
+      "help": "Ajuda",
+      "save": "Salvar jogo",
+      "load": "Carregar jogo",
+      "quit": "Sair do jogo",
+      "troubleshooting": "Jogo não está funcionando corretamente? Tente recarregar:",
+      "refreshGame": "Recarregar Jogo"
+    },
     "language": {
       "current": "pt-BR"
     }
   }
-} 
+}

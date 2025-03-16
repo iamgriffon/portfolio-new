@@ -53,7 +53,7 @@ export default function About() {
             {sections.map((section, index) => (
               <motion.div
                 key={index}
-                className="group bg-slate-800/80 border-2 border-white rounded-lg overflow-hidden"
+                className="group backdrop-blur-sm bg-slate-800/80 border-2 border-white rounded-lg overflow-hidden"
                 initial={{ x: -50, opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}
                 transition={{ duration: 0.5, delay: 0.2 }}

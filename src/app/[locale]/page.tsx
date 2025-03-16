@@ -15,6 +15,7 @@ import {
   ProgressBar,
   SkipIntroButton,
 } from "@/components/ui";
+import LanguageSwitcher from "@/components/ui/common/language-switcher";
 export default function Home() {
   const t = useTranslations("main");
   const menuOptions = [
@@ -132,6 +133,9 @@ export default function Home() {
         maxVelocity={2.5}
         withoutBouncing={false}
       >
+        <section className="flex w-full pt-10 justify-end items-center gap-2 container h-auto pb-2 z-20">
+          <LanguageSwitcher />
+        </section>
         <div className="w-full h-full flex flex-col z-10 gap-4 items-center justify-center pointer-events-auto">
           <a
             href="https://github.com/iamgriffon"

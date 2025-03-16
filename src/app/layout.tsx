@@ -16,8 +16,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Interactive Portfolio",
-  description: "A portfolio with interactive bouncing sprites and pixel art aesthetics",
+  title: "Gustavo Dupin - Portfolio",
 };
 
 export default function RootLayout({

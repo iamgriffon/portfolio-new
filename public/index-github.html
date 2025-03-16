@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script>
+    // This script checks if a redirect is needed
+    // It needs to run before the rest of the page loads
+    (function() {
+      const search = window.location.search;
+      if (search.includes('?/')) {
+        // Parse the path from search and redirect
+        const path = search.substring(2); // Remove '?/'
+        const cleanPath = path.split('&')[0]; // Remove any query params
+        const newPath = window.location.origin + window.location.pathname.replace('index.html', '') + cleanPath;
+        window.history.replaceState(null, null, newPath);
+      }
+    })();
+  </script>
+  <!-- This will be replaced with the real Next.js generated index.html -->
+  <meta http-equiv="refresh" content="0;url=./_next/index.html">
+</head>
+<body>
+  <p>Loading...</p>
+</body>
+</html> 

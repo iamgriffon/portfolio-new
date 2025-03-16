@@ -1,8 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import Link from "next/link";
+import { AnimatePresence } from "framer-motion";
 import { useTranslations } from "next-intl";
 import {
   TechGrid,
@@ -30,7 +29,6 @@ export default function TechSelection({ techs }: TechSelectionProps) {
 
   // Load stack from localStorage on mount
   useEffect(() => {
-    // Make sure we're running in the browser
     if (typeof window === "undefined") {
       return;
     }
@@ -110,34 +108,9 @@ export default function TechSelection({ techs }: TechSelectionProps) {
   };
 
   return (
-    <div className="w-full min-h-screen pb-20 overflow-y-auto text-white">
-      <header className="w-full">
-        <div className="container mx-auto">
-          <div className="flex justify-between items-center mb-8">
-            <motion.h1
-              className="text-4xl font-bold text-white text-center"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 1 }}
-            >
-              {t("skills.title").toUpperCase()}
-            </motion.h1>
-
-            <Link
-              href={`/${t("language.current")}/about`}
-              className="px-4 py-2 bg-slate-800 border border-white rounded-md text-white hover:bg-slate-700 transition-colors"
-              title={t("back")}
-            >
-              ← {t("back")}
-            </Link>
-          </div>
-        </div>
-      </header>
-
+    <div className="w-screen h-full mb-15 px-4 overflow-y-auto text-white">
       <SectionTitle title={t("skills.selectTech")} />
-
       <SearchBar searchQuery={searchQuery} onSearchChange={setSearchQuery} />
-
       <TechGrid
         techs={techs}
         searchQuery={searchQuery}
@@ -150,7 +123,6 @@ export default function TechSelection({ techs }: TechSelectionProps) {
         onDragStart={handleDragStart}
         onDragEnd={handleDragEnd}
       />
-
       <AnimatePresence>
         {selectedTech && (
           <TechDetail

@@ -19,8 +19,6 @@
     "header": "你好，欢迎来到我的作品集！",
     "description1": "我是一名巴西软件工程师，热衷于构建帮助人们生活得更好的产品。",
     "description2": "...我喜欢音乐、游戏和编程。",
-    "bounceHint": "点击任何精灵，让它以随机速度弹跳！",
-    "clickCounter": "精灵点击次数: {count}",
     "back": "返回",
     "skipIntro": "跳过介绍",
     "menu": {
@@ -34,16 +32,7 @@
       "subtitle": "选择你的模式",
       "resume": {
         "title": "我的简历",
-        "desc": "角色属性和背景故事",
-        "education": "教育背景",
-        "experience": "工作经验",
-        "technologies": "技术栈",
-        "achievements": "成就",
-        "present": "至今",
-        "visitWebsite": "访问网站",
-        "expandAll": "展开全部",
-        "collapseAll": "收起全部",
-        "seeCertificate": "查看证书"
+        "desc": "角色属性和背景故事"
       },
       "skills": {
         "title": "我的技能",
@@ -53,7 +42,23 @@
         "title": "我的社交",
         "desc": "与其他玩家连接"
       },
+      "doom": {
+        "title": "DOOM",
+        "desc": "玩DOOM!"
+      },
       "footer": "按选项继续 · 投入硬币解锁所有模式"
+    },
+    "resume": {
+      "title": "我的简历",
+      "education": "教育背景",
+      "experience": "工作经验",
+      "technologies": "技术栈",
+      "achievements": "成就",
+      "present": "至今",
+      "visitWebsite": "访问网站",
+      "expandAll": "展开全部",
+      "collapseAll": "收起全部",
+      "seeCertificate": "查看证书"
     },
     "projects": {
       "title": "我的项目",
@@ -61,6 +66,7 @@
     },
     "skills": {
       "title": "我的技能",
+      "desc": "特殊能力和能力级别",
       "selectTech": "选择你的技术",
       "searchPlaceholder": "搜索技术...",
       "year": "年",
@@ -122,8 +128,46 @@
         "default": "这是我使用的技术之一。点击查看更多详情。"
       }
     },
+    "socials": {
+      "title": "我的社交",
+      "visitProfile": "访问资料",
+      "copied": "已复制!"
+    },
+    "doom": {
+      "title": "DOOM 经典版",
+      "playDoom": "玩 DOOM",
+      "description": "直接在浏览器中体验原版 DOOM 游戏！控制太空战士与地狱恶魔战斗。",
+      "loading": "正在加载 DOOM...",
+      "errorTitle": "加载 DOOM 时出错",
+      "backToHome": "返回首页",
+      "poweredBy": "由 js-dos 提供支持",
+      "browserSupport": "为了获得最佳体验，请使用 Chrome、Firefox 或 Edge。某些浏览器可能对游戏有限制。",
+      "gameControls": "游戏控制",
+      "controlsDescription": "使用这些控制在 DOOM 中导航和战斗",
+      "movement": "移动",
+      "moveForward": "向前移动",
+      "moveBackward": "向后移动", 
+      "strafeLeft": "向左闪避",
+      "strafeRight": "向右闪避",
+      "actions": "动作",
+      "mouseAim": "鼠标 - 瞄准",
+      "leftClickShoot": "左键点击 - 射击",
+      "useAction": "使用/打开门",
+      "weaponSelect": "选择武器",
+      "fire": "开火",
+      "strafe": "闪避",
+      "run": "奔跑",
+      "gameOptions": "游戏选项",
+      "menu": "游戏菜单",
+      "help": "帮助",
+      "save": "保存游戏",
+      "load": "加载游戏",
+      "quit": "退出游戏",
+      "troubleshooting": "游戏运行不正常？尝试刷新：",
+      "refreshGame": "刷新游戏"
+    },
     "language": {
       "current": "zh"
     }
   }
-} 
+}

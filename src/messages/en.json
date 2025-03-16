@@ -19,8 +19,6 @@
     "header": "Hello and welcome to my portfolio!",
     "description1": "I'm a brazilian software engineer with a passion for building products that help people live better lives.",
     "description2": "...and I LOVE music, gaming and coding.",
-    "bounceHint": "Click on any sprite to see it bounce with random velocity!",
-    "clickCounter": "Sprite Clicks: {count}",
     "back": "Back",
     "skipIntro": "Skip Intro",
     "menu": {
@@ -34,16 +32,7 @@
       "subtitle": "Select your mode",
       "resume": {
         "title": "My Resume",
-        "desc": "Character stats and background story",
-        "education": "Education",
-        "experience": "Experience",
-        "technologies": "Technologies",
-        "achievements": "Achievements",
-        "present": "Present",
-        "visitWebsite": "Visit Website",
-        "expandAll": "Expand All",
-        "collapseAll": "Collapse All",
-        "seeCertificate": "See Certificate"
+        "desc": "Character stats and background story"
       },
       "skills": {
         "title": "My Skills",
@@ -53,7 +42,23 @@
         "title": "My Socials",
         "desc": "Connect with other players"
       },
+      "doom": {
+        "title": "Doom",
+        "desc": "Play Doom!"
+      },
       "footer": "PRESS OPTION TO CONTINUE · INSERT COIN TO UNLOCK ALL MODES"
+    },
+    "resume": {
+      "title": "My Resume",
+      "education": "Education",
+      "experience": "Experience",
+      "technologies": "Technologies",
+      "achievements": "Achievements",
+      "present": "Present",
+      "visitWebsite": "Visit Website",
+      "expandAll": "Expand All",
+      "collapseAll": "Collapse All",
+      "seeCertificate": "See Certificate"
     },
     "projects": {
       "title": "My Projects",
@@ -61,7 +66,8 @@
     },
     "skills": {
       "title": "My Skills",
-      "selectTech": "SELECT YOUR TECH",
+      "desc": "Special abilities and power levels",
+      "selectTech": "Select your Technology",
       "searchPlaceholder": "Search technologies...",
       "year": "year",
       "years": "years",
@@ -70,8 +76,8 @@
       "experience": "Experience",
       "readyToDeploy": "Ready to deploy",
       "addToStack": "Add to stack",
-      "alreadyInStack": "Already in stack",
       "removeFromStack": "Remove from stack",
+      "alreadyInStack": "Already in stack",
       "buildStack": "Build your dream stack",
       "dragDropDescription": "Drag and drop technologies to create your ideal tech stack. Choose your target seniority level and see if I can stack up to your ambition!",
       "chooseSeniority": "Which seniority level are you looking for?",
@@ -122,8 +128,46 @@
         "default": "This is one of the technologies I work with. Click to view more details."
       }
     },
+    "socials": {
+      "title": "My Socials",
+      "visitProfile": "Visit Profile",
+      "copied": "Copied!"
+    },
+    "doom": {
+      "title": "DOOM Classic",
+      "playDoom": "Play DOOM",
+      "description": "Experience the original DOOM game right in your browser! Control the space marine as you battle demons from hell.",
+      "loading": "Loading DOOM...",
+      "errorTitle": "Error Loading DOOM",
+      "backToHome": "Back to Home",
+      "poweredBy": "Powered by js-dos",
+      "browserSupport": "For the best experience, use Chrome, Firefox, or Edge. Some browsers may have limitations with the game.",
+      "gameControls": "Game Controls",
+      "controlsDescription": "Use these controls to navigate and battle in DOOM",
+      "movement": "Movement",
+      "moveForward": "Move forward",
+      "moveBackward": "Move backward", 
+      "strafeLeft": "Strafe left",
+      "strafeRight": "Strafe right",
+      "actions": "Actions",
+      "mouseAim": "Mouse - Aim",
+      "leftClickShoot": "Left Click - Shoot",
+      "useAction": "Use/Open doors",
+      "weaponSelect": "Select weapon",
+      "fire": "Fire weapon",
+      "strafe": "Strafe",
+      "run": "Run",
+      "gameOptions": "Game Options",
+      "menu": "Game menu",
+      "help": "Help",
+      "save": "Save game",
+      "load": "Load game",
+      "quit": "Quit game",
+      "troubleshooting": "Game not working properly? Try refreshing it:",
+      "refreshGame": "Refresh Game"
+    },
     "language": {
       "current": "en"
     }
   }
-} 
+}

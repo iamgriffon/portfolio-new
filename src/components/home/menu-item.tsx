@@ -10,7 +10,8 @@ interface MenuItemProps {
   onClick?: () => void;
   index?: number;
   interactive?: boolean;
-}
+  withArrow?: boolean;
+  }
 
 /**
  * A reusable menu item component that can be used in both interactive and non-interactive states.
@@ -23,6 +24,7 @@ export const MenuItem = ({
   onClick,
   index = 0,
   interactive = true,
+  withArrow = true,
 }: MenuItemProps) => {
   if (!interactive) {
     return (
@@ -49,7 +51,7 @@ export const MenuItem = ({
                 <p className="text-gray-300 mt-1 font-mono text-sm">{description}</p>
               )}
             </div>
-            <div className="text-green-400 text-2xl">➔</div>
+            {withArrow && <div className="text-green-400 text-2xl">➔</div>}
           </div>
         </div>
       </motion.div>
@@ -65,7 +67,7 @@ export const MenuItem = ({
       transition={{ duration: 0.5, delay: 0.2 * index }}
       whileHover={{
         scale: 1.03,
-        boxShadow: "0 0 20px rgba(255, 255, 255, 0.5)",
+        boxShadow: "0 0 15px rgba(255, 255, 255, 0.3)",
         borderColor: "#4ade80",
       }}
     >
@@ -89,7 +91,7 @@ export const MenuItem = ({
               <p className="text-gray-300 mt-1 font-mono text-sm">{description}</p>
             )}
           </div>
-          <div className="text-green-400 text-2xl">➔</div>
+          {withArrow && <div className="text-green-400 text-2xl">➔</div>}
         </div>
       </button>
     </motion.div>

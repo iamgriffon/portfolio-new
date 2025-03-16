@@ -1,12 +1,15 @@
 "use client";
 
 import React, { useState, useMemo } from "react";
-import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
-import Link from "next/link";
-import { FaBriefcase, FaGraduationCap, FaChevronDown, FaChevronUp } from "react-icons/fa";
+import {
+  FaBriefcase,
+  FaGraduationCap,
+  FaChevronUp,
+} from "react-icons/fa";
 import { JobHistoryItem, EducationItem } from "./types";
 import { ResumeCard } from "@/components/resume/resume-card";
+import { cn } from "@/lib/utils";
 
 interface ResumeClientProps {
   jobHistory: JobHistoryItem[];
@@ -20,6 +23,7 @@ export default function ResumeClient({
   const t = useTranslations("main");
   const [activeTab, setActiveTab] = useState<"jobs" | "education">("jobs");
   const [expandedCardIds, setExpandedCardIds] = useState<number[]>([]);
+  const [isExpanded, setIsExpanded] = useState(false);
 
   const jobs = jobHistory.map((job) => ({
     ...job,
@@ -38,7 +42,7 @@ export default function ResumeClient({
       en: edu.en_description,
       "pt-BR": edu.ptbr_description,
       zh: edu.zh_description,
-    },  
+    },
     degree: {
       en: edu.en_degree,
       "pt-BR": edu.ptbr_degree,
@@ -51,21 +55,23 @@ export default function ResumeClient({
   }, [activeTab, jobs, educations]);
 
   const toggleCard = (id: number) => {
-    setExpandedCardIds(prevIds => {
+    setExpandedCardIds((prevIds) => {
       if (prevIds.includes(id)) {
-        return prevIds.filter(cardId => cardId !== id);
+        return prevIds.filter((cardId) => cardId !== id);
       }
       return [...prevIds, id];
     });
   };
 
   const expandAllCards = () => {
-    const allIds = activeItems.map(item => item.id);
+    const allIds = activeItems.map((item) => item.id);
     setExpandedCardIds(allIds);
+    setIsExpanded(true);
   };
 
   const collapseAllCards = () => {
     setExpandedCardIds([]);
+    setIsExpanded(false);
   };
 
   const handleToggleTab = (tab: "jobs" | "education") => {
@@ -84,25 +90,25 @@ export default function ResumeClient({
           <ResumeCard
             key={job.id}
             id={job.id}
-            title={job.position}
+            title={
+              job.description[
+                t("language.current") as keyof typeof job.description
+              ]
+            }
             subtitle={job.company}
             startDate={job.start_date}
             endDate={job.end_date}
             image_url={job.image_url}
             details={[
               {
-                label: t("about.resume.technologies"),
+                label: t("resume.technologies"),
                 content: job.technologies,
-              },
-              {
-                label: t("about.resume.achievements"),
-                content: job.achievements,
               },
             ]}
             url={job.url}
             isExpanded={expandedCardIds.includes(job.id)}
             onToggle={toggleCard}
-            visitText={t("about.resume.visitWebsite")}
+            visitText={t("resume.visitWebsite")}
           />
         ))}
       </div>
@@ -122,25 +128,27 @@ export default function ResumeClient({
           <ResumeCard
             key={edu.id}
             id={edu.id}
-            title={`${edu.degree[t("language.current") as keyof typeof edu.degree]}`}
+            title={`${
+              edu.degree[t("language.current") as keyof typeof edu.degree]
+            }`}
             subtitle={edu.institution}
             startDate={edu.start_date}
             endDate={edu.end_date}
             image_url={edu.image_url}
             details={[
               {
-                label: t("about.resume.achievements"),
+                label: t("resume.achievements"),
                 content: edu.achievements,
               },
               {
-                label: t("about.resume.technologies"),
+                label: t("resume.technologies"),
                 content: edu.technologies,
               },
             ]}
             url={edu.degree_url}
             isExpanded={expandedCardIds.includes(edu.id)}
             onToggle={toggleCard}
-            visitText={ t("about.resume.seeCertificate")}
+            visitText={t("resume.seeCertificate")}
           />
         ))}
       </div>
@@ -148,81 +156,59 @@ export default function ResumeClient({
   };
 
   return (
-    <div className="min-h-screen text-white">
-      <header className="w-full pt-10">
-        <div className="container mx-auto px-4">
-          <div className="flex justify-between items-center mb-8">
-            <motion.h1
-              className="text-4xl font-bold text-white text-center"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 1 }}
+    <div className="text-white z-10">
+      <div className="max-w-4xl mx-auto">
+        <div className="mb-8 bg-slate-800/50 p-4 rounded-lg backdrop-contrast-100">
+          <div className="flex border-b border-gray-700">
+            <button
+              className={`flex-1 py-3 px-4 text-center font-mono text-lg transition-colors ${
+                activeTab === "jobs"
+                  ? "text-green-400 border-b-2 border-green-400"
+                  : "text-gray-400 hover:text-white"
+              }`}
+              onClick={() => handleToggleTab("jobs")}
             >
-              {t("about.resume.title").toUpperCase()}
-            </motion.h1>
+              <span className="flex items-center justify-center gap-2">
+                <FaBriefcase /> {t("resume.experience")}
+              </span>
+            </button>
+            <button
+              className={`flex-1 py-3 px-4 text-center font-mono text-lg transition-colors ${
+                activeTab === "education"
+                  ? "text-green-400 border-b-2 border-green-400"
+                  : "text-gray-400 hover:text-white"
+              }`}
+              onClick={() => handleToggleTab("education")}
+            >
+              <span className="flex items-center justify-center gap-2">
+                <FaGraduationCap /> {t("resume.education")}
+              </span>
+            </button>
+          </div>
 
-            <Link
-              href={`/${t("language.current")}/about`}
-              className="px-4 py-2 bg-slate-800 border border-white rounded-md text-white hover:bg-slate-700 transition-colors"
-              title={t("back")}
+          <div className="flex justify-end space-x-2 mt-4">
+            <button
+              onClick={() =>
+                isExpanded ? collapseAllCards() : expandAllCards()
+              }
+              className="flex items-center gap-1 px-3 py-1 text-sm bg-slate-700 hover:bg-slate-600 rounded-md transition-colors cursor-pointer"
             >
-              ← {t("back")}
-            </Link>
+              <FaChevronUp
+                size={12}
+                className={cn(
+                  "transition-all duration-300 rotate-180",
+                  isExpanded && "rotate-0"
+                )}
+              />{" "}
+              {isExpanded ? t("resume.collapseAll") : t("resume.expandAll")}
+            </button>
+          </div>
+
+          <div className="pt-6">
+            {activeTab === "jobs" ? renderJobHistory() : renderEducation()}
           </div>
         </div>
-      </header>
-
-      <main className="container mx-auto px-4 py-8">
-        <div className="max-w-4xl mx-auto">
-          <div className="mb-8 bg-slate-800/50 p-4 rounded-lg">
-            <div className="flex border-b border-gray-700">
-              <button
-                className={`flex-1 py-3 px-4 text-center font-mono text-lg transition-colors ${
-                  activeTab === "jobs"
-                    ? "text-green-400 border-b-2 border-green-400"
-                    : "text-gray-400 hover:text-white"
-                }`}
-                onClick={() => handleToggleTab("jobs")}
-              >
-                <span className="flex items-center justify-center gap-2">
-                  <FaBriefcase /> {t("about.resume.experience")}
-                </span>
-              </button>
-              <button
-                className={`flex-1 py-3 px-4 text-center font-mono text-lg transition-colors ${
-                  activeTab === "education"
-                    ? "text-green-400 border-b-2 border-green-400"
-                    : "text-gray-400 hover:text-white"
-                }`}
-                onClick={() => handleToggleTab("education")}
-              >
-                <span className="flex items-center justify-center gap-2">
-                  <FaGraduationCap /> {t("about.resume.education")}
-                </span>
-              </button>
-            </div>
-
-            <div className="flex justify-end space-x-2 mt-4">
-              <button
-                onClick={expandAllCards}
-                className="flex items-center gap-1 px-3 py-1 text-sm bg-slate-700 hover:bg-slate-600 rounded-md transition-colors"
-              >
-                <FaChevronDown size={12} /> {t("about.resume.expandAll")}
-              </button>
-              <button
-                onClick={collapseAllCards}
-                className="flex items-center gap-1 px-3 py-1 text-sm bg-slate-700 hover:bg-slate-600 rounded-md transition-colors"
-              >
-                <FaChevronUp size={12} /> {t("about.resume.collapseAll")}
-              </button>
-            </div>
-
-            <div className="pt-6">
-              {activeTab === "jobs" ? renderJobHistory() : renderEducation()}
-            </div>
-          </div>
-        </div>
-      </main>
+      </div>
     </div>
   );
 }

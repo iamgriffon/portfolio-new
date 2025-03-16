@@ -9,7 +9,7 @@ export default async function ResumePage() {
     const education = await getEducation();
     
     return (
-      <Suspense fallback={<div className="flex justify-center items-center h-screen">Loading resume data...</div>}>
+      <Suspense fallback={<div className="flex justify-center items-center h-screen z-20">Loading resume data...</div>}>
         <ResumeClient jobHistory={jobHistory} education={education} />
       </Suspense>
     );

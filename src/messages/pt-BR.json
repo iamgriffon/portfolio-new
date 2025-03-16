@@ -1,7 +1,6 @@
 {
   "welcome": {
-    "title": "Bem-vindo ao meu Portfólio",
-    "subtitle": "Explore meu trabalho e projetos"
+    "title": "Bem-vindo ao meu Portfólio"
   },
   "nav": {
     "home": "Início",
@@ -16,11 +15,9 @@
   },
   "current": "pt-BR",
   "main": {
-    "header": "Olá e bem-vindo ao meu portfólio!",
+    "header": "Olá e bem-vindo(a) ao meu portfólio!",
     "description1": "Sou um engenheiro de software brasileiro com paixão por construir produtos que ajudam as pessoas a viverem melhor.",
     "description2": "...e eu AMO música, jogos e programação.",
-    "bounceHint": "Clique em qualquer sprite para vê-lo quicar com velocidade aleatória!",
-    "clickCounter": "Cliques nos Sprites: {count}",
     "back": "Voltar",
     "skipIntro": "Pular Intro",
     "menu": {
@@ -31,29 +28,38 @@
     },
     "about": {
       "title": "Sobre Mim",
-      "subtitle": "SELECIONE O MODO",
+      "subtitle": "Selecione o Modo",
       "resume": {
-        "title": "MEU CURRÍCULO",
-        "desc": "Atributos do personagem e experiências profissionais",
-        "education": "EDUCAÇÃO",
-        "experience": "EXPERIÊNCIA PROFISSIONAL",
-        "technologies": "Tecnologias",
-        "achievements": "Conquistas",
-        "present": "Presente",
-        "visitWebsite": "Visitar Website",
-        "expandAll": "Expandir Todos",
-        "collapseAll": "Recolher Todos",
-        "seeCertificate": "Ver Certificado"
+        "title": "Meu Currículo",
+        "desc": "Atributos do personagem e experiências profissionais"
       },
       "skills": {
-        "title": "MINHAS HABILIDADES",
+        "title": "Minhas Habilidades",
         "desc": "Habilidades especiais e níveis de poder"
       },
       "socials": {
-        "title": "MINHAS REDES",
-        "desc": "Conecte-se com outros jogadores"
+        "title": "Minhas Redes",
+        "desc": "Conecte-se com outros jogadores",
+        "visitProfile": "Visitar Perfil",
+        "copied": "Copiado"
+      },
+      "doom": {
+        "title": "Doom",
+        "desc": "Jogar DOOM!"
       },
       "footer": "CLIQUE EM UMA OPÇÃO PARA CONTINUAR · INSIRA MOEDA PARA DESBLOQUEAR TODOS OS MODOS"
+    },
+    "resume": {
+      "title": "Meu Currículo",
+      "education": "Educação",
+      "experience": "Experiência Profissional",
+      "technologies": "Tecnologias",
+      "achievements": "Conquistas",
+      "present": "Presente",
+      "visitWebsite": "Visitar Website",
+      "expandAll": "Expandir Todos",
+      "collapseAll": "Recolher Todos",
+      "seeCertificate": "Ver Certificado"
     },
     "projects": {
       "title": "Meus Projetos",
@@ -61,7 +67,8 @@
     },
     "skills": {
       "title": "Minhas Habilidades",
-      "selectTech": "SELECIONE SUA TECNOLOGIA",
+      "desc": "Habilidades especiais e níveis de poder",
+      "selectTech": "Selecione sua Tecnologia",
       "searchPlaceholder": "Pesquisar tecnologias...",
       "year": "ano",
       "years": "anos",
@@ -121,6 +128,44 @@
         "python": "Python é uma linguagem de programação interpretada, de alto nível e de propósito geral.",
         "default": "Esta é uma das tecnologias com as quais trabalho. Clique para ver mais detalhes."
       }
+    },
+    "socials": {
+      "title": "Minhas Redes",
+      "visitProfile": "Visitar Perfil",
+      "copied": "Copiado!"
+    },
+    "doom": {
+      "title": "DOOM Clássico",
+      "playDoom": "Jogar DOOM",
+      "description": "Experimente o jogo DOOM original diretamente no seu navegador! Controle o marine espacial enquanto combate demônios do inferno.",
+      "loading": "Carregando DOOM...",
+      "errorTitle": "Erro ao Carregar DOOM",
+      "backToHome": "Voltar para Home",
+      "poweredBy": "Powered by js-dos",
+      "browserSupport": "Para a melhor experiência, use Chrome, Firefox ou Edge. Alguns navegadores podem ter limitações com o jogo.",
+      "gameControls": "Controles do Jogo",
+      "controlsDescription": "Use estes controles para navegar e batalhar em DOOM",
+      "movement": "Movimento",
+      "moveForward": "Mover para frente",
+      "moveBackward": "Mover para trás",
+      "strafeLeft": "Esquivar para esquerda",
+      "strafeRight": "Esquivar para direita",
+      "actions": "Ações",
+      "mouseAim": "Mouse - Mirar",
+      "leftClickShoot": "Clique Esquerdo - Atirar",
+      "useAction": "Usar/Abrir portas",
+      "weaponSelect": "Selecionar arma",
+      "fire": "Atirar",
+      "strafe": "Esquivar",
+      "run": "Correr",
+      "gameOptions": "Opções do Jogo",
+      "menu": "Menu do jogo",
+      "help": "Ajuda",
+      "save": "Salvar jogo",
+      "load": "Carregar jogo",
+      "quit": "Sair do jogo",
+      "troubleshooting": "Jogo não está funcionando corretamente? Tente recarregar:",
+      "refreshGame": "Recarregar Jogo"
     },
     "language": {
       "current": "pt-BR"

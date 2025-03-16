@@ -13,6 +13,7 @@ interface SectionTitleProps {
   title: ReactNode;
   animate?: boolean;
   className?: string;
+  withoutBar?: boolean;
 }
 
 

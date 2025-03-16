@@ -32,6 +32,12 @@ export type Education = {
   technologies: string | null;
 };
 
+export type SocialLink = {
+  social_media: string;
+  user_name: string;
+  profile_url: string;
+};
+
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "";
 
@@ -55,11 +61,9 @@ export async function getJobHistory(): Promise<JobHistoryItem[]> {
     console.error('Error fetching job history:', error);
     throw error;
   }
-  
-  // Transform the data to match JobHistoryItem interface
+  console.log({data})
   return (data || []).map(job => ({
     ...job,
-    position: job.en_position // Set default position to English for backward compatibility
   })) as JobHistoryItem[];
 }
 
@@ -74,13 +78,26 @@ export async function getEducation(): Promise<EducationItem[]> {
     throw error;
   }
   
-  // Transform the data to match EducationItem interface
   return (data || []).map(edu => ({
     ...edu,
-    field: '', // Add missing field property
     en_description: edu.en_achievements || '',
     ptbr_description: edu.ptbr_achievements || '',
     zh_description: edu.zh_achievements || '',
-    achievements: edu.en_achievements // Set achievements to English for backward compatibility
   })) as EducationItem[];
 } 
+
+export async function getSocialLinks(): Promise<SocialLink[]> {
+  const { data, error } = await supabase
+    .from('socials')
+    .select('social_media, user_name, profile_url')
+    .order('order_index', { ascending: true });
+
+    if (error) {
+      console.error('Error fetching social links:', error);
+      throw error;
+    }
+
+    return (data || []).map(link => ({
+      ...link,
+    })) as SocialLink[];
+}

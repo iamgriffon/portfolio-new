@@ -45,7 +45,7 @@ export const ToggleMenuButton = ({
       onClick={onClick}
       whileHover={{
         scale: 1.05,
-        boxShadow: "0 0 20px rgba(255, 255, 255, 0.5)",
+        boxShadow: "0 0 15px rgba(255, 255, 255, 0.3)",
         borderColor: "#4ade80",
       }}
       title={buttonText}

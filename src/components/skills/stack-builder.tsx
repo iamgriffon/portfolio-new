@@ -62,37 +62,9 @@ export default function StackBuilder({
   return (
     <motion.div
       layoutId="stack-builder-container"
-      className="max-w-4xl mx-auto mt-12 mb-20 overflow-visible rounded-xl p-6 border-gray-800"
+      className="max-w-4xl mx-auto mt-12 mb-20 overflow-visible rounded-xl p-6 border-gray-800 backdrop-blur-sm"
     >
       <SectionTitle title={t("skills.buildStack")} />
-
-      <motion.p
-        layoutId="stack-builder-description"
-        className="text-center text-lg text-gray-200 mb-8 max-w-2xl mx-auto"
-      >
-        {t("skills.dragDropDescription")}
-      </motion.p>
-
-      <motion.div layoutId="seniority-selector" className="mb-6">
-        <h3 className="text-xl font-semibold text-center mb-4">
-          {t("skills.chooseSeniority")}
-        </h3>
-        <div className="flex flex-wrap justify-center gap-3">
-          {ranks.map((level) => (
-            <button
-              key={level.label}
-              onClick={() => setTargetSeniority(level.label)}
-              className={`px-4 py-2 rounded-lg transition ${
-                targetSeniority === level.label
-                  ? "bg-primary text-white"
-                  : "bg-gray-800 hover:bg-gray-700"
-              }`}
-            >
-              {t(`skills.ranks.${level.label.toLowerCase()}`)}
-            </button>
-          ))}
-        </div>
-      </motion.div>
 
       <motion.div
         layoutId="drop-zone"
@@ -180,7 +152,35 @@ export default function StackBuilder({
         )}
       </motion.div>
 
-      {stack.length > 0 && (
+      <motion.p
+        layoutId="stack-builder-description"
+        className="text-center text-lg text-gray-200 mb-8 max-w-2xl mx-auto"
+      >
+        {t("skills.dragDropDescription")}
+      </motion.p>
+
+      <motion.div layoutId="seniority-selector" className="mb-6">
+        <h3 className="text-xl font-semibold text-center mb-4">
+          {t("skills.chooseSeniority")}
+        </h3>
+        <div className="flex flex-wrap justify-center gap-3">
+          {ranks.map((level) => (
+            <button
+              key={level.label}
+              onClick={() => setTargetSeniority(level.label)}
+              className={`cursor-pointer px-4 py-2 rounded-lg transition ${
+                targetSeniority === level.label
+                  ? "bg-primary text-white"
+                  : "bg-gray-800 hover:bg-gray-700"
+              }`}
+            >
+              {t(`skills.ranks.${level.label.toLowerCase()}`)}
+            </button>
+          ))}
+        </div>
+      </motion.div>
+
+      {!!stack.length && (
         <StackAssessment
           avgLevel={avgLevel}
           currentSeniority={currentSeniority}

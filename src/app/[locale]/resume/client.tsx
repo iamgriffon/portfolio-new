@@ -157,7 +157,7 @@ export default function ResumeClient({
   };
 
   return (
-    <div className="text-white z-10">
+    <div className="text-white z-10 overflow-auto mb-40">
       <div className="max-w-4xl mx-auto">
         <div className="mb-8 bg-slate-800/50 p-4 rounded-lg backdrop-contrast-100">
           <div className="flex border-b border-gray-700">

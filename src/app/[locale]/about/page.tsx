@@ -37,10 +37,10 @@ export default function About() {
   ], [t]);
 
   return (
-    <div className="relative flex flex-col text-white">
+    <div className="flex flex-col text-white">
       <main className="w-full h-full">
         <motion.div
-          className="max-w-4xl mx-auto mt-16 mb-32"
+          className="max-w-4xl mx-auto mb-32"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
@@ -94,7 +94,7 @@ export default function About() {
             ))}
           </section>
 
-          <footer className="text-center mt-16 text-sm font-mono text-gray-50 select-none">
+          <footer className="text-center text-sm mt-16 font-mono text-gray-50 select-none">
             {t("about.footer")}
           </footer>
         </motion.div>
@@ -102,3 +102,4 @@ export default function About() {
     </div>
   );
 }
+  

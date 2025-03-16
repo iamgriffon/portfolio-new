@@ -77,6 +77,7 @@ export default function ResumeClient({
   const handleToggleTab = (tab: "jobs" | "education") => {
     setExpandedCardIds([]);
     setActiveTab(tab);
+    setIsExpanded(false);
   };
 
   const renderJobHistory = () => {

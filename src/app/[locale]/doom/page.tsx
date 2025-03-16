@@ -14,7 +14,7 @@ export default function DoomPage() {
       transition={{ duration: 0.5 }}
       className="font-mono"
     >
-      <main className="container mx-auto pt-8 px-4 md:px-6">
+      <main className="container mx-auto px-4 pb-40 md:px-6">
         <div className="max-w-7xl mx-auto">
           <BrowserSupportAlert />
 

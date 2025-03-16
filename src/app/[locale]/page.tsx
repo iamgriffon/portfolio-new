@@ -163,7 +163,7 @@ export default function Home() {
           >
             {t("header")}
           </motion.h1>
-          <p className="flex flex-col text-center gap-2 z-10 shadow-sm">
+          <p className="flex flex-col text-center gap-2 z-10">
             <motion.span
               key={`desc1-${
                 hasAnimated || skippedIntro ? "skipped" : "animated"

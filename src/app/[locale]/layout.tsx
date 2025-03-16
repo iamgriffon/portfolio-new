@@ -1,6 +1,6 @@
 import { NextIntlClientProvider } from "next-intl";
 import { notFound } from "next/navigation";
-import { locales, getMessages } from "@/app/i18n";
+import { locales, getMessages } from "@/i18n";
 import LanguageSwitcher from "@/components/ui/common/language-switcher";
 import Image from "next/image";
 import { headers } from "next/headers";
@@ -20,7 +20,7 @@ export default async function LocaleLayout(props: any) {
 
   return (
     <NextIntlClientProvider locale={locale} messages={messages}>
-      <header className="flex flex-col gap-4 w-full justify-between items-center h-40 z-20 mb-4 shadow-md">
+      <header className="flex flex-col gap-4 w-full justify-between items-center h-40 z-20 mb-4">
         <section className="flex w-full max-w-7xl pt-8 justify-between items-center gap-2 container h-full pb-2">
           {" "}
           <a
@@ -41,7 +41,7 @@ export default async function LocaleLayout(props: any) {
         </section>
         <TitleAndBackButton initialPathname={initialPathname} />
       </header>
-      <main className="w-full h-full overflow-scroll">{children}</main>
+      <main className="w-full h-full pt-20 overflow-scroll">{children}</main>
     </NextIntlClientProvider>
   );
 }

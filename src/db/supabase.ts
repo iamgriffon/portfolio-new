@@ -1,5 +1,6 @@
 import { createClient } from '@supabase/supabase-js';
 import { JobHistoryItem, EducationItem } from '@/app/[locale]/resume/types';
+import { createCache, createQueryKey } from '@/lib/cache-utils';
 
 export type JobHistory = {
   id: number;
@@ -51,7 +52,8 @@ export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
   },
 });
 
-export async function getJobHistory(): Promise<JobHistoryItem[]> {
+// Base function for fetching job history
+async function fetchJobHistory(): Promise<JobHistoryItem[]> {
   const { data, error } = await supabase
     .from('job_history')
     .select('*')
@@ -61,13 +63,14 @@ export async function getJobHistory(): Promise<JobHistoryItem[]> {
     console.error('Error fetching job history:', error);
     throw error;
   }
-  console.log({data})
+  
   return (data || []).map(job => ({
     ...job,
   })) as JobHistoryItem[];
 }
 
-export async function getEducation(): Promise<EducationItem[]> {
+// Base function for fetching education
+async function fetchEducation(): Promise<EducationItem[]> {
   const { data, error } = await supabase
     .from('education')
     .select('*')
@@ -84,20 +87,40 @@ export async function getEducation(): Promise<EducationItem[]> {
     ptbr_description: edu.ptbr_achievements || '',
     zh_description: edu.zh_achievements || '',
   })) as EducationItem[];
-} 
+}
 
-export async function getSocialLinks(): Promise<SocialLink[]> {
+// Base function for fetching social links
+async function fetchSocialLinks(): Promise<SocialLink[]> {
   const { data, error } = await supabase
     .from('socials')
     .select('social_media, user_name, profile_url')
     .order('order_index', { ascending: true });
 
-    if (error) {
-      console.error('Error fetching social links:', error);
-      throw error;
-    }
+  if (error) {
+    console.error('Error fetching social links:', error);
+    throw error;
+  }
 
-    return (data || []).map(link => ({
-      ...link,
-    })) as SocialLink[];
+  return (data || []).map(link => ({
+    ...link,
+  })) as SocialLink[];
 }
+
+// Cached versions of the functions with configurable revalidation
+export const getJobHistory = createCache(
+  fetchJobHistory,
+  createQueryKey('jobHistory'),
+  { revalidate: 3600, tags: ['jobHistory', 'resume'] }
+);
+
+export const getEducation = createCache(
+  fetchEducation,
+  createQueryKey('education'),
+  { revalidate: 3600, tags: ['education', 'resume'] }
+);
+
+export const getSocialLinks = createCache(
+  fetchSocialLinks,
+  createQueryKey('socialLinks'),
+  { revalidate: 3600, tags: ['socialLinks'] }
+);

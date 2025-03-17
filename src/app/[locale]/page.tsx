@@ -250,10 +250,6 @@ export default function Home() {
     setSkippedIntro(true);
   };
 
-  // Generate key based on animation state
-  const getAnimationKey = (prefix: string) => 
-    `${prefix}-${hasAnimated || skippedIntro ? "skipped" : "animated"}`;
-
   // Render content based on state
   const renderContent = () => {
     if (!hasAnimated) {

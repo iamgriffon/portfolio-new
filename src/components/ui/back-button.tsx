@@ -2,40 +2,32 @@
 
 import { useRouter, usePathname } from "next/navigation";
 import { useTranslations } from "next-intl";
-import { useRef } from "react";
+import { Routes } from "@/lib/routes";
 
 export default function BackButton() {
   const router = useRouter();
   const t = useTranslations("main");
   const pathname = usePathname();
 
-  const previousPath = useRef<string | null>(document.referrer || null);
-
   const handleBack = () => {
-    const lastPath = previousPath.current;
-    const absoluteCurrentPath = pathname.split("/")[2];
-    const currentLanguage = pathname.split("/")[1];
-    const deepRoutes = ["resume", "skills", "socials", "doom"];
-    if (absoluteCurrentPath === "about")
-      return router.push(`/${currentLanguage}/`);
+    const pathParts = pathname.split("/");
+    const currentLanguage = pathParts[1];
+    const absoluteCurrentPath = pathParts[2] || "";
 
-    if (!lastPath) {
-      if (!deepRoutes.includes(absoluteCurrentPath)) {
-        return router.push(`/${currentLanguage}/about`);
-      }
+    const routeWithPrefix = (route: Routes) => `/${currentLanguage}/${route}`;
+
+    if (absoluteCurrentPath === Routes.ABOUT) {
+      return router.push(routeWithPrefix(Routes.HOME));
     }
 
-    if (lastPath && deepRoutes.includes(absoluteCurrentPath)) {
-      return router.push(`/${currentLanguage}/about`);
+    const deepRoutes = Object.values(Routes)
+      .filter((route) => route !== Routes.HOME && route !== Routes.ABOUT) as Routes[];
+
+    if (deepRoutes.includes(absoluteCurrentPath as Routes)) {
+      return router.push(routeWithPrefix(Routes.ABOUT));
     }
 
-    const isSameLang = lastPath?.split("/")[1] === currentLanguage;
-    const absoluteLastPath = lastPath?.split("/")[2];
-
-    if (isSameLang) {
-      if (absoluteLastPath === absoluteCurrentPath) return;
-    }
-    return router.back();
+    return router.push(routeWithPrefix(Routes.HOME));
   };
 
   return (

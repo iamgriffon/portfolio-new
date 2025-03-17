@@ -34,7 +34,6 @@ const LanguageButton = ({
   </li>
 );
 
-// Dropdown arrow icon
 const DropdownArrow = () => (
   <svg 
     className="w-4 h-4" 
@@ -59,28 +58,21 @@ export default function LanguageSwitcher() {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   
-  // Define available languages
   const languages: Language[] = [
     { code: 'en', name: t('en'), flag: '🇺🇸' },
     { code: 'pt-BR', name: t('pt-BR'), flag: '🇧🇷' },
     { code: 'zh', name: t('zh'), flag: '🇨🇳' }
   ];
 
-  // Get the current language details
   const currentLanguage = languages.find(lang => lang.code === locale) || languages[0];
 
-  // Handle language change
   const handleLanguageChange = (newLocale: string) => {
-    // Extract the path without locale
     const segments = pathname.split('/');
     const pathnameWithoutLocale = segments.slice(2).join('/') || '';
-    
-    // Navigate to the same page with new locale
     router.push(`/${newLocale}/${pathnameWithoutLocale}`);
     setIsOpen(false);
   };
 
-  // Toggle dropdown menu
   const toggleDropdown = () => setIsOpen(!isOpen);
 
   return (

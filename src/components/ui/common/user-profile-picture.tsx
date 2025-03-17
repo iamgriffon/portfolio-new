@@ -2,18 +2,21 @@
 
 import { Routes } from "@/lib/routes";
 import { cn } from "@/lib/utils";
+import { useLocale } from "next-intl";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 
 // User profile component
 export const UserProfile = () => {
   const pathname = usePathname();
+  const currentLocale = useLocale();
+  const shouldHide = pathname.includes(Routes.HOME) || pathname === `/${currentLocale}`;
   return (
     <a
       href="https://github.com/iamgriffon"
       className={cn(
         "flex items-center gap-3 cursor-pointer",
-        pathname.includes(Routes.HOME) && "invisible"
+        shouldHide && "invisible"
       )}
       target="_blank"
     >

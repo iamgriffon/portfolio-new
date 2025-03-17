@@ -108,7 +108,7 @@ export default function TechSelection({ techs }: TechSelectionProps) {
   };
 
   return (
-    <div className="w-screen h-full overflow-y-auto mb-15 px-4  text-white">
+    <div className="w-screen h-full overflow-y-auto mb-15 px-4 text-white">
       <SectionTitle title={t("skills.selectTech")} />
       <SearchBar searchQuery={searchQuery} onSearchChange={setSearchQuery} />
       <TechGrid

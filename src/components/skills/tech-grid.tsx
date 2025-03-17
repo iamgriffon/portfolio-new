@@ -36,9 +36,10 @@ export default function TechGrid({
     return techs.filter(
       (tech) =>
         tech.name.toLowerCase().includes(query) ||
-        tech.id.toLowerCase().includes(query)
+        tech.id.toLowerCase().includes(query) ||
+        stack.find((t) => t.id === tech.id)
     );
-  }, [techs, searchQuery]);
+  }, [techs, searchQuery, stack]);
 
   return (
     <div className="mb-10 relative">

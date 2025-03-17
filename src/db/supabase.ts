@@ -86,6 +86,7 @@ async function fetchEducation(): Promise<EducationItem[]> {
     en_description: edu.en_achievements || '',
     ptbr_description: edu.ptbr_achievements || '',
     zh_description: edu.zh_achievements || '',
+    es_description: edu.es_achievements || '',
   })) as EducationItem[];
 }
 

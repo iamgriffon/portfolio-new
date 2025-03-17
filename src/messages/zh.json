@@ -16,16 +16,18 @@
   },
   "current": "zh",
   "main": {
-    "header": "你好，欢迎来到我的作品集！",
-    "description1": "我是一名巴西软件工程师，热衷于构建帮助人们生活得更好的产品。",
-    "description2": "...我喜欢音乐、游戏和编程。",
-    "back": "返回",
-    "skipIntro": "跳过介绍",
-    "menu": {
-      "title": "主菜单",
-      "start": "开始",
-      "hideMenu": "隐藏菜单",
-      "showMenu": "显示菜单"
+    "home": {
+      "header": "你好，欢迎来到我的作品集！",
+      "description1": "我是一名巴西软件工程师，热衷于构建帮助人们生活得更好的产品。",
+      "description2": "...我喜欢音乐、游戏和编程。",
+      "back": "返回",
+      "skipIntro": "跳过介绍",
+      "menu": {
+        "title": "主菜单",
+        "start": "开始",
+        "hideMenu": "隐藏菜单",
+        "showMenu": "显示菜单"
+      }
     },
     "about": {
       "title": "关于我",
@@ -146,7 +148,7 @@
       "controlsDescription": "使用这些控制在 DOOM 中导航和战斗",
       "movement": "移动",
       "moveForward": "向前移动",
-      "moveBackward": "向后移动", 
+      "moveBackward": "向后移动",
       "strafeLeft": "向左闪避",
       "strafeRight": "向右闪避",
       "actions": "动作",

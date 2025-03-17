@@ -3,10 +3,11 @@
 import { useRouter, usePathname } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { Routes } from "@/lib/routes";
+import { cn } from "@/lib/utils";
 
 export default function BackButton() {
   const router = useRouter();
-  const t = useTranslations("main");
+  const t = useTranslations("main.home");
   const pathname = usePathname();
 
   const handleBack = () => {
@@ -33,7 +34,10 @@ export default function BackButton() {
   return (
     <button
       onClick={handleBack}
-      className="cursor-pointer px-4 py-2 bg-slate-800 border border-white rounded-md text-white hover:bg-slate-700 transition-colors"
+      className={cn(
+        "cursor-pointer px-4 py-2 bg-slate-800 border border-white rounded-md text-white hover:bg-slate-700 transition-colors",
+        pathname.includes(Routes.HOME) && "invisible"
+      )}
       title={t("back")}
     >
       ← {t("back")}

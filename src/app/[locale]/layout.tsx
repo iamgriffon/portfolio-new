@@ -1,11 +1,13 @@
+
+
 import { NextIntlClientProvider } from "next-intl";
 import { notFound } from "next/navigation";
 import { locales, getMessages } from "@/i18n";
 import LanguageSwitcher from "@/components/ui/common/language-switcher";
-import Image from "next/image";
 import { headers } from "next/headers";
 import { TitleAndBackButton } from "@/components/ui/common/title-and-button";
 import { ReactNode } from "react";
+import { UserProfile } from "@/components/ui/common/user-profile-picture";
 
 // Layout props type
 type LocaleLayoutProps = {
@@ -15,23 +17,6 @@ type LocaleLayoutProps = {
   };
 };
 
-// User profile component
-const UserProfile = () => (
-  <a
-    href="https://github.com/iamgriffon"
-    className="flex items-center gap-3 cursor-pointer"
-    target="_blank"
-  >
-    <Image
-      src="https://github.com/iamgriffon.png"
-      alt="Logo"
-      width={32}
-      height={32}
-      className="rounded-full"
-    />
-    <span className="font-bold text-lg text-white">Gustavo</span>
-  </a>
-);
 
 // Navigation header component
 const NavigationHeader = ({ initialPathname }: { initialPathname: string }) => (
@@ -44,11 +29,15 @@ const NavigationHeader = ({ initialPathname }: { initialPathname: string }) => (
   </header>
 );
 
-export default async function LocaleLayout({ children, params }: LocaleLayoutProps) {
+export default async function LocaleLayout({
+  children,
+  params,
+}: LocaleLayoutProps) {
   const { locale } = await params;
-  
+
   // Get the current pathname from headers
-  const initialPathname = (await headers()).get("x-url")?.replace("/", "") || "";
+  const initialPathname =
+    (await headers()).get("x-url")?.replace("/", "") || "";
 
   // Validate that locale is supported
   if (!locale || !locales.includes(locale)) {

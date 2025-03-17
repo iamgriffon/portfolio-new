@@ -17,4 +17,16 @@ interface SectionTitleProps {
 }
 
 
-export type { ProgressBarProps, SectionTitleProps };
+interface MenuItemProps {
+  title: string;
+  description?: string;
+  icon: ReactNode;
+  onClick?: () => void;
+  index?: number;
+  interactive?: boolean;
+  withArrow?: boolean;
+  href?: string;
+}
+
+
+export type { ProgressBarProps, SectionTitleProps, MenuItemProps };

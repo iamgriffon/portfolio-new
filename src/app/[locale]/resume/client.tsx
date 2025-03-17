@@ -32,6 +32,7 @@ export default function ResumeClient({
       en: job.en_position,
       "pt-BR": job.ptbr_position,
       zh: job.zh_position,
+      es: job.es_position,
     },
   }));
 
@@ -42,11 +43,13 @@ export default function ResumeClient({
       en: edu.en_description,
       "pt-BR": edu.ptbr_description,
       zh: edu.zh_description,
+      es: edu.es_description,
     },
     degree: {
       en: edu.en_degree,
       "pt-BR": edu.ptbr_degree,
       zh: edu.zh_degree,
+      es: edu.es_degree,
     },
   }));
 

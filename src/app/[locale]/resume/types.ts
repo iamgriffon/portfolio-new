@@ -7,6 +7,7 @@ export interface JobHistoryItem {
   en_position: string;
   ptbr_position: string;
   zh_position: string;
+  es_position: string;
   technologies: string | null;
   achievements: string | null;
   url: string | null;
@@ -20,12 +21,14 @@ export interface EducationItem {
   en_degree: string;
   ptbr_degree: string;
   zh_degree: string;
+  es_degree: string;
   field: string;
   start_date: string;
   end_date: string | null;
   en_description: string;
   ptbr_description: string;
   zh_description: string;
+  es_description: string;
   achievements: string | null;
   url: string | null;
   order_index: number;

@@ -1,0 +1,176 @@
+{
+  "welcome": {
+    "title": "Bienvenido a mi Portafolio",
+    "subtitle": "Explora mi trabajo y proyectos"
+  },
+  "nav": {
+    "home": "Inicio",
+    "projects": "Proyectos",
+    "about": "Sobre mí",
+    "contact": "Contacto"
+  },
+  "language": {
+    "en": "English",
+    "pt-BR": "Português",
+    "zh": "中文",
+    "es": "Español"
+  },
+  "current": "es",
+  "main": {
+    "home": {
+      "header": "¡Hola y bienvenido a mi portafolio!",
+      "description1": "Soy un ingeniero de software brasileño con pasión por construir productos que ayuden a las personas a vivir mejor.",
+      "description2": "...y AMO la música, los videojuegos y la programación.",
+      "back": "Atrás",
+      "skipIntro": "Saltar Intro",
+      "menu": {
+        "title": "Menú Principal",
+        "start": "Comenzar",
+        "hideMenu": "Ocultar menú",
+        "showMenu": "Mostrar menú"
+      }
+    },
+    "about": {
+      "title": "Sobre mí",
+      "subtitle": "Selecciona tu modo",
+      "resume": {
+        "title": "Mi Currículum",
+        "desc": "Estadísticas del personaje e historia de fondo"
+      },
+      "skills": {
+        "title": "Mis Habilidades",
+        "desc": "Habilidades especiales y niveles de poder"
+      },
+      "socials": {
+        "title": "Mis Redes Sociales",
+        "desc": "Conéctate con otros jugadores"
+      },
+      "doom": {
+        "title": "Doom",
+        "desc": "¡Juega Doom!"
+      },
+      "footer": "PRESIONA OPCIÓN PARA CONTINUAR · INSERTA MONEDA PARA DESBLOQUEAR TODOS LOS MODOS"
+    },
+    "resume": {
+      "title": "Mi Currículum",
+      "education": "Educación",
+      "experience": "Experiencia",
+      "technologies": "Tecnologías",
+      "achievements": "Logros",
+      "present": "Presente",
+      "visitWebsite": "Visitar sitio web",
+      "expandAll": "Expandir Todo",
+      "collapseAll": "Colapsar Todo",
+      "seeCertificate": "Ver Certificado"
+    },
+    "projects": {
+      "title": "Mis Proyectos",
+      "viewAll": "Ver Todos los Proyectos"
+    },
+    "skills": {
+      "title": "Mis Habilidades",
+      "desc": "Habilidades especiales y niveles de poder",
+      "selectTech": "Selecciona tu Tecnología",
+      "searchPlaceholder": "Buscar tecnologías...",
+      "year": "año",
+      "years": "años",
+      "selected": "Seleccionado",
+      "skillLevel": "Nivel de Habilidad",
+      "experience": "Experiencia",
+      "readyToDeploy": "Listo para implementar",
+      "addToStack": "Añadir al stack",
+      "removeFromStack": "Quitar del stack",
+      "alreadyInStack": "Ya está en el stack",
+      "buildStack": "Construye tu stack ideal",
+      "dragDropDescription": "Arrastra y suelta tecnologías para crear tu stack tecnológico ideal. ¡Elige tu nivel de experiencia objetivo y comprueba si puedo cumplir con tus ambiciones!",
+      "chooseSeniority": "¿Qué nivel de experiencia estás buscando?",
+      "dropHere": "Suelta las Tecnologías Aquí",
+      "dragDescription": "Arrastra tecnologías desde arriba para construir tu stack",
+      "yourStack": "Tu Stack Tecnológico",
+      "clearAll": "Limpiar Todo",
+      "stackAssessment": "Evaluación del Stack",
+      "averageSkillLevel": "Nivel Promedio de Habilidad",
+      "level": "Nivel",
+      "stackSuitability": "Adecuación del Stack",
+      "stackMatches": "¡Definitivamente soy la persona adecuada para ti!",
+      "stackMismatch": "Estás buscando un {target}, pero según tus especificaciones soy un {current}",
+      "stackDescription": "Descripción del Stack",
+      "recommendations": "Recomendaciones",
+      "recommendationLower": "Todavía no estoy del todo ahí :(",
+      "recommendationHigher": "¡Estás subestimando mis capacidades para esta posición!",
+      "ranks": {
+        "junior": "Junior",
+        "junior_description": "Construyendo bases con entusiasmo y aprendiendo rápidamente.",
+        "mid-level": "Nivel Medio",
+        "mid-level_description": "Habilidades técnicas sólidas con creciente independencia.",
+        "senior": "Senior",
+        "senior_description": "Habilidades expertas con conocimiento profundo del dominio y capacidades de liderazgo.",
+        "principal": "Especialista",
+        "principal_description": "Experiencia de clase mundial con visión técnica e innovación."
+      },
+      "descriptions": {
+        "typescript": "TypeScript es un superconjunto de JavaScript con tipado estático que añade tipos opcionales, clases e interfaces.",
+        "javascript": "JavaScript es un lenguaje de programación que permite implementar características complejas en páginas web.",
+        "html": "HTML es el lenguaje de marcado estándar para crear páginas web.",
+        "css": "CSS es un lenguaje de hojas de estilo utilizado para describir la presentación de un documento escrito en HTML.",
+        "react": "React es una biblioteca de JavaScript para construir interfaces de usuario. He trabajado extensamente con React para crear aplicaciones web interactivas.",
+        "react-native": "React Native es un framework para construir aplicaciones móviles nativas usando React.",
+        "next": "Next.js es un framework de React que permite renderización del lado del servidor y generación de sitios web estáticos.",
+        "angular": "Angular es una plataforma para construir aplicaciones web móviles y de escritorio.",
+        "vue": "Vue.js es un framework progresivo para construir interfaces de usuario.",
+        "express": "Express.js es un framework de aplicaciones web para Node.js.",
+        "fastify": "Fastify es un framework web para Node.js.",
+        "node": "Node.js es un entorno de ejecución de JavaScript construido sobre el motor V8 de Chrome.",
+        "nest": "Nest.js es un framework para construir aplicaciones del lado del servidor Node.js eficientes y escalables.",
+        "git": "Git es un sistema de control de versiones distribuido para rastrear cambios en el código fuente.",
+        "docker": "Docker es una plataforma para desarrollar, enviar y ejecutar aplicaciones en contenedores.",
+        "php": "PHP es un lenguaje de scripting de propósito general popular para desarrollo web.",
+        "java": "Java es un lenguaje de programación orientado a objetos diseñado para portabilidad.",
+        "csharp": "C# es un lenguaje de programación orientado a objetos moderno de Microsoft.",
+        "python": "Python es un lenguaje de programación interpretado, de alto nivel y de propósito general.",
+        "default": "Esta es una de las tecnologías con las que trabajo. Haz clic para ver más detalles."
+      }
+    },
+    "socials": {
+      "title": "Mis Redes Sociales",
+      "visitProfile": "Visitar Perfil",
+      "copied": "¡Copiado!"
+    },
+    "doom": {
+      "title": "DOOM Clásico",
+      "playDoom": "Jugar DOOM",
+      "description": "¡Experimenta el juego DOOM original directamente en tu navegador! Controla al marine espacial mientras luchas contra demonios del infierno.",
+      "loading": "Cargando DOOM...",
+      "errorTitle": "Error al Cargar DOOM",
+      "backToHome": "Volver al Inicio",
+      "poweredBy": "Desarrollado con js-dos",
+      "browserSupport": "Para la mejor experiencia, usa Chrome, Firefox o Edge. Algunos navegadores pueden tener limitaciones con el juego.",
+      "gameControls": "Controles del Juego",
+      "controlsDescription": "Usa estos controles para navegar y luchar en DOOM",
+      "movement": "Movimiento",
+      "moveForward": "Avanzar",
+      "moveBackward": "Retroceder",
+      "strafeLeft": "Desplazarse a la izquierda",
+      "strafeRight": "Desplazarse a la derecha",
+      "actions": "Acciones",
+      "mouseAim": "Ratón - Apuntar",
+      "leftClickShoot": "Clic Izquierdo - Disparar",
+      "useAction": "Usar/Abrir puertas",
+      "weaponSelect": "Seleccionar arma",
+      "fire": "Disparar arma",
+      "strafe": "Desplazarse",
+      "run": "Correr",
+      "gameOptions": "Opciones del Juego",
+      "menu": "Menú del juego",
+      "help": "Ayuda",
+      "save": "Guardar partida",
+      "load": "Cargar partida",
+      "quit": "Salir del juego",
+      "troubleshooting": "¿El juego no funciona correctamente? Intenta recargarlo:",
+      "refreshGame": "Recargar Juego"
+    },
+    "language": {
+      "current": "es"
+    }
+  }
+} 

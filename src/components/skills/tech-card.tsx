@@ -40,8 +40,8 @@ export default function TechCard({
   onDragStart,
   onDragEnd,
 }: TechCardProps) {
-  const [isHovered, setIsHovered] = useState(false);
   const t = useTranslations("main");
+  const [isHovered, setIsHovered] = useState(false);
 
   const handleDragStart = (e: React.DragEvent<HTMLDivElement>) => {
     // Set data transfer to ensure drag works across browsers
@@ -57,12 +57,11 @@ export default function TechCard({
       className={cn(
         "relative cursor-pointer rounded-lg overflow-hidden border-4 w-48",
         isSelected
-          ? "border-green-500 shadow-lg shadow-blue-500/30 z-10"
-          : isHovered
-          ? "border-white/80 shadow-lg shadow-white/30"
+          ? "border-blue-500/80 shadow-lg bg-gradient-to-br from-blue-500/20 to-blue-500/10 shadow-blue-500/30 z-10 hover:shadow-lg hover:shadow-blue-500/30"
           : isInStack
-          ? "border-green-500/70 shadow-md shadow-green-500/20"
-          : "border-gray-700 z-0"
+          ? "shadow-md shadow-green-500/20 border-green-500/70 bg-gradient-to-br from-green-500/20 to-green-500/10"
+          : "border-gray-700 z-0",
+        isHovered && "shadow-lg shadow-white/30 border-white/80"
       )}
       initial={{ opacity: 0, y: 20 }}
       animate={{
@@ -74,30 +73,23 @@ export default function TechCard({
         type: "spring",
         stiffness: 260,
         damping: 20,
+        duration: 0.8,
       }}
       whileHover={{
         scale: 1.05,
         boxShadow: "0 0 15px rgba(255, 255, 255, 0.3)",
       }}
+      onClick={() => onSelect(tech)}
+      onDoubleClick={() => onAddToStack(tech)}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      onClick={() => onSelect(tech)}
     >
       <div
-        className="relative bg-slate-800/80 backdrop-blur-sm p-4 h-48 flex flex-col items-center justify-center"
-        draggable={true}
+        className="relative backdrop-blur-sm p-4 h-48 flex flex-col items-center justify-center"
         onDragStart={handleDragStart}
+        draggable
         onDragEnd={onDragEnd}
       >
-        {isHovered && (
-          <motion.div
-            className="absolute inset-0 bg-gradient-to-tr from-transparent to-transparent"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-          />
-        )}
-
         <div className="relative w-20 h-20 mb-3">
           <Image
             src={tech.icon}
@@ -125,7 +117,8 @@ export default function TechCard({
 
       <motion.button
         className={cn(
-          "absolute top-0 right-0 bg-green-500 text-black font-bold px-2 py-1 text-xs transition-colors"
+          "absolute top-0 right-0 bg-green-500 text-black font-bold px-2 py-1 text-xs transition-colors",
+          isInStack && "bg-red-500/80"
         )}
         onClick={(e) => {
           e.stopPropagation(); // Prevent card selection when clicking the button

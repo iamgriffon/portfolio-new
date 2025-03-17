@@ -15,7 +15,7 @@ export const SectionTitle = ({
     <section className="text-center">
       <h2
         className={`text-3xl font-bold  text-white tracking-wider ${
-          animate ? "animate-bounce duration-500" : ""
+          animate ? "animate-bounce duration-500 pt-2" : ""
         } ${className}`}
         style={{
           textShadow:

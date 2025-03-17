@@ -16,16 +16,18 @@
   },
   "current": "en",
   "main": {
-    "header": "Hello and welcome to my portfolio!",
-    "description1": "I'm a brazilian software engineer with a passion for building products that help people live better lives.",
-    "description2": "...and I LOVE music, gaming and coding.",
-    "back": "Back",
-    "skipIntro": "Skip Intro",
-    "menu": {
-      "title": "Main Menu",
-      "start": "Start",
-      "hideMenu": "Hide menu",
-      "showMenu": "Show menu"
+    "home": {
+      "header": "Hello and welcome to my portfolio!",
+      "description1": "I'm a brazilian software engineer with a passion for building products that help people live better lives.",
+      "description2": "...and I LOVE music, gaming and coding.",
+      "back": "Back",
+      "skipIntro": "Skip Intro",
+      "menu": {
+        "title": "Main Menu",
+        "start": "Start",
+        "hideMenu": "Hide menu",
+        "showMenu": "Show menu"
+      }
     },
     "about": {
       "title": "About Me",
@@ -146,7 +148,7 @@
       "controlsDescription": "Use these controls to navigate and battle in DOOM",
       "movement": "Movement",
       "moveForward": "Move forward",
-      "moveBackward": "Move backward", 
+      "moveBackward": "Move backward",
       "strafeLeft": "Strafe left",
       "strafeRight": "Strafe right",
       "actions": "Actions",

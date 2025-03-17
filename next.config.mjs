@@ -15,9 +15,5 @@ const nextConfig = {
       },
     ],
   },
-  assetPrefix: isProd ? '/portfolio-new/' : '',
-  basePath: isProd ? '/portfolio-new' : '',
-  output: 'standalone',
-  distDir: 'build',
 }
 export default withNextIntl(nextConfig); 

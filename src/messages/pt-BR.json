@@ -15,16 +15,18 @@
   },
   "current": "pt-BR",
   "main": {
-    "header": "Olá e bem-vindo(a) ao meu portfólio!",
-    "description1": "Sou um engenheiro de software brasileiro com paixão por construir produtos que ajudam as pessoas a viverem melhor.",
-    "description2": "...e eu AMO música, jogos e programação.",
-    "back": "Voltar",
-    "skipIntro": "Pular Intro",
-    "menu": {
-      "title": "Menu Principal",
-      "start": "Iniciar",
-      "hideMenu": "Esconder Menu",
-      "showMenu": "Mostrar Menu"
+    "home": {
+      "header": "Olá e bem-vindo(a) ao meu portfólio!",
+      "description1": "Sou um engenheiro de software brasileiro com paixão por construir produtos que ajudam as pessoas a viverem melhor.",
+      "description2": "...e eu AMO música, jogos e programação.",
+      "back": "Voltar",
+      "skipIntro": "Pular Intro",
+      "menu": {
+        "title": "Menu Principal",
+        "start": "Iniciar",
+        "hideMenu": "Esconder Menu",
+        "showMenu": "Mostrar Menu"
+      }
     },
     "about": {
       "title": "Sobre Mim",

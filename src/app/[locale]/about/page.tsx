@@ -42,16 +42,16 @@ export default function About() {
     <div className="flex flex-col text-white">
       <main className="w-full h-full">
         <motion.div
-          className="max-w-4xl mx-auto mb-32"
+          className="max-w-xs sm:max-w-sm md:max-w-4xl mx-auto mb-20 sm:mb-32 px-2 sm:px-4"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
         >
-          <section className="text-center mb-12">
+          <section className="text-center mb-8 sm:mb-12">
             <SectionTitle title={t("about.subtitle")} />
           </section>
 
-          <section className="space-y-8">
+          <section className="space-y-4 sm:space-y-8">
             {sections.map((section, index) => (
               <MenuItem
                 key={`${section.title}-${index}`}
@@ -65,7 +65,7 @@ export default function About() {
             ))}
           </section>
 
-          <footer className="text-center text-sm mt-16 font-mono text-gray-50 select-none">
+          <footer className="text-center text-xs sm:text-sm mt-12 sm:mt-16 font-mono text-gray-50 select-none px-2">
             {t("about.footer")}
           </footer>
         </motion.div>

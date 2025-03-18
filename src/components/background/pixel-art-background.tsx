@@ -1,9 +1,16 @@
-import { useEffect, useRef, ReactNode, useState } from "react";
+import { useEffect, useRef, ReactNode, useState, useLayoutEffect } from "react";
 import Image from "next/image";
 import { cn } from "@/app/utils/cn";
 import { useBackgroundState } from "./pixel-art-background-provider";
 import { SpritePosition } from "./pixel-art-background.types";
 import { sprites as defaultSprites } from "./pixel-art-background-sprites";
+
+// Extend the SpritePosition type to include original dimensions and scale
+interface EnhancedSpritePosition extends SpritePosition {
+  originalWidth?: number;
+  originalHeight?: number;
+  originalScale?: number;
+}
 
 export default function PixelArtBackground({
   className,
@@ -40,23 +47,23 @@ export default function PixelArtBackground({
   } = useBackgroundState();
 
   const [localSpritePositions, setLocalSpritePositions] = useState<
-    SpritePosition[]
+    EnhancedSpritePosition[]
   >([]);
 
   const effectiveSpritePositions =
-    spritePositions.length > 0 ? spritePositions : localSpritePositions;
+    spritePositions.length > 0 ? spritePositions as EnhancedSpritePosition[] : localSpritePositions;
 
   // Function to update sprite positions in both local and global state
   const updateSpritePositions = (
-    updater: SpritePosition[] | ((prev: SpritePosition[]) => SpritePosition[])
+    updater: EnhancedSpritePosition[] | ((prev: EnhancedSpritePosition[]) => EnhancedSpritePosition[])
   ) => {
     if (typeof updater === "function") {
       const newPositions = updater(effectiveSpritePositions);
       setLocalSpritePositions(newPositions);
-      setSpritePositions(newPositions);
+      setSpritePositions(newPositions as SpritePosition[]);
     } else {
       setLocalSpritePositions(updater);
-      setSpritePositions(updater);
+      setSpritePositions(updater as SpritePosition[]);
     }
   };
 
@@ -66,42 +73,27 @@ export default function PixelArtBackground({
   const isAnimating = useRef(false);
   const lastUpdateTime = useRef<number>(0);
   const [containerSize, setContainerSize] = useState({ width: 0, height: 0 });
+  const [isMobile, setIsMobile] = useState(false);
 
   // If no sprites are provided, use the default sprites
   const spriteImages =
     sprites.length > 0 ? sprites : defaultSprites.map((sprite) => sprite.path);
 
-  // Update container size when window size changes
+  // Update container size and check if mobile when window size changes
   useEffect(() => {
     const updateSize = () => {
       if (containerRef.current) {
         const newWidth = window.innerWidth;
         const newHeight = window.innerHeight;
         
-        // Only update if there's a significant change to avoid unnecessary re-renders
-        if (Math.abs(newWidth - containerSize.width) > 5 || Math.abs(newHeight - containerSize.height) > 5) {
-          setContainerSize({
-            width: newWidth,
-            height: newHeight,
-          });
-          
-          // When container size changes, adjust sprite positions to stay within bounds
-          if (effectiveSpritePositions.length > 0 && (newWidth > 0 && newHeight > 0)) {
-            updateSpritePositions((prevPositions) => {
-              return prevPositions.map(sprite => {
-                // Calculate the new position to keep sprites in bounds
-                const newX = Math.min(Math.max(0, sprite.x), newWidth - sprite.width);
-                const newY = Math.min(Math.max(0, sprite.y), newHeight - sprite.height);
-                
-                return {
-                  ...sprite,
-                  x: newX,
-                  y: newY
-                };
-              });
-            });
-          }
-        }
+        // Update mobile state immediately
+        setIsMobile(newWidth < 640);
+        
+        // Always update container size to ensure we have the latest dimensions
+        setContainerSize({
+          width: newWidth,
+          height: newHeight,
+        });
       }
     };
 
@@ -113,7 +105,115 @@ export default function PixelArtBackground({
     
     // Clean up
     return () => window.removeEventListener("resize", updateSize);
-  }, [containerSize.width, containerSize.height, effectiveSpritePositions.length]);
+  }, []);
+
+  // Update sprite positions and sizes when container size changes
+  useEffect(() => {
+    if (
+      effectiveSpritePositions.length === 0 || 
+      containerSize.width <= 0 || 
+      containerSize.height <= 0
+    ) {
+      return;
+    }
+    
+    // Mobile sprites are 60% of desktop size
+    const mobileSizeFactor = 0.6;
+    
+    const newSpriteArray = effectiveSpritePositions.map(sprite => {
+      const originalWidth = sprite.originalWidth || sprite.width;
+      const originalHeight = sprite.originalHeight || sprite.height;
+      const originalScale = sprite.originalScale || sprite.scale;
+      
+      // Calculate new dimensions based on current screen size
+      const newScale = isMobile ? originalScale * mobileSizeFactor : originalScale;
+      const newWidth = isMobile ? Math.round(originalWidth * mobileSizeFactor) : originalWidth;
+      const newHeight = isMobile ? Math.round(originalHeight * mobileSizeFactor) : originalHeight;
+      
+      const relativeX = containerSize.width > sprite.width ?
+        sprite.x / (containerSize.width - sprite.width) : 0.5;
+      const relativeY = containerSize.height > sprite.height ?
+        sprite.y / (containerSize.height - sprite.height) : 0.5;
+      
+      // Clamp relative position to valid range
+      const clampedRelX = Math.min(Math.max(0, relativeX), 1);
+      const clampedRelY = Math.min(Math.max(0, relativeY), 1);
+      
+      // Calculate new position ensuring sprite stays within bounds
+      const maxX = Math.max(0, containerSize.width - newWidth);
+      const maxY = Math.max(0, containerSize.height - newHeight);
+      
+      const newX = clampedRelX * maxX;
+      const newY = clampedRelY * maxY;
+      
+      // Create a completely new sprite object
+      return {
+        id: sprite.id,
+        x: newX,
+        y: newY,
+        width: newWidth,
+        height: newHeight,
+        scale: newScale,
+        velocityX: sprite.velocityX,
+        velocityY: sprite.velocityY,
+        spritePath: sprite.spritePath,
+        name: sprite.name,
+        originalWidth: originalWidth,
+        originalHeight: originalHeight,
+        originalScale: originalScale,
+        // Add a timestamp to force React to recognize this as a new object
+        _lastResized: Date.now()
+      };
+    });
+    
+    // Directly set the new sprite array rather than updating existing one
+    setLocalSpritePositions(newSpriteArray);
+    setSpritePositions(newSpriteArray as SpritePosition[]);
+    
+  }, [containerSize.width, containerSize.height, isMobile, effectiveSpritePositions.length]);
+
+  // Add a layout effect that runs before the render phase to ensure sprite dimensions
+  // are updated immediately when screen size changes
+  useLayoutEffect(() => {
+    // Skip if we already checked in the regular useEffect
+    if (
+      effectiveSpritePositions.length === 0 || 
+      containerSize.width <= 0 || 
+      containerSize.height <= 0
+    ) {
+      return;
+    }
+    
+    // This is the same logic as the resize effect, but in a layout effect
+    // which runs synchronously before browser paint
+    const mobileSizeFactor = 0.6;
+    
+    const updateDimensions = () => {
+      setLocalSpritePositions(prev => 
+        prev.map(sprite => {
+          const originalWidth = sprite.originalWidth || sprite.width;
+          const originalHeight = sprite.originalHeight || sprite.height;
+          
+          const newWidth = isMobile ? 
+            Math.round(originalWidth * mobileSizeFactor) : 
+            originalWidth;
+          const newHeight = isMobile ? 
+            Math.round(originalHeight * mobileSizeFactor) : 
+            originalHeight;
+          
+          return { 
+            ...sprite, 
+            width: newWidth, 
+            height: newHeight,
+            _lastResized: Date.now() 
+          };
+        })
+      );
+    };
+    
+    // Run the dimension update immediately
+    updateDimensions();
+  }, [isMobile]);
 
   // Handle mouse movement
   useEffect(() => {
@@ -151,14 +251,17 @@ export default function PixelArtBackground({
 
     // If we already have local sprite positions, don't reinitialize
     if (localSpritePositions.length > 0) return;
-
+    
+    // Adjust sprite size for mobile screens - make them significantly smaller
+    const mobileSizeFactor = 0.5; // 60% of original size on mobile
+    
     // Limit the number of sprites based on available sprites
     const actualNumberOfSprites = Math.min(
-      numberOfSprites,
-      spriteImages.length
+       numberOfSprites,
+      isMobile ? spriteImages.length * 0.8 : spriteImages.length
     );
 
-    const initialPositions: SpritePosition[] = Array.from({
+    const initialPositions: EnhancedSpritePosition[] = Array.from({
       length: actualNumberOfSprites,
     }).map((_, index) => {
       // Generate random position and velocity
@@ -170,19 +273,37 @@ export default function PixelArtBackground({
         (Math.random() > 0.5 ? 1 : -1);
       
       // Convert displaySize to proper scale factor (divide by 100)
-      const spriteScale = defaultSprites[index].displaySize / 100;
+      let spriteScale = defaultSprites[index].displaySize / 100;
+      
+      // Further reduce sprite scale on mobile
+      if (isMobile) {
+        spriteScale *= mobileSizeFactor;
+      }
+      
+      // Calculate actual width and height based on scale
+      const scaledWidth = isMobile 
+        ? Math.round(defaultSprites[index].width * mobileSizeFactor)
+        : defaultSprites[index].width;
+        
+      const scaledHeight = isMobile
+        ? Math.round(defaultSprites[index].height * mobileSizeFactor)
+        : defaultSprites[index].height;
 
       return {
         id: index,
-        x: Math.random() * (containerSize.width - spriteSize),
-        y: Math.random() * (containerSize.height - spriteSize),
+        x: Math.random() * (containerSize.width - scaledWidth),
+        y: Math.random() * (containerSize.height - scaledHeight),
         velocityX: randomVelocityX,
         velocityY: randomVelocityY,
-        width: defaultSprites[index].width,
-        height: defaultSprites[index].height,
+        width: scaledWidth,
+        height: scaledHeight,
         spritePath: spriteImages[index % spriteImages.length],
         scale: spriteScale,
         name: defaultSprites[index].name,
+        // Store original dimensions for resizing
+        originalWidth: defaultSprites[index].width,
+        originalHeight: defaultSprites[index].height,
+        originalScale: defaultSprites[index].displaySize / 100
       };
     });
 
@@ -199,12 +320,13 @@ export default function PixelArtBackground({
     spritePositions.length,
     localSpritePositions.length,
     setSpritePositions,
+    isMobile,
   ]);
 
   // Helper function to detect collision between two sprites
   const detectCollision = (
-    spriteA: SpritePosition,
-    spriteB: SpritePosition
+    spriteA: EnhancedSpritePosition,
+    spriteB: EnhancedSpritePosition
   ): boolean => {
     return (
       spriteA.x < spriteB.x + spriteB.width &&
@@ -216,9 +338,12 @@ export default function PixelArtBackground({
 
   // Helper function to resolve collision with improved physics
   const resolveCollision = (
-    spriteA: SpritePosition,
-    spriteB: SpritePosition
+    spriteA: EnhancedSpritePosition,
+    spriteB: EnhancedSpritePosition
   ): void => {
+    // Detect if we're on a mobile device for collision adjustment
+    const isMobileView = containerSize.width < 640;
+    
     // Calculate center points of each sprite
     const centerAX = spriteA.x + spriteA.width / 2;
     const centerAY = spriteA.y + spriteA.height / 2;
@@ -240,11 +365,12 @@ export default function PixelArtBackground({
     const overlap = (spriteA.width + spriteB.width) / 2 - length;
     if (overlap <= 0) return;
 
-    // Move sprites in opposite directions
-    spriteA.x -= (normalizedDirX * overlap) / 2;
-    spriteA.y -= (normalizedDirY * overlap) / 2;
-    spriteB.x += (normalizedDirX * overlap) / 2;
-    spriteB.y += (normalizedDirY * overlap) / 2;
+    // Move sprites in opposite directions - proportionally less on mobile
+    const repositionFactor = isMobileView ? 0.6 : 0.5; // Less aggressive movement on mobile
+    spriteA.x -= (normalizedDirX * overlap) * repositionFactor;
+    spriteA.y -= (normalizedDirY * overlap) * repositionFactor;
+    spriteB.x += (normalizedDirX * overlap) * repositionFactor;
+    spriteB.y += (normalizedDirY * overlap) * repositionFactor;
 
     // Calculate new velocities based on elastic collision
     // Create a normalized collision vector
@@ -266,10 +392,15 @@ export default function PixelArtBackground({
     // Don't proceed if objects are moving away from each other
     if (velocityAlongNormal > 0) return;
 
-    // Using restitution coefficient of 0.8 for moderate bounce
-    const restitution = 0.8;
+    // Use a lower restitution coefficient on mobile for gentler bounces
+    const restitution = isMobileView ? 0.65 : 0.8;
     let impulse = -(1 + restitution) * velocityAlongNormal;
     impulse /= 2; // Equal mass assumption
+    
+    // Reduce impulse slightly on mobile for more stable collisions
+    if (isMobileView) {
+      impulse *= 0.85;
+    }
 
     // Apply impulse
     spriteA.velocityX -= impulse * nx;
@@ -277,18 +408,32 @@ export default function PixelArtBackground({
     spriteB.velocityX += impulse * nx;
     spriteB.velocityY += impulse * ny;
 
+    // Add slight random perturbation on mobile to avoid sprites getting stuck
+    if (isMobileView) {
+      const jitter = 0.2;
+      spriteA.velocityX += (Math.random() - 0.5) * jitter;
+      spriteA.velocityY += (Math.random() - 0.5) * jitter;
+      spriteB.velocityX += (Math.random() - 0.5) * jitter;
+      spriteB.velocityY += (Math.random() - 0.5) * jitter;
+    }
+
     // Ensure velocities stay moderate
-    const enforceModerateVelocity = (sprite: SpritePosition) => {
+    const enforceModerateVelocity = (sprite: EnhancedSpritePosition) => {
       const speed = Math.sqrt(
         sprite.velocityX * sprite.velocityX +
           sprite.velocityY * sprite.velocityY
       );
-      if (speed < minVelocity) {
-        const factor = minVelocity / speed;
+      
+      // Use more moderate min/max velocities on mobile devices
+      const effectiveMinVelocity = isMobileView ? minVelocity * 0.8 : minVelocity;
+      const effectiveMaxVelocity = isMobileView ? maxVelocity * 0.9 : maxVelocity;
+      
+      if (speed < effectiveMinVelocity) {
+        const factor = effectiveMinVelocity / (speed || 0.001); // Avoid division by zero
         sprite.velocityX *= factor;
         sprite.velocityY *= factor;
-      } else if (speed > maxVelocity) {
-        const factor = maxVelocity / speed;
+      } else if (speed > effectiveMaxVelocity) {
+        const factor = effectiveMaxVelocity / speed;
         sprite.velocityX *= factor;
         sprite.velocityY *= factor;
       }
@@ -326,6 +471,7 @@ export default function PixelArtBackground({
     const currentMaxVelocity = maxVelocity;
     const currentContainerWidth = containerSize.width;
     const currentContainerHeight = containerSize.height;
+    const currentIsMobile = isMobile;
 
     const updatePositions = (timestamp: number) => {
       if (!lastUpdateTime.current) {
@@ -344,18 +490,55 @@ export default function PixelArtBackground({
         return;
       }
 
-      currentUpdateSpritePositions((prevPositions: SpritePosition[]) => {
+      // Adjust physics parameters based on screen size
+      const isMobileView = currentIsMobile;
+      
+      // Mobile-specific physics adjustments
+      const velocityFactor = isMobileView ? 0.85 : 1.0;
+      
+      // More forgiving physics for mobile
+      const bounceElasticity = isMobileView ? 0.7 : 0.9;
+      const frictionFactor = isMobileView ? 0.98 : 0.995; // Slightly more friction on mobile
+      
+      currentUpdateSpritePositions((prevPositions: EnhancedSpritePosition[]) => {
         const newPositions = [...prevPositions];
         for (let i = 0; i < newPositions.length; i++) {
           const sprite = newPositions[i];
 
+          // Store original properties if not already set
+          // This preserves dimensions during animation
+          if (!sprite.originalWidth) sprite.originalWidth = sprite.width;
+          if (!sprite.originalHeight) sprite.originalHeight = sprite.height;
+          if (!sprite.originalScale) sprite.originalScale = sprite.scale;
+
+          // Preserve current dimensions based on isMobile state
+          // This ensures animation loop doesn't undo our resize effect
+          const mobileSizeFactor = 0.6;
+          const expectedWidth = isMobileView ? 
+            Math.round((sprite.originalWidth || sprite.width) * mobileSizeFactor) : 
+            (sprite.originalWidth || sprite.width);
+          const expectedHeight = isMobileView ? 
+            Math.round((sprite.originalHeight || sprite.height) * mobileSizeFactor) : 
+            (sprite.originalHeight || sprite.height);
+          
+          // Only update position, not dimensions
+          sprite.width = expectedWidth;
+          sprite.height = expectedHeight;
+
+          // Apply slight friction to velocity for more controlled movement on mobile
+          sprite.velocityX *= frictionFactor;
+          sprite.velocityY *= frictionFactor;
+
           // Use smoother motion calculation with fixed timestep
           const speedFactor = deltaTime / 16;
-          sprite.x += sprite.velocityX * speedFactor;
-          sprite.y += sprite.velocityY * speedFactor;
+          
+          // Apply velocity with size-based adjustment
+          sprite.x += sprite.velocityX * speedFactor * velocityFactor;
+          sprite.y += sprite.velocityY * speedFactor * velocityFactor;
 
-          // Cap maximum velocity to avoid excessive movement
-          const maxSpeed = currentMaxVelocity * 1.2;
+          // Cap maximum velocity - lower on mobile
+          const maxSpeed = isMobileView ? currentMaxVelocity * 0.9 : currentMaxVelocity * 1.2;
+          
           if (Math.abs(sprite.velocityX) > maxSpeed) {
             sprite.velocityX = maxSpeed * Math.sign(sprite.velocityX);
           }
@@ -364,21 +547,32 @@ export default function PixelArtBackground({
             sprite.velocityY = maxSpeed * Math.sign(sprite.velocityY);
           }
 
-          // Use more gradual velocity changes for softer bounces
+          // Apply minimum velocity to ensure movement
+          const minSpeed = isMobileView ? currentMinVelocity * 0.8 : currentMinVelocity;
+          const currentSpeed = Math.sqrt(sprite.velocityX * sprite.velocityX + sprite.velocityY * sprite.velocityY);
+          
+          if (currentSpeed < minSpeed) {
+            // If speed is too low, boost it
+            const factor = minSpeed / (currentSpeed || 0.001); // Avoid division by zero
+            sprite.velocityX *= factor;
+            sprite.velocityY *= factor;
+          }
+
+          // Boundary collisions with bounce
           if (sprite.x <= 0) {
-            sprite.x = 0; // Clamp to boundary
-            sprite.velocityX = Math.abs(sprite.velocityX) * 0.9 + currentMinVelocity * 0.5;
+            sprite.x = 0;
+            sprite.velocityX = Math.abs(sprite.velocityX) * bounceElasticity;
           } else if (sprite.x + sprite.width >= currentContainerWidth) {
-            sprite.x = currentContainerWidth - sprite.width; // Clamp to boundary
-            sprite.velocityX = -(Math.abs(sprite.velocityX) * 0.9 + currentMinVelocity * 0.5);
+            sprite.x = currentContainerWidth - sprite.width;
+            sprite.velocityX = -Math.abs(sprite.velocityX) * bounceElasticity;
           }
 
           if (sprite.y <= 0) {
-            sprite.y = 0; // Clamp to boundary
-            sprite.velocityY = Math.abs(sprite.velocityY) * 0.9 + currentMinVelocity * 0.5;
+            sprite.y = 0;
+            sprite.velocityY = Math.abs(sprite.velocityY) * bounceElasticity;
           } else if (sprite.y + sprite.height >= currentContainerHeight) {
-            sprite.y = currentContainerHeight - sprite.height; // Clamp to boundary
-            sprite.velocityY = -(Math.abs(sprite.velocityY) * 0.9 + currentMinVelocity * 0.5);
+            sprite.y = currentContainerHeight - sprite.height;
+            sprite.velocityY = -Math.abs(sprite.velocityY) * bounceElasticity;
           }
         }
 
@@ -410,7 +604,7 @@ export default function PixelArtBackground({
         cancelAnimationFrame(animationRef.current);
       }
     };
-  }, [effectiveSpritePositions.length, withoutAnimation, withoutBouncing]);
+  }, [effectiveSpritePositions.length, withoutAnimation, withoutBouncing, isMobile, containerSize.width, containerSize.height]);
 
   if (withoutAnimation) {
     return (
@@ -510,26 +704,26 @@ export default function PixelArtBackground({
           {!withoutBouncing &&
             effectiveSpritePositions.map((sprite) => (
               <div
-                key={`bouncing-sprite-${sprite.id}`}
+                key={`bouncing-sprite-${sprite.id}-${Math.random()}`}
                 className="absolute will-change-transform"
                 style={{
                   width: `${sprite.width}px`,
                   height: `${sprite.height}px`,
-                  transform: `translate3d(${sprite.x}px, ${sprite.y}px, 0)`,
+                  transform: `translate3d(${sprite.x}px, ${sprite.y}px, 0) scale(${isMobile ? 0.6 : 1})`,
+                  transformOrigin: "center",
                   filter: "drop-shadow(0 0 8px rgba(255, 255, 255, 0.4))",
                   pointerEvents: "none"
                 }}
               >
-                <Image
+                <img
+                  key={`sprite-img-${sprite.id}-${Math.random()}`}
                   src={sprite.spritePath}
-                  alt={sprite.name}
-                  width={sprite.width}
-                  height={sprite.height}
-                  className="w-full h-full [image-rendering:pixelated] select-none"
-                  style={{
-                    transform: `scale(${typeof sprite.scale === 'number' ? sprite.scale : 1})`,
-                    transformOrigin: "center"
-                  }}
+                  alt={sprite.name || "pixel sprite"}
+                  width={sprite.originalWidth}
+                  height={sprite.originalHeight}
+                  className={cn(
+                    "w-full h-full [image-rendering:pixelated] select-none object-contain"
+                  )}
                   draggable={false}
                 />
               </div>

@@ -1,5 +1,3 @@
-
-
 import { NextIntlClientProvider } from "next-intl";
 import { notFound } from "next/navigation";
 import { locales, getMessages } from "@/i18n";
@@ -31,7 +29,7 @@ export default async function LocaleLayout({
   return (
     <NextIntlClientProvider locale={locale} messages={messages}>
       <NavigationHeader initialPathname={initialPathname} />
-      <main className="w-full h-full pt-20 overflow-scroll">{children}</main>
+      <main className="w-full h-full pt-16 sm:pt-20 overflow-x-hidden overflow-y-auto px-2 sm:px-4">{children}</main>
     </NextIntlClientProvider>
   );
 }

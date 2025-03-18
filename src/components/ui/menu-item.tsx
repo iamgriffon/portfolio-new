@@ -34,24 +34,24 @@ const MenuItemContent = ({
   withArrow,
 }: MenuItemProps) => {
   return (
-    <div className="px-6 py-5 flex items-center">
-      <div className="group-hover:bg-white/10 group-hover:border-green-400 transition-all duration-500 delay-200 w-10 h-10 flex-shrink-0 border-2 border-white/50 rounded-full flex items-center justify-center mr-4 font-bold">
+    <div className="px-3 sm:px-6 py-3 sm:py-5 flex items-center">
+      <div className="group-hover:bg-white/10 group-hover:border-green-400 transition-all duration-500 delay-200 w-7 h-7 sm:w-10 sm:h-10 flex-shrink-0 border-2 border-white/50 rounded-full flex items-center justify-center mr-2 sm:mr-4 text-sm sm:text-base">
         {icon}
       </div>
-      <div className="flex-grow">
+      <div className="flex-grow overflow-hidden">
         <h3
-          className="group-hover:text-green-400 transition-all duration-500 delay-200 text-2xl font-bold tracking-wide text-white"
+          className="group-hover:text-green-400 transition-all duration-500 delay-200 text-sm sm:text-lg md:text-2xl font-bold tracking-wide text-white truncate"
           style={{ textShadow: "0 0 8px rgba(34, 211, 238, 0.6)" }}
         >
           {title}
         </h3>
         {description && (
-          <p className="text-gray-300 mt-1 font-mono text-sm">
+          <p className="text-gray-300 mt-0.5 sm:mt-1 font-mono text-xs sm:text-sm truncate">
             {description.toLocaleUpperCase()}
           </p>
         )}
       </div>
-      {withArrow && <div className="text-green-400 text-2xl">➔</div>}
+      {withArrow && <div className="text-green-400 text-base sm:text-lg md:text-2xl ml-1 sm:ml-2 flex-shrink-0">➔</div>}
     </div>
   );
 };

@@ -15,7 +15,7 @@ export const UserProfile = () => {
     <a
       href="https://github.com/iamgriffon"
       className={cn(
-        "flex items-center gap-3 cursor-pointer",
+        "flex items-center gap-2 sm:gap-3 cursor-pointer",
         shouldHide && "invisible"
       )}
       target="_blank"
@@ -25,9 +25,9 @@ export const UserProfile = () => {
         alt="Logo"
         width={32}
         height={32}
-        className="rounded-full"
+        className="rounded-full w-7 h-7 sm:w-8 sm:h-8"
       />
-      <span className="font-bold text-lg text-white">Gustavo</span>
+      <span className="font-bold text-sm sm:text-lg text-white">Gustavo</span>
     </a>
   );
 };

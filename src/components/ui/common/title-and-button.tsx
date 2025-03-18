@@ -20,11 +20,12 @@ export function TitleAndBackButton({
   }
 
   return (
-    <section className="flex w-full max-w-7xl items-center justify-between relative">
+    <section className="flex w-full max-w-7xl items-center justify-between relative px-3 sm:px-6">
       <SectionTitle
         title={pathname === Routes.HOME ? "" : t(`${pathname}.title`)}
         animate={false}
         withoutBar
+        className="text-lg sm:text-xl md:text-3xl truncate pr-2"
       />
       <BackButton />
     </section>

@@ -17,15 +17,15 @@ export const Menu = ({
   menuTitle: string;
 }) => (
   <motion.div
-    className="mt-8 flex flex-col items-center"
+    className="mt-6 sm:mt-8 flex flex-col items-center w-full px-3 sm:px-4"
     {...menuAnimationProps}
     animate={{ opacity: 1 }}
     transition={{ duration: 0.5 }}
     ref={menuRef}
   >
-    <div className="max-w-md w-full min-w-96 z-10">
-      <SectionTitle title={menuTitle} className="text-white" />
-      <section className="space-y-4">
+    <div className="max-w-xs sm:max-w-sm md:max-w-md w-full z-10">
+      <SectionTitle title={menuTitle} className="text-white text-center sm:text-left" />
+      <section className="space-y-3 sm:space-y-4">
         {menuOptions.map((option, index) => (
           <MenuItem
             key={index}

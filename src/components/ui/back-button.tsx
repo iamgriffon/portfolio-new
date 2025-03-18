@@ -35,7 +35,7 @@ export default function BackButton() {
     <button
       onClick={handleBack}
       className={cn(
-        "cursor-pointer px-4 py-2 bg-slate-800 border border-white rounded-md text-white hover:bg-slate-700 transition-colors",
+        "flex-shrink-0 cursor-pointer px-2 sm:px-4 py-1 sm:py-2 bg-slate-800 border border-white rounded-md text-white hover:bg-slate-700 transition-colors text-xs sm:text-sm whitespace-nowrap",
         pathname.includes(Routes.HOME) && "invisible"
       )}
       title={t("back")}

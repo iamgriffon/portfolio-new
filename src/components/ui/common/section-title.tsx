@@ -11,10 +11,14 @@ export const SectionTitle = ({
   className = "",
   withoutBar = false,
 }: SectionTitleProps) => {
+  if (!title) {
+    return null;
+  }
+  
   return (
-    <section className="text-center">
+    <section className="text-center flex flex-col items-center">
       <h2
-        className={`text-3xl font-bold  text-white tracking-wider ${
+        className={`text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-white tracking-wider ${
           animate ? "animate-bounce duration-500 pt-2" : ""
         } ${className}`}
         style={{
@@ -25,7 +29,7 @@ export const SectionTitle = ({
         {String(title)?.toUpperCase()}
       </h2>
       {!withoutBar && (
-        <div className="h-2 w-32 mt-4 bg-green-500 mx-auto rounded-full border-2 border-white mb-10"></div>
+        <div className="h-1 sm:h-2 w-16 sm:w-20 md:w-32 mt-2 sm:mt-4 bg-green-500 mx-auto rounded-full border-2 border-white mb-4 sm:mb-6 md:mb-10"></div>
       )}
     </section>
   );

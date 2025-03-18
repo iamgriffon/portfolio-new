@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { BackgroundStateProvider } from '@/components/background/pixel-art-background-provider';
@@ -19,6 +19,13 @@ export const metadata: Metadata = {
   title: "Gustavo Dupin - Portfolio",
 };
 
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+  userScalable: true,
+};
+
 export default function RootLayout({
   children
 }: {
@@ -26,7 +33,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
-      <body className="bg-slate-900 h-full w-full overflow-y-scroll">
+      <body className="bg-slate-900 h-full w-full overflow-x-hidden overflow-y-auto text-[14px] sm:text-[16px]">
         <BackgroundStateProvider>
           <AnimationStateProvider>
             <BackgroundWrapper>

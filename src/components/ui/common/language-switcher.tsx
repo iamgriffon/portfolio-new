@@ -22,13 +22,13 @@ const LanguageButton = ({
   <li key={language.code}>
     <button
       onClick={onClick}
-      className={`flex items-center cursor-pointer gap-2 w-full text-left px-4 py-2 text-sm ${
+      className={`flex items-center cursor-pointer gap-2 w-full text-left px-3 py-1.5 sm:px-4 sm:py-2 text-xs sm:text-sm ${
         isSelected 
           ? 'bg-slate-700 text-white' 
           : 'text-gray-200 hover:bg-slate-700'
       }`}
     >
-      <span className="text-lg">{language.flag}</span>
+      <span className="text-base sm:text-lg">{language.flag}</span>
       <span>{language.name}</span>
     </button>
   </li>
@@ -80,10 +80,11 @@ export default function LanguageSwitcher() {
     <div className="relative">
       <button 
         onClick={toggleDropdown}
-        className="flex items-center gap-2 px-3 py-2 rounded-md bg-slate-800 hover:bg-slate-700 text-white cursor-pointer"
+        className="flex items-center gap-1 sm:gap-2 px-2 sm:px-3 py-1 sm:py-2 rounded-md bg-slate-800 hover:bg-slate-700 text-white cursor-pointer text-xs sm:text-sm"
       >
-        <span>
-          {currentLanguage.flag} {currentLanguage.name}
+        <span className="flex items-center">
+          <span className="text-base sm:text-lg mr-0.5 sm:mr-1">{currentLanguage.flag}</span>
+          <span className="hidden xs:inline">{currentLanguage.name}</span>
         </span>
         <DropdownArrow />
       </button>

@@ -253,12 +253,12 @@ export default function PixelArtBackground({
     if (localSpritePositions.length > 0) return;
     
     // Adjust sprite size for mobile screens - make them significantly smaller
-    const mobileSizeFactor = 0.6; // 60% of original size on mobile
+    const mobileSizeFactor = 0.5; // 60% of original size on mobile
     
     // Limit the number of sprites based on available sprites
     const actualNumberOfSprites = Math.min(
-      numberOfSprites,
-      spriteImages.length
+       numberOfSprites,
+      isMobile ? spriteImages.length * 0.8 : spriteImages.length
     );
 
     const initialPositions: EnhancedSpritePosition[] = Array.from({

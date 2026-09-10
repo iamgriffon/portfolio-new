@@ -1,6 +1,8 @@
-import { techs } from "./techs";
-import TechSelection from "./client";
+import { preloadQuery } from "convex/nextjs";
+import { api } from "../../../../convex/_generated/api";
+import LiveTechSelection from "./live";
 
-export default function SkillsPage() {
-  return <TechSelection techs={techs} />;
+export default async function SkillsPage() {
+  const techs = await preloadQuery(api.portfolio.techs, {});
+  return <LiveTechSelection techs={techs} />;
 }

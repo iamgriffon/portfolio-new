@@ -20,7 +20,8 @@ interface TechSelectionProps {
 const STACK_STORAGE_KEY = "skills-stack";
 
 export default function TechSelection({ techs }: TechSelectionProps) {
-  const [selectedTech, setSelectedTech] = useState<Tech | null>(null);
+  const [selectedTechId, setSelectedTechId] = useState<string | null>(null);
+  const selectedTech = techs.find((tech) => tech.id === selectedTechId) ?? null;
   const [isReady, setIsReady] = useState(false);
   const [stack, setStack] = useState<Tech[]>([]);
   const [draggedTech, setDraggedTech] = useState<Tech | null>(null);
@@ -70,11 +71,11 @@ export default function TechSelection({ techs }: TechSelectionProps) {
 
   const handleSelectTech = (tech: Tech) => {
     if (selectedTech?.id === tech.id) {
-      setSelectedTech(null);
+      setSelectedTechId(null);
       return;
     }
 
-    setSelectedTech(tech);
+    setSelectedTechId(tech.id);
   };
 
   const handleAddToStack = (tech: Tech) => {
@@ -128,7 +129,7 @@ export default function TechSelection({ techs }: TechSelectionProps) {
           <TechDetail
             tech={selectedTech}
             isInStack={stack.some((t) => t.id === selectedTech.id)}
-            onClose={() => setSelectedTech(null)}
+            onClose={() => setSelectedTechId(null)}
             onAddToStack={handleAddToStack}
           />
         )}

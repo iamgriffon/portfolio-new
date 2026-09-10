@@ -1,12 +1,14 @@
 import { Suspense } from 'react';
-import { getJobHistory, getEducation } from '@/db/supabase';
+import { preloadQuery } from 'convex/nextjs';
+import { api } from '../../../../convex/_generated/api';
 import ResumeClient from './client';
 
 export default async function ResumePage() {
   try {
-    // Fetch resume data from Supabase
-    const jobHistory = await getJobHistory();
-    const education = await getEducation();
+    const [jobHistory, education] = await Promise.all([
+      preloadQuery(api.portfolio.jobHistory, {}),
+      preloadQuery(api.portfolio.education, {}),
+    ]);
     
     return (
       <Suspense fallback={<div className="flex justify-center items-center h-screen z-20">Loading resume data...</div>}>
@@ -22,4 +24,4 @@ export default async function ResumePage() {
       </div>
     );
   }
-} 
+}

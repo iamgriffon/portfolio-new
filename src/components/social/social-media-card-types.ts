@@ -1,4 +1,4 @@
-import { SocialLink } from "@/db/supabase";
+import type { SocialLink } from "@/db/convex";
 
 interface SocialMediaCardProps {
   social: SocialLink;

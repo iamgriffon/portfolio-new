@@ -7,9 +7,9 @@ import NavigationHeader from "@/components/ui/common/navigation-header";
 
 interface LocaleLayoutProps {
   children: ReactNode;
-  params: {
+  params: Promise<{
     locale: string;
-  };
+  }>;
 };
 
 export default async function LocaleLayout({

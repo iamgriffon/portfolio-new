@@ -4,6 +4,7 @@ import "./globals.css";
 import { BackgroundStateProvider } from '@/components/background/pixel-art-background-provider';
 import { AnimationStateProvider } from '@/components/background/animation-state-provider';
 import BackgroundWrapper from '@/components/background/pixel-art-background-wrapper';
+import PortfolioConvexProvider from '@/components/convex-provider';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -34,13 +35,15 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
       <body className="bg-slate-900 h-full w-full overflow-x-hidden overflow-y-auto text-[14px] sm:text-[16px]">
-        <BackgroundStateProvider>
-          <AnimationStateProvider>
-            <BackgroundWrapper>
-              {children}
-            </BackgroundWrapper>
-          </AnimationStateProvider>
-        </BackgroundStateProvider>
+        <PortfolioConvexProvider>
+          <BackgroundStateProvider>
+            <AnimationStateProvider>
+              <BackgroundWrapper>
+                {children}
+              </BackgroundWrapper>
+            </AnimationStateProvider>
+          </BackgroundStateProvider>
+        </PortfolioConvexProvider>
       </body>
     </html>
   );

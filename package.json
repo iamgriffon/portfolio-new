@@ -12,7 +12,8 @@
     "deploy": "gh-pages -d build",
     "backup:convert": "bun scripts/convert-backup.ts",
     "backup:import": "bun scripts/import-backup.ts",
-    "backup:verify": "bun scripts/verify-backup.ts"
+    "backup:verify": "bun scripts/verify-backup.ts",
+    "techs:import": "bun scripts/import-techs.ts"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.3.1",

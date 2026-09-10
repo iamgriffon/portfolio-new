@@ -35,6 +35,25 @@ in the browser with `usePreloadedQuery`, under a shared `ConvexProvider`.
 Job and education updates therefore reach an open page without refreshing or
 waiting for a Next.js cache to expire.
 
+The skills page uses the same preload/subscription flow with `portfolio:techs`.
+The `techs` table stores the original string IDs and an `order_index`; the public
+query returns only `{ id, name, icon, level, years }`, preserving the `Tech` type
+and the existing `techs: Tech[]` component prop. Icon paths are normalized to
+`/icons/` and empty icons fall back to `/icons/cursor.svg`.
+
+After deploying the backend, import the original 23 technologies with:
+
+```sh
+bun run techs:import
+```
+
+The seed lives in `scripts/data/techs.ts` and is not imported by the frontend.
+The internal import is atomic, accepts identical repeats, and refuses to
+overwrite later dashboard edits. It verifies the public query field by field.
+Manage skills in the Convex dashboard after importing; keep IDs stable for saved
+stacks and use `order_index` for display order. The catalog supports up to 1000
+technologies. Existing resume/social queries and the backup import are unchanged.
+
 Social links still use the Next.js server adapter in `src/db/convex.ts`, with a
 one-hour cache and the `socialLinks` tag. Configure `REVALIDATION_SECRET` to use
 the existing `/api/revalidate` endpoint for immediate social link updates.

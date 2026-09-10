@@ -49,7 +49,18 @@ export const socialFields = {
   profile_url: nullableString,
 };
 
+// Public shape matches the existing Tech type; ordering is storage-only.
+export const techFields = {
+  id: v.string(),
+  name: v.string(),
+  icon: v.string(),
+  level: v.number(),
+  years: v.number(),
+};
+
 export default defineSchema({
+  techs: defineTable({ ...techFields, order_index: v.number() })
+    .index("by_order_index", ["order_index"]),
   job_history: defineTable(jobHistoryFields).index("by_order", ["order_index"]),
   education: defineTable(educationFields).index("by_order", ["order_index"]),
   socials: defineTable(socialFields).index("by_order", ["order_index"]),

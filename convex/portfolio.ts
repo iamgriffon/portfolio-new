@@ -1,4 +1,22 @@
 import { query } from "./_generated/server";
+import { v } from "convex/values";
+import { techFields } from "./schema";
+
+export const techs = query({
+  args: {},
+  returns: v.array(v.object(techFields)),
+  handler: async (ctx) => {
+    const rows = await ctx.db.query("techs").withIndex("by_order_index").take(1000);
+    return rows.map(({ id, name, icon, level, years }) => ({
+      id,
+      name,
+      icon: !icon ? "/icons/cursor.svg"
+        : icon.startsWith("/") && !icon.startsWith("/icons/") ? `/icons${icon}` : icon,
+      level,
+      years,
+    }));
+  },
+});
 
 // PostgreSQL sorts NULL last in ascending order; Convex sorts it first.
 function nullsLast<T extends { order_index: number | null }>(rows: T[]): T[] {

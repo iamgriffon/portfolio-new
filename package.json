@@ -8,16 +8,19 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "predeploy": "bun run build",
+    "deploy": "gh-pages -d build",
+    "backup:convert": "bun scripts/convert-backup.ts",
+    "backup:import": "bun scripts/import-backup.ts",
+    "backup:verify": "bun scripts/verify-backup.ts"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.3.1",
     "@iconify/react": "^5.2.0",
     "@radix-ui/react-slot": "^1.1.2",
-    "@supabase/supabase-js": "^2.49.1",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "convex": "^1.45.0",
     "dotenv": "^16.4.7",
     "framer-motion": "^12.5.0",
     "gh-pages": "^6.3.0",
@@ -43,6 +46,8 @@
     "eslint": "^9",
     "eslint-config-next": "15.2.2",
     "tailwindcss": "^4",
-    "typescript": "^5"
-  }
+    "typescript": "^5",
+    "@types/bun": "^1.3.14"
+  },
+  "packageManager": "bun@1.3.14"
 }

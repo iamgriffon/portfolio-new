@@ -7,19 +7,22 @@ import {
   FaGraduationCap,
   FaChevronUp,
 } from "react-icons/fa";
-import { JobHistoryItem, EducationItem } from "./types";
+import { usePreloadedQuery, type Preloaded } from "convex/react";
+import { api } from "../../../../convex/_generated/api";
 import { ResumeCard } from "@/components/resume/resume-card";
 import { cn } from "@/lib/utils";
 
 interface ResumeClientProps {
-  jobHistory: JobHistoryItem[];
-  education: EducationItem[];
+  jobHistory: Preloaded<typeof api.portfolio.jobHistory>;
+  education: Preloaded<typeof api.portfolio.education>;
 }
 
 export default function ResumeClient({
-  jobHistory,
-  education,
+  jobHistory: preloadedJobHistory,
+  education: preloadedEducation,
 }: ResumeClientProps) {
+  const jobHistory = usePreloadedQuery(preloadedJobHistory);
+  const education = usePreloadedQuery(preloadedEducation);
   const t = useTranslations("main");
   const [activeTab, setActiveTab] = useState<"jobs" | "education">("jobs");
   const [expandedCardIds, setExpandedCardIds] = useState<number[]>([]);
@@ -32,7 +35,7 @@ export default function ResumeClient({
       en: job.en_position,
       "pt-BR": job.ptbr_position,
       zh: job.zh_position,
-      es: job.es_position,
+      es: job.es_position ?? job.en_position,
     },
   }));
 
@@ -40,16 +43,16 @@ export default function ResumeClient({
     ...edu,
     image_url: edu.image_url || null,
     description: {
-      en: edu.en_description,
-      "pt-BR": edu.ptbr_description,
-      zh: edu.zh_description,
-      es: edu.es_description,
+      en: edu.en_achievements ?? '',
+      "pt-BR": edu.ptbr_achievements ?? '',
+      zh: edu.zh_achievements ?? '',
+      es: edu.es_achievements ?? edu.en_achievements ?? '',
     },
     degree: {
       en: edu.en_degree,
       "pt-BR": edu.ptbr_degree,
       zh: edu.zh_degree,
-      es: edu.es_degree,
+      es: edu.es_degree ?? edu.en_degree,
     },
   }));
 
@@ -142,7 +145,7 @@ export default function ResumeClient({
             details={[
               {
                 label: t("resume.achievements"),
-                content: edu.achievements,
+                content: edu.description[t("language.current") as keyof typeof edu.description],
               },
               {
                 label: t("resume.technologies"),

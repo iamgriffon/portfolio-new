@@ -10,7 +10,7 @@ export type CacheOptions = {
 // Default cache options
 const defaultCacheOptions: CacheOptions = {
   revalidate: 3600,    // Default revalidation time: 1 hour
-  tags: ['supabase'],  // Default tag for all Supabase data
+  tags: ['convex'],   // Default tag for portfolio data
 };
 
 /**
@@ -56,4 +56,4 @@ export function createQueryKey(prefix: string, params: Record<string, any> = {})
   });
   
   return keyParts;
-} 
+}

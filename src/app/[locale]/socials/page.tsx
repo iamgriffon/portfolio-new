@@ -1,4 +1,4 @@
-import { getSocialLinks } from "@/db/supabase";
+import { getSocialLinks } from "@/db/convex";
 import SocialMediaCard from "@/components/social/social-media-card";
 
 export default async function Socials() {

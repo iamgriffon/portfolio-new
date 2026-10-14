@@ -1,5 +1,6 @@
 import { internalMutation } from "./_generated/server";
 import { v } from "convex/values";
+import { addedTechs, previousTechs } from "../scripts/data/techs";
 import { educationFields, jobHistoryFields, socialFields, techFields } from "./schema";
 
 // Seeds only an empty table; a repeat must match exactly to avoid overwriting edits.
@@ -62,5 +63,42 @@ export const importPortfolio = internalMutation({
       counts[table] = incoming.length;
     }
     return counts;
+  },
+});
+
+// Admin-only, atomic and repeatable: preserve document IDs and dashboard edits.
+export const updateTechsOctober2026 = internalMutation({
+  args: {},
+  returns: v.null(),
+  handler: async (ctx) => {
+    const existing = await ctx.db.query("techs").withIndex("by_order_index").take(1001);
+    const byId = new Map(existing.map(tech => [tech.id, tech]));
+    const missing = addedTechs.filter(tech => !byId.has(tech.id));
+    if (existing.length + missing.length > 1000 || byId.size !== existing.length) {
+      throw new Error("Expected at most 1000 technologies with unique IDs");
+    }
+    for (const previous of previousTechs) {
+      const stored = byId.get(previous.id);
+      if (!stored) throw new Error(`Missing technology: ${previous.id}; seed an empty catalog first`);
+      const years = previous.years + 1;
+      if (stored.years === years) continue;
+      if (stored.years !== previous.years) {
+        throw new Error(`Experience was edited for ${previous.id}; refusing to overwrite`);
+      }
+      await ctx.db.patch(stored._id, { years });
+    }
+    for (const tech of addedTechs) {
+      const stored = byId.get(tech.id);
+      if (stored && Object.entries(tech).some(([key, value]) =>
+        stored[key as keyof typeof stored] !== value,
+      )) {
+        throw new Error(`Technology already exists with different data: ${tech.id}`);
+      }
+    }
+    let order = Math.max(-1, ...existing.map(tech => tech.order_index)) + 1;
+    for (const tech of missing) {
+      await ctx.db.insert("techs", { ...tech, order_index: order++ });
+    }
+    return null;
   },
 });

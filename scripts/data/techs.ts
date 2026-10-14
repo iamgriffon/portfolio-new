@@ -13,7 +13,7 @@ const validateIconPath = (iconPath: string) => {
   return iconPath;
 };
 
-export const techs = [
+export const previousTechs = [
   { id: "typescript", name: "TypeScript", icon: "/typescript.svg", level: 96, years: 5 },
   { id: "javascript", name: "JavaScript", icon: "/javascript.svg", level: 96, years: 5 },
   { id: "html", name: "HTML", icon: "/html.svg", level: 95, years: 5 },
@@ -41,3 +41,21 @@ export const techs = [
   ...tech,
   icon: validateIconPath(tech.icon)
 }));
+
+// Snapshot for the October 2026 migration; keep previousTechs unchanged.
+export const addedTechs = [
+  { id: "claude", name: "Claude", icon: "/icons/claude.svg", level: 85, years: 1 },
+  { id: "datadog", name: "Datadog", icon: "/icons/datadog.svg", level: 80, years: 2 },
+  { id: "grafana", name: "Grafana", icon: "/icons/grafana.svg", level: 80, years: 3 },
+  { id: "sentry", name: "Sentry", icon: "/icons/sentry.svg", level: 85, years: 3 },
+  { id: "mcp", name: "MCP", icon: "/icons/mcp.svg", level: 85, years: 1 },
+  { id: "kubernetes", name: "Kubernetes", icon: "/icons/kubernetes.svg", level: 80, years: 2 },
+  { id: "cloudflare", name: "Cloudflare", icon: "/icons/cloudflare.svg", level: 85, years: 3 },
+  { id: "web3-crypto", name: "Web3/crypto", icon: "/icons/web3-crypto.svg", level: 75, years: 1 },
+  { id: "ci-cd", name: "CI/CD", icon: "/icons/ci-cd.svg", level: 85, years: 3 },
+];
+
+export const techs = [
+  ...previousTechs.map(tech => ({ ...tech, years: tech.years + 1 })),
+  ...addedTechs,
+];

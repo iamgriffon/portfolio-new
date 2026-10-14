@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" stroke="#A78BFA" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+  <title>Web3/crypto</title>
+  <path d="m32 7 22 13v24L32 57 10 44V20L32 7Z"/>
+  <path d="m10 20 22 13 22-13M32 33v24M32 7v13m-22 24 11-6m33 6-11-6"/>
+  <path d="m32 20 11 6v12l-11 7-11-7V26l11-6Z" fill="#312E81"/>
+  <path d="m21 26 11 7 11-7M32 33v12"/>
+</svg>

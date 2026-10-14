@@ -41,7 +41,7 @@ query returns only `{ id, name, icon, level, years }`, preserving the `Tech` typ
 and the existing `techs: Tech[]` component prop. Icon paths are normalized to
 `/icons/` and empty icons fall back to `/icons/cursor.svg`.
 
-After deploying the backend, import the original 23 technologies with:
+After deploying the backend, import the 32 technologies with:
 
 ```sh
 bun run techs:import
@@ -50,6 +50,19 @@ bun run techs:import
 The seed lives in `scripts/data/techs.ts` and is not imported by the frontend.
 The internal import is atomic, accepts identical repeats, and refuses to
 overwrite later dashboard edits. It verifies the public query field by field.
+For an existing catalog, deploy the backend and then apply the October 2026
+update (adds nine skills and increments the original 23 skills by one year):
+
+```sh
+bunx convex run migrations:updateTechsOctober2026 --typecheck disable --codegen disable
+```
+
+This admin-only migration preserves document IDs, order, and existing proficiency
+levels. Repeating it does not increment experience again; unexpected experience
+values or conflicting new skills abort the entire transaction. Publish the
+frontend's new SVG assets before applying the migration to a live deployment.
+Datadog has 2 years; new proficiency levels are initial estimates.
+
 Manage skills in the Convex dashboard after importing; keep IDs stable for saved
 stacks and use `order_index` for display order. The catalog supports up to 1000
 technologies. Existing resume/social queries and the backup import are unchanged.

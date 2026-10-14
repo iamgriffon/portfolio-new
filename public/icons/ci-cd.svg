@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" stroke="#38BDF8" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+  <title>CI/CD</title>
+  <path d="M32 32c-7-10-10-14-17-14a14 14 0 0 0 0 28c7 0 10-4 17-14s10-14 17-14a14 14 0 0 1 0 28c-7 0-10-4-17-14Z"/>
+  <path d="m13 12 6 6-6 6m38 16-6 6 6 6"/>
+</svg>

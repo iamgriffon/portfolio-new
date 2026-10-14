@@ -1,9 +1,22 @@
 type Skill = { id: string; level: number; years: number };
-type Area = "infrastructure" | "delivery" | "observability" | "integration" | "automation";
+type Area = "frontend" | "backend" | "mobile" | "infrastructure" | "delivery" | "observability" | "integration" | "automation";
 
 // Portfolio-specific calibration based on reported hands-on work, not a
 // universal ranking of technologies. Related tools share the same area cap.
 const experience: Record<string, Partial<Record<Area, number>>> = {
+  // Frameworks share their execution domain; Next.js alone does not imply
+  // separate backend experience. React Native represents mobile delivery.
+  react: { frontend: 2 },
+  nextjs: { frontend: 2 },
+  angular: { frontend: 2 },
+  vue: { frontend: 2 },
+  jquery: { frontend: 1 },
+  node: { backend: 2 },
+  express: { backend: 2 },
+  nest: { backend: 2 },
+  "react-native": { mobile: 2 },
+  // JS/TS are shared language foundations: they affect depth, but cannot
+  // independently claim frontend AND backend breadth. HTML/CSS stay depth-only.
   docker: { infrastructure: 3, delivery: 2 }, // Compose and cloud production deploys.
   kubernetes: { infrastructure: 4, delivery: 2 }, // Helm, replication and redundancy.
   aws: { infrastructure: 4 }, // Cloud services and CDK; excludes Bedrock learning.

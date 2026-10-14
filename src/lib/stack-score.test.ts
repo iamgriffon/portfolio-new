@@ -61,4 +61,40 @@ describe("portfolio stack assessment", () => {
     expect(calculateStackScore([...core, { id: "aws", level: 80, years: 0 }]))
       .toBe(calculateStackScore(core));
   });
+
+  test("frontend frameworks share credit rather than accumulating it", () => {
+    const frontend = select("react");
+    expect(calculateStackScore([...frontend, ...select("nextjs", "angular", "vue", "jquery")]))
+      .toBe(calculateStackScore(frontend));
+  });
+
+  test("Node backend frameworks share credit, independently of frontend", () => {
+    const backend = select("express");
+    expect(calculateStackScore([...backend, ...select("node", "nest")]))
+      .toBe(calculateStackScore(backend));
+    expect(calculateStackScore(select("nextjs", "nest")))
+      .toBeGreaterThan(calculateStackScore(select("nextjs")));
+  });
+
+  test("shared languages do not imply frontend or backend breadth", () => {
+    const languages = select("javascript", "typescript");
+    expect(calculateStackScore(languages)).toBe(calculateStackScore(select("typescript")));
+    expect(calculateStackScore(select("react", "javascript", "typescript", "html", "css")))
+      .toBe(calculateStackScore(select("react")));
+    expect(calculateStackScore([...languages, ...select("react", "node")]))
+      .toBeGreaterThan(calculateStackScore([...languages, ...select("react")]));
+  });
+
+  test("mobile is complementary to web despite sharing React", () => {
+    expect(calculateStackScore(select("react", "react-native")))
+      .toBeGreaterThan(calculateStackScore(select("react")));
+  });
+
+  test("equivalent frameworks receive equal credit at equal proficiency and experience", () => {
+    const skill = { level: 80, years: 3 };
+    const reference = calculateStackScore([{ ...skill, id: "react" }]);
+    for (const id of ["nextjs", "angular", "vue", "node", "nest", "express"]) {
+      expect(calculateStackScore([{ ...skill, id }])).toBe(reference);
+    }
+  });
 });

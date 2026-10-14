@@ -101,12 +101,10 @@
       "ranks": {
         "junior": "Junior",
         "junior_description": "Building foundations with enthusiasm and learning rapidly.",
-        "mid-level": "Mid-level",
+        "mid-level": "Mid Level",
         "mid-level_description": "Solid technical skills with growing independence.",
         "senior": "Senior",
-        "senior_description": "Expert skills with deep domain knowledge and leadership capabilities.",
-        "principal": "Specialist",
-        "principal_description": "World-class expertise with technical vision and innovation."
+        "senior_description": "Expert skills with deep domain knowledge and leadership capabilities."
       },
       "descriptions": {
         "typescript": "TypeScript is a statically typed superset of JavaScript that adds optional types, classes, and interfaces.",

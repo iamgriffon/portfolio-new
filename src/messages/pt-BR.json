@@ -105,9 +105,7 @@
         "mid-level": "Pleno",
         "mid-level_description": "Habilidades técnicas sólidas com crescente independência.",
         "senior": "Sênior",
-        "senior_description": "Habilidades avançadas com profundo conhecimento de domínio e capacidades de liderança.",
-        "principal": "Especialista",
-        "principal_description": "Experiência de classe mundial com visão técnica e inovação."
+        "senior_description": "Habilidades avançadas com profundo conhecimento de domínio e capacidades de liderança."
       },
       "descriptions": {
         "typescript": "TypeScript é um superconjunto de JavaScript com tipagem estática que adiciona tipos, classes e interfaces opcionais.",

@@ -18,11 +18,6 @@ export const ranks: Rank[] = [
   {
     label: "Senior",
     min: 76,
-    max: 90,
-  },
-  {
-    label: "Principal",
-    min: 91,
     max: 100,
   },
 ];

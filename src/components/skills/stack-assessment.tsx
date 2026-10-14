@@ -5,13 +5,13 @@ import { useTranslations } from "next-intl";
 import { type Rank, ranks } from "@/app/[locale]/skills/ranks";
 
 interface StackAssessmentProps {
-  avgLevel: number;
+  stackScore: number;
   currentSeniority: Rank;
   targetSeniority: string;
 }
 
 export default function StackAssessment({
-  avgLevel,
+  stackScore,
   currentSeniority,
   targetSeniority,
 }: StackAssessmentProps) {
@@ -46,7 +46,7 @@ export default function StackAssessment({
       <div className="mb-6">
         <div className="flex justify-between items-center mb-2">
           <span>
-            {t("skills.averageSkillLevel")}: {avgLevel}%
+            {t("skills.stackScore")}: {stackScore}%
           </span>
           <span className="font-bold text-lg bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">
             {t(`skills.ranks.${currentSeniority.label.toLowerCase()}`)}{" "}
@@ -57,7 +57,7 @@ export default function StackAssessment({
           <motion.div
             className="bg-gradient-to-r from-primary to-secondary h-4 rounded-full"
             initial={{ width: 0 }}
-            animate={{ width: `${avgLevel}%` }}
+            animate={{ width: `${stackScore}%` }}
             transition={{ duration: 0.8 }}
           />
         </div>
@@ -114,4 +114,4 @@ export default function StackAssessment({
       )}
     </motion.div>
   );
-} 
+}

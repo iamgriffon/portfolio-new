@@ -8,6 +8,7 @@ import { ranks } from "@/app/[locale]/skills/ranks";
 import { type Tech } from "./tech-card";
 import StackAssessment from "./stack-assessment";
 import { SectionTitle } from "../ui";
+import { calculateStackScore } from "@/lib/stack-score";
 
 interface StackBuilderProps {
   stack: Tech[];
@@ -28,21 +29,13 @@ export default function StackBuilder({
   const [targetSeniority, setTargetSeniority] = useState("Senior");
   const t = useTranslations("main");
 
-  const avgLevel = stack.length
-    ? Math.round(
-        stack.reduce((sum, tech) => {
-          const yearsScore = Math.min(tech.years * 10, 100);
-          const weightedScore = tech.level * 0.6 + yearsScore * 0.4;
-          return sum + weightedScore;
-        }, 0) / stack.length
-      )
-    : 0;
+  const stackScore = calculateStackScore(stack);
 
   const getSeniorityLevel = (level: number) => {
     return ranks.find((s) => level >= s.min && level <= s.max) || ranks[0];
   };
 
-  const currentSeniority = getSeniorityLevel(avgLevel);
+  const currentSeniority = getSeniorityLevel(stackScore);
 
   const handleDragOver = (e: React.DragEvent) => {
     e.preventDefault();
@@ -182,7 +175,7 @@ export default function StackBuilder({
 
       {!!stack.length && (
         <StackAssessment
-          avgLevel={avgLevel}
+          stackScore={stackScore}
           currentSeniority={currentSeniority}
           targetSeniority={targetSeniority}
         />

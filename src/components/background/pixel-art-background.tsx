@@ -4,6 +4,7 @@ import { cn } from "@/app/utils/cn";
 import { useBackgroundState } from "./pixel-art-background-provider";
 import { SpritePosition } from "./pixel-art-background.types";
 import { sprites as defaultSprites } from "./pixel-art-background-sprites";
+import { selectSpriteIndices } from "./select-sprite-indices";
 
 // Extend the SpritePosition type to include original dimensions and scale
 interface EnhancedSpritePosition extends SpritePosition {
@@ -21,7 +22,7 @@ export default function PixelArtBackground({
   withoutBouncing = false,
   sprites = [],
   spriteSize = 128,
-  numberOfSprites = 12,
+  numberOfSprites = sprites.length || defaultSprites.length,
   minVelocity = 2.0,
   maxVelocity = 4.0,
 }: {
@@ -256,14 +257,19 @@ export default function PixelArtBackground({
     const mobileSizeFactor = 0.5; // 60% of original size on mobile
     
     // Limit the number of sprites based on available sprites
-    const actualNumberOfSprites = Math.min(
-       numberOfSprites,
-      isMobile ? spriteImages.length * 0.8 : spriteImages.length
+    const selectedIndices = selectSpriteIndices(
+      spriteImages.length,
+      numberOfSprites,
+      isMobile,
     );
 
-    const initialPositions: EnhancedSpritePosition[] = Array.from({
-      length: actualNumberOfSprites,
-    }).map((_, index) => {
+    const initialPositions: EnhancedSpritePosition[] = selectedIndices.map((index) => {
+      const metadata = defaultSprites.find(sprite => sprite.path === spriteImages[index]) ?? {
+        name: "pixel sprite",
+        width: spriteSize,
+        height: spriteSize,
+        displaySize: 100,
+      };
       // Generate random position and velocity
       const randomVelocityX =
         (Math.random() * (maxVelocity - minVelocity) + minVelocity) *
@@ -273,7 +279,7 @@ export default function PixelArtBackground({
         (Math.random() > 0.5 ? 1 : -1);
       
       // Convert displaySize to proper scale factor (divide by 100)
-      let spriteScale = defaultSprites[index].displaySize / 100;
+      let spriteScale = metadata.displaySize / 100;
       
       // Further reduce sprite scale on mobile
       if (isMobile) {
@@ -282,12 +288,12 @@ export default function PixelArtBackground({
       
       // Calculate actual width and height based on scale
       const scaledWidth = isMobile 
-        ? Math.round(defaultSprites[index].width * mobileSizeFactor)
-        : defaultSprites[index].width;
+        ? Math.round(metadata.width * mobileSizeFactor)
+        : metadata.width;
         
       const scaledHeight = isMobile
-        ? Math.round(defaultSprites[index].height * mobileSizeFactor)
-        : defaultSprites[index].height;
+        ? Math.round(metadata.height * mobileSizeFactor)
+        : metadata.height;
 
       return {
         id: index,
@@ -297,13 +303,13 @@ export default function PixelArtBackground({
         velocityY: randomVelocityY,
         width: scaledWidth,
         height: scaledHeight,
-        spritePath: spriteImages[index % spriteImages.length],
+        spritePath: spriteImages[index],
         scale: spriteScale,
-        name: defaultSprites[index].name,
+        name: metadata.name,
         // Store original dimensions for resizing
-        originalWidth: defaultSprites[index].width,
-        originalHeight: defaultSprites[index].height,
-        originalScale: defaultSprites[index].displaySize / 100
+        originalWidth: metadata.width,
+        originalHeight: metadata.height,
+        originalScale: metadata.displaySize / 100
       };
     });
 

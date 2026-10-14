@@ -106,5 +106,14 @@ export const sprites = [
     width: 150,
     height: 150,
     displaySize: 70,
+  },
+  {
+    id: 13,
+    name: "Claude",
+    franchise: "Anthropic",
+    path: "/pixels/claude.gif",
+    width: 150,
+    height: 150,
+    displaySize: 70,
   }
 ];

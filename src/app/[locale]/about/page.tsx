@@ -3,7 +3,7 @@
 import { MenuItem, SectionTitle } from "@/components/ui";
 import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
-import { FaBook, FaCode, FaUsers, FaGamepad } from "react-icons/fa";
+import { FaBook, FaCode, FaUsers, FaGamepad, FaLaptopCode } from "react-icons/fa";
 import { useMemo } from "react";
 
 export default function About() {
@@ -21,6 +21,12 @@ export default function About() {
         path: "/skills",
         desc: t("about.skills.desc"),
         icon: <FaCode />,
+      },
+      {
+        title: t("about.projects.title"),
+        path: "/projects",
+        desc: t("about.projects.desc"),
+        icon: <FaLaptopCode />,
       },
       {
         title: t("about.socials.title"),

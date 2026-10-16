@@ -49,7 +49,11 @@
         "title": "Doom",
         "desc": "¡Juega Doom!"
       },
-      "footer": "PRESIONA OPCIÓN PARA CONTINUAR · INSERTA MONEDA PARA DESBLOQUEAR TODOS LOS MODOS"
+      "footer": "PRESIONA OPCIÓN PARA CONTINUAR · INSERTA MONEDA PARA DESBLOQUEAR TODOS LOS MODOS",
+      "projects": {
+        "title": "Mis Proyectos",
+        "desc": "Experimentos con IA y aplicaciones para explorar"
+      }
     },
     "resume": {
       "title": "Mi Currículum",
@@ -65,7 +69,20 @@
     },
     "projects": {
       "title": "Mis Proyectos",
-      "viewAll": "Ver Todos los Proyectos"
+      "viewAll": "Ver Todos los Proyectos",
+      "intro": "De la visión artificial a los compañeros de estudio: explora los proyectos, prueba las demos y consulta el código.",
+      "demo": "Abrir proyecto",
+      "technologies": "Tecnologías",
+      "openProject": "Abrir {name} en una pestaña nueva",
+      "openRepository": "Ver el código de {name} en GitHub en una pestaña nueva",
+      "whackamole": {
+        "description": "Un juego de golpear topos con piloto automático. La IA analiza los píxeles del tablero con TensorFlow.js y reconoce los objetivos mediante comparación visual de plantillas en un Web Worker.",
+        "thumbnail": "Whack-a-Mole en marcha, con el tablero y los controles del piloto automático."
+      },
+      "matchmaker": {
+        "description": "Recomendaciones de compañeros de estudio con IA. Combina TensorFlow.js en el navegador con Cloudflare Workers, D1 y Vectorize para explorar perfiles y encontrar parejas de estudio.",
+        "thumbnail": "Vestibulandos mostrando un perfil de estudiante y recomendaciones de compañeros."
+      }
     },
     "skills": {
       "title": "Mis Habilidades",
@@ -171,4 +188,4 @@
       "current": "es"
     }
   }
-} 
+}

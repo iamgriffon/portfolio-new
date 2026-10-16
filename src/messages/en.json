@@ -49,7 +49,11 @@
         "title": "Doom",
         "desc": "Play Doom!"
       },
-      "footer": "PRESS OPTION TO CONTINUE · INSERT COIN TO UNLOCK ALL MODES"
+      "footer": "PRESS OPTION TO CONTINUE · INSERT COIN TO UNLOCK ALL MODES",
+      "projects": {
+        "title": "My Projects",
+        "desc": "AI experiments and applications to explore"
+      }
     },
     "resume": {
       "title": "My Resume",
@@ -65,7 +69,20 @@
     },
     "projects": {
       "title": "My Projects",
-      "viewAll": "View All Projects"
+      "viewAll": "View All Projects",
+      "intro": "From computer vision to study partners: explore the projects, try the demos and browse the code.",
+      "demo": "Open project",
+      "technologies": "Technologies",
+      "openProject": "Open {name} in a new tab",
+      "openRepository": "View the code for {name} on GitHub in a new tab",
+      "whackamole": {
+        "description": "A Whack-a-Mole game with an autoplayer. The AI analyzes board pixels with TensorFlow.js and recognizes targets through visual template matching in a Web Worker.",
+        "thumbnail": "Whack-a-Mole in progress, showing the board and autoplayer controls."
+      },
+      "matchmaker": {
+        "description": "AI-powered study partner recommendations. Combines TensorFlow.js in the browser with Cloudflare Workers, D1 and Vectorize to explore student profiles and find study partners.",
+        "thumbnail": "Vestibulandos showing a student profile and recommended study partners."
+      }
     },
     "skills": {
       "title": "My Skills",

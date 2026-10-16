@@ -49,7 +49,11 @@
         "title": "DOOM",
         "desc": "玩DOOM!"
       },
-      "footer": "按选项继续 · 投入硬币解锁所有模式"
+      "footer": "按选项继续 · 投入硬币解锁所有模式",
+      "projects": {
+        "title": "我的项目",
+        "desc": "探索人工智能实验和应用"
+      }
     },
     "resume": {
       "title": "我的简历",
@@ -65,7 +69,20 @@
     },
     "projects": {
       "title": "我的项目",
-      "viewAll": "查看所有项目"
+      "viewAll": "查看所有项目",
+      "intro": "从计算机视觉到学习伙伴：探索项目、体验演示并查看源代码。",
+      "demo": "打开项目",
+      "technologies": "技术栈",
+      "openProject": "在新标签页中打开 {name}",
+      "openRepository": "在新标签页中查看 {name} 的 GitHub 源代码",
+      "whackamole": {
+        "description": "支持自动游玩的打地鼠游戏。AI 使用 TensorFlow.js 分析棋盘像素，在 Web Worker 中通过视觉模板匹配识别目标。",
+        "thumbnail": "运行中的打地鼠游戏，展示棋盘和自动游玩控制面板。"
+      },
+      "matchmaker": {
+        "description": "利用 AI 推荐学习伙伴。结合浏览器中的 TensorFlow.js 与 Cloudflare Workers、D1 和 Vectorize，探索学生资料并寻找学习伙伴。",
+        "thumbnail": "Vestibulandos 展示学生资料与推荐的学习伙伴。"
+      }
     },
     "skills": {
       "title": "我的技能",

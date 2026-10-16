@@ -65,7 +65,12 @@
       "visitWebsite": "Visit Website",
       "expandAll": "Expand All",
       "collapseAll": "Collapse All",
-      "seeCertificate": "See Certificate"
+      "seeCertificate": "See Certificate",
+      "download": "Download CV as PDF",
+      "downloadLoading": "Generating PDF…",
+      "downloadSuccess": "Download started.",
+      "downloadError": "Could not generate the PDF. Please try again.",
+      "downloadEmpty": "No resume data available to download."
     },
     "projects": {
       "title": "My Projects",

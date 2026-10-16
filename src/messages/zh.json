@@ -65,7 +65,12 @@
       "visitWebsite": "访问网站",
       "expandAll": "展开全部",
       "collapseAll": "收起全部",
-      "seeCertificate": "查看证书"
+      "seeCertificate": "查看证书",
+      "download": "下载 PDF 简历",
+      "downloadLoading": "正在生成 PDF…",
+      "downloadSuccess": "下载已开始。",
+      "downloadError": "无法生成 PDF。请重试。",
+      "downloadEmpty": "暂无可下载的简历数据。"
     },
     "projects": {
       "title": "我的项目",

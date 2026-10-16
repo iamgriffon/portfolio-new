@@ -109,3 +109,9 @@ Test the converter without running lint, typecheck, or build:
 ```sh
 bun test scripts/convert-backup.test.ts
 ```
+
+## Download CV
+
+The resume page downloads a PDF in the active locale, generated entirely in the
+browser with a lazy-loaded renderer. See [CV download](docs/resume-cv.md) for
+content provenance, font handling, validation and limitations.

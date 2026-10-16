@@ -1,18 +1,20 @@
 import { Suspense } from 'react';
 import { preloadQuery } from 'convex/nextjs';
 import { api } from '../../../../convex/_generated/api';
+import { getSocialLinks } from '@/db/convex';
 import ResumeClient from './client';
 
 export default async function ResumePage() {
   try {
-    const [jobHistory, education] = await Promise.all([
+    const [jobHistory, education, contacts] = await Promise.all([
       preloadQuery(api.portfolio.jobHistory, {}),
       preloadQuery(api.portfolio.education, {}),
+      getSocialLinks(),
     ]);
     
     return (
       <Suspense fallback={<div className="flex justify-center items-center h-screen z-20">Loading resume data...</div>}>
-        <ResumeClient jobHistory={jobHistory} education={education} />
+        <ResumeClient jobHistory={jobHistory} education={education} contacts={contacts} />
       </Suspense>
     );
   } catch (error) {

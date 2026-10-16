@@ -10,14 +10,18 @@ import {
 import { usePreloadedQuery, type Preloaded } from "convex/react";
 import { api } from "../../../../convex/_generated/api";
 import { ResumeCard } from "@/components/resume/resume-card";
+import { DownloadResume } from "@/components/resume/download-resume";
+import type { ResumeInput } from "@/lib/resume-data";
 import { cn } from "@/lib/utils";
 
 interface ResumeClientProps {
+  contacts: ResumeInput["contacts"];
   jobHistory: Preloaded<typeof api.portfolio.jobHistory>;
   education: Preloaded<typeof api.portfolio.education>;
 }
 
 export default function ResumeClient({
+  contacts,
   jobHistory: preloadedJobHistory,
   education: preloadedEducation,
 }: ResumeClientProps) {
@@ -166,6 +170,7 @@ export default function ResumeClient({
     <div className="text-white z-10 overflow-auto mb-40">
       <div className="max-w-4xl mx-auto">
         <div className="mb-8 bg-slate-800/50 p-4 rounded-lg backdrop-contrast-100">
+          <DownloadResume jobs={jobHistory} education={education} contacts={contacts} />
           <div className="flex border-b border-gray-700">
             <button
               className={`flex-1 py-3 px-4 text-center font-mono text-lg transition-colors ${

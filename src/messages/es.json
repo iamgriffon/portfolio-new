@@ -65,7 +65,12 @@
       "visitWebsite": "Visitar sitio web",
       "expandAll": "Expandir Todo",
       "collapseAll": "Colapsar Todo",
-      "seeCertificate": "Ver Certificado"
+      "seeCertificate": "Ver Certificado",
+      "download": "Descargar CV en PDF",
+      "downloadLoading": "Generando PDF…",
+      "downloadSuccess": "Descarga iniciada.",
+      "downloadError": "No se pudo generar el PDF. Inténtalo de nuevo.",
+      "downloadEmpty": "No hay datos del currículum para descargar."
     },
     "projects": {
       "title": "Mis Proyectos",
